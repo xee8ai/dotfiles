@@ -2,133 +2,159 @@
 " SETTINGS
 " =======================================
 
-	" Use Vim settings, rather then Vi settings (much better!).
-	" This must be first, because it changes other options as a side effect
-	set nocompatible
+    " Use Vim settings, rather then Vi settings (much better!).
+    " This must be first, because it changes other options as a side effect
+    set nocompatible
 
-	" fire up pathogen
-	call pathogen#infect()
-	call pathogen#helptags()
+    " fire up pathogen
+    call pathogen#infect()
+    call pathogen#helptags()
 
-	" activate filetype detection
-	filetype on
+    " activate filetype detection
+    filetype on
 
-	" status line configuration
-	set laststatus=2
-	set statusline=
-	set statusline+=%-3.3n				" buffer number
-	set statusline+=%f					" filename
-	set statusline+=%h%m%r%w			" status flags
-	set statusline+=%=					" right align remainder
-	set statusline+=0x%-8B				" character value
-	set statusline+=%-14(%l,%c%V%)		" line, character
-	set statusline+=%<%P				" file position
+    " status line configuration
+    set laststatus=2
 
-	" show relative line numbers in smart mode (current line has absolute
-	" number); for this behaviour both settings are necessary
-	set number
-	set relativenumber
+        " buffer number
+        set statusline+=%-3.3n
 
-	" in insert mode use only absolute numbers
-	autocmd InsertEnter * :set norelativenumber
-	autocmd InsertLeave * :set relativenumber
+        " filename (f for filename, F for full path)
+        set statusline+=%f
+        "set statusline+=%-.100F
 
-	" activate syntax highlighting
-	syntax on
+        " status flags
+        set statusline+=%h%m%r%w
 
-	" for dark background
-	set background=dark
+        " filetype
+        set statusline+=\ (%Y,
 
-	" choose colorscheme (/usr/share/vim/vimcurrent/colors/*.vim)
-	" set t_Co=256 => problem on virtual consoles
-	colorscheme elflord
+        " encoding
+        set statusline+=\ %{strlen(&fenc)?&fenc:'none'},
 
-	" hides buffers instead of closing them (can have unwritten changes to a
-	" file and open a new file using :e , without being forced to write or undo
-	" your changes first)
-	set hidden
+        " mode
+        set statusline+=\ %{&ff})
 
-	" tab sizes
-	set tabstop=4
-	set softtabstop=4
-	"set expandtab
+        " right align remainder
+        set statusline+=%=
 
-	" number of spaces for '>>' and '<<'
-	set shiftwidth=4
+        " character value
+        set statusline+=\ 0x%B
 
-	" some filetype specific settings (overwrites global ones)
-	autocmd FileType php set tabstop=4|set shiftwidth=4|set expandtab
-	autocmd FileType python set tabstop=4|set expandtab
+        " position
+        set statusline+=\ (%l/%L,%v)\ %p%%
 
-	" auto indent depending on filetype
-	filetype plugin indent on
+    " show relative line numbers in smart mode (current line has absolute
+    " number); for this behaviour both settings are necessary
+    set number
+    set relativenumber
 
-	" temporarily switch to “paste mode” (in insert) (Vim will switch to paste
-	" mode, disabling all kinds of smartness and just pasting a whole buffer of
-	" text.)
-	set pastetoggle=<F2>
+    " in insert mode use only absolute numbers
+    autocmd InsertEnter * :set norelativenumber
+    autocmd InsertLeave * :set relativenumber
 
-	" number of context lines (top and bottom) when scrolling
-	set scrolloff=3
+    " activate syntax highlighting
+    syntax on
 
-	" emulate behaviour of other editors (right arrow at the end of a line
-	" sets cursor on next line)
-	set whichwrap=b,s,<,>,[,]
+    " for dark background
+    set background=dark
 
-	" search on typing
-	set incsearch
+    " choose colorscheme (/usr/share/vim/vimcurrent/colors/*.vim)
+    " set t_Co=256 => problem on virtual consoles
+    colorscheme elflord
 
-	" highlight all search matches
-	set hlsearch
+    " hides buffers instead of closing them (can have unwritten changes to a
+    " file and open a new file using :e , without being forced to write or undo
+    " your changes first)
+    set hidden
 
-	" search case insensitive when search term contains only small letters,
-	" else search case sensitive
-	set ignorecase
-	set smartcase
+    " tab sizes
+    set tabstop=4
+    set softtabstop=4
+    "set expandtab
 
-	" set folding method
-	:com Myfold :exec ":set foldmethod=indent"
-	set foldlevel=2
-	" if editing python: open file folded; zM closes and zR opens all foldings
-	autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    " number of spaces for '>>' and '<<'
+    set shiftwidth=4
 
-	" add spell checking and automatic wrapping at the recommended 72 columns
-	" to your commit messages
-	autocmd Filetype gitcommit setlocal spell textwidth=72
+    " some filetype specific settings (overwrites global ones)
+    autocmd FileType php,vim set tabstop=4|set shiftwidth=4|set expandtab
+    autocmd FileType python set tabstop=4|set expandtab
 
-	" highlight cols (as hint for line length)
-	highlight ColorColumn ctermbg=232  guibg=darkblue
-	"execute "set colorcolumn=" . join(range(81,335), ',')
-	set colorcolumn=81,101,102,103
+    " auto indent depending on filetype
+    filetype plugin indent on
 
-	" map za (alternate between opening and closing a fold) to spacebar
-	nnoremap <space> za
+    " temporarily switch to “paste mode” (in insert) (Vim will switch to paste
+    " mode, disabling all kinds of smartness and just pasting a whole buffer of
+    " text.)
+    set pastetoggle=<F2>
 
-	" own extension for syntax highlighting
-	au BufReadPost *.ini* set syntax=cfg
+    " number of context lines (top and bottom) when scrolling
+    set scrolloff=3
 
-	" H toggles marking the current line
-	nnoremap H :set cursorline!<CR>
+    " emulate behaviour of other editors (right arrow at the end of a line
+    " sets cursor on next line)
+    set whichwrap=b,s,<,>,[,]
 
-	" show invisible symbols
-	:set list
-	" and define which ones (e.g. :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<)
-	" trailing space is needed!
-	:set listchars=tab:\|\ 
+    " search on typing
+    set incsearch
 
-	" show trailing spaces as error (in normal mode only)
-	match ErrorMsg '\s\+$'
-	autocmd InsertEnter * match none
-	autocmd InsertLeave * match ErrorMsg '\s\+$'
+    " highlight all search matches
+    set hlsearch
 
-	" change windows using tabulator
-	map <TAB> <C-w>w
+    " search case insensitive when search term contains only small letters,
+    " else search case sensitive
+    set ignorecase
+    set smartcase
 
-	" change window sizes using alt key and arrows
-	map <a-down> <C-w>+
-	map <a-up> <C-w>-
-	map <a-right> <C-w>>
-	map <a-left> <C-w><
+    " set folding method
+    :com Myfold :exec ":set foldmethod=indent"
+    set foldlevel=2
+    " if editing python: open file folded; zM closes and zR opens all foldings
+    autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
 
-	" Use CRTL-N to toggle nerdtree (or more correct: nerdtreetabs)
-	map <C-n> :NERDTreeTabsToggle<CR>
+    " add spell checking and automatic wrapping at the recommended 72 columns
+    " to your commit messages
+    autocmd Filetype gitcommit setlocal spell textwidth=72
+
+    " highlight cols (as hint for line length)
+    highlight ColorColumn ctermbg=232  guibg=darkblue
+    "execute "set colorcolumn=" . join(range(81,335), ',')
+    set colorcolumn=81,101,102,103
+
+    " map za (alternate between opening and closing a fold) to spacebar
+    nnoremap <space> za
+
+    " own extension for syntax highlighting
+    au BufReadPost *.ini* set syntax=cfg
+
+    " H toggles marking the current line
+    nnoremap H :set cursorline!<CR>
+
+    " show invisible symbols
+    :set list
+    " and define which ones (e.g. :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<)
+    " trailing space is needed!
+    :set listchars=tab:\|\ 
+
+    " show trailing spaces as error (in normal mode only)
+    match ErrorMsg '\s\+$'
+    autocmd InsertEnter * match none
+    autocmd InsertLeave * match ErrorMsg '\s\+$'
+
+    " change windows using tabulator
+    map <TAB> <C-w>w
+
+    " change window sizes using alt key and arrows
+    map <a-down> <C-w>+
+    map <a-up> <C-w>-
+    map <a-right> <C-w>>
+    map <a-left> <C-w><
+
+    " Use CRTL-N to toggle nerdtree (or more correct: nerdtreetabs)
+    map <C-n> :NERDTreeTabsToggle<CR>
+
+    " don't open nerdtree in gvim
+    let g:nerdtree_tabs_open_on_gui_startup=0
+
+    " redefine emmet leader key
+    let g:user_emmet_leader_key='<C-H>'
