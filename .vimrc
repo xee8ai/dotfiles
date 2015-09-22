@@ -1,6 +1,8 @@
-" =======================================
-" SETTINGS
-" =======================================
+" Plugins:
+" git clone https://github.com/mattn/emmet-vim.git
+" git clone https://github.com/scrooloose/nerdtree.git
+" git clone https://github.com/jistr/vim-nerdtree-tabs.git
+
 
     " Use Vim settings, rather then Vi settings (much better!).
     " This must be first, because it changes other options as a side effect
@@ -12,6 +14,9 @@
 
     " activate filetype detection
     filetype on
+
+    " redefine leader to comma
+    let mapleader = ","
 
     " status line configuration
     set laststatus=2
@@ -123,6 +128,9 @@
 
     " map za (alternate between opening and closing a fold) to spacebar
     nnoremap <space> za
+
+    " shortcut for _r_emoving _t_railing _w_hitespaces
+    nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
     " own extension for syntax highlighting
     au BufReadPost *.ini* set syntax=cfg
