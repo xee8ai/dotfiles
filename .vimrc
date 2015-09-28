@@ -1,4 +1,5 @@
 " Plugins:
+" git clone https://github.com/tpope/vim-pathogen (or via aptitude)
 " git clone https://github.com/mattn/emmet-vim.git
 " git clone https://github.com/scrooloose/nerdtree.git
 " git clone https://github.com/jistr/vim-nerdtree-tabs.git
