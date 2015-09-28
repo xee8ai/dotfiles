@@ -120,7 +120,7 @@
 
     " add spell checking and automatic wrapping at the recommended 72 columns
     " to your commit messages
-    autocmd Filetype gitcommit setlocal spell textwidth=72
+    autocmd Filetype gitcommit setlocal spell textwidth=72|set colorcolumn=51,52,73,74
 
     " highlight cols (as hint for line length)
     highlight ColorColumn ctermbg=232  guibg=darkblue
