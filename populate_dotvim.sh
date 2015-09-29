@@ -1,6 +1,6 @@
 #!/bin/bash
 
-HOMEDIR="~"
+HOMEDIR=$HOME
 DIRS=".vim
 .vim/autoload
 .vim/bundle
