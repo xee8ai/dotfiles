@@ -112,6 +112,10 @@
     set ignorecase
     set smartcase
 
+    " bash-like tab completion
+    set wildmode=longest,list
+    set wildmenu
+
     " set folding method
     :com Myfold :exec ":set foldmethod=indent"
     set foldlevel=2
