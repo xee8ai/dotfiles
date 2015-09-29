@@ -109,6 +109,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # source: Linux-Magazin 10/12, pg. 87
 export PS4='+${BASH_SOURCE##*/}:${LINENO}:${FUNCNAME[0]}: '
 
+# needed for sudoedit using vim instead of vi on centos
+export EDITOR=/usr/bin/vim
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
