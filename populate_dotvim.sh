@@ -23,9 +23,9 @@ echo
 cd $HOMEDIR/.vim/autoload
 
 # get pathogen
-echo "Cloning pathogen…"
+echo "Getting pathogen…"
 echo "-----------------"
-git clone https://github.com/tpope/vim-pathogen
+curl -LSso $HOMEDIR/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 echo
 
 # get plugins
