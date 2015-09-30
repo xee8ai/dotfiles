@@ -3,8 +3,7 @@
 HOMEDIR=$HOME
 DIRS=".vim
 .vim/autoload
-.vim/bundle
-dotfiles"
+.vim/bundle"
 
 CURDIR=$(pwd)
 
@@ -14,6 +13,7 @@ echo "Making dirs…"
 echo "------------"
 # make dirs
 for DIR in $DIRS; do
+	echo $DIR
 	if ! test -e $HOMEDIR/$DIR; then
 		mkdir $HOMEDIR/$DIR
 	fi
