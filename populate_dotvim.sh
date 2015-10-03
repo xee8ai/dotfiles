@@ -35,6 +35,7 @@ echo "----------------"
 git clone https://github.com/mattn/emmet-vim.git
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/jistr/vim-nerdtree-tabs.git
+git clone https://github.com/tpope/vim-commentary.git
 echo
 
 cd $CURDIR
