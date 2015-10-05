@@ -44,9 +44,13 @@ function get_plugins {
 	cd $BUNDLEDIR
 	echo "Cloning plugins…"
 	echo "----------------"
+	echo "emmmet…"
 	git clone https://github.com/mattn/emmet-vim.git
+	echo "nerdtree…"
 	git clone https://github.com/scrooloose/nerdtree.git
+	echo "nerdtree-tabs…"
 	git clone https://github.com/jistr/vim-nerdtree-tabs.git
+	echo "commentary…"
 	git clone https://github.com/tpope/vim-commentary.git
 	echo
 }
@@ -59,6 +63,7 @@ function update_plugins {
 	echo "-----------------"
 	ls -D | while read DIR; do
 		cd $DIR
+		echo "$DIR…"
 		git pull
 		cd $HOMEDIR/.vim/bundle
 	done
