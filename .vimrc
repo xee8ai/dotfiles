@@ -59,9 +59,13 @@
     set number
     set relativenumber
 
+    " manual toggle relativenumber
+    nnoremap <Leader>tn :set relativenumber!<CR>
+
     " in insert mode use only absolute numbers
-    autocmd InsertEnter * :set norelativenumber
-    autocmd InsertLeave * :set relativenumber
+    " commented out: confusing and slow
+    " autocmd InsertEnter * :set norelativenumber
+    " autocmd InsertLeave * :set relativenumber
 
     " activate syntax highlighting
     syntax on
