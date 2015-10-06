@@ -125,6 +125,7 @@
     set foldlevel=2
     " if editing python: open file folded; zM closes and zR opens all foldings
     autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType java set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
 
     " add spell checking and automatic wrapping at the recommended 72 columns
     " to your commit messages
@@ -140,6 +141,10 @@
 
     " shortcut for _r_emoving _t_railing _w_hitespaces
     nnoremap <Leader>rtw :%s/\s\+$//e<CR>
+
+    " shortcut for _tabs_ _t_o _s_paces
+    " don't use substitution because this can move columns
+    nnoremap <Leader>tts :set expandtab<CR>:retab<CR>
 
     " own extension for syntax highlighting
     au BufReadPost *.ini* set syntax=cfg
