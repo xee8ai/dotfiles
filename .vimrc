@@ -17,7 +17,9 @@
     filetype on
 
     " redefine leader to comma
-    let mapleader = ","
+    " decided not to remap leader ⇒ comma is used for backward character
+    " search
+    " let mapleader = ","
 
     " status line configuration
     set laststatus=2
