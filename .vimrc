@@ -91,8 +91,8 @@
     set shiftwidth=4
 
     " some filetype specific settings (overwrites global ones)
-    autocmd FileType php,vim set tabstop=4|set shiftwidth=4|set expandtab
-    autocmd FileType python set tabstop=4|set expandtab
+    autocmd FileType vim,python set tabstop=4|set shiftwidth=4|set expandtab
+    autocmd FileType php set tabstop=4|set shiftwidth=4
 
     " auto indent depending on filetype
     filetype plugin indent on
@@ -159,8 +159,8 @@
     " show invisible symbols
     :set list
     " and define which ones (e.g. :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<)
-    " trailing space is needed!
-    :set listchars=tab:\|\ 
+    :set listchars=tab:\|\ ,
+    :hi SpecialKey ctermfg=66
 
     " show trailing spaces as error (in normal mode only)
     match ErrorMsg '\s\+$'
