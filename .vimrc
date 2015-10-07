@@ -91,8 +91,11 @@
     set shiftwidth=4
 
     " some filetype specific settings (overwrites global ones)
-    autocmd FileType vim,python set tabstop=4|set shiftwidth=4|set expandtab
+    autocmd FileType java set tabstop=4|set shiftwidth=4
     autocmd FileType php set tabstop=4|set shiftwidth=4
+    autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
+    autocmd FileType sh set tabstop=4|set shiftwidth=4
+    autocmd FileType vim set tabstop=4|set shiftwidth=4|set expandtab
 
     " auto indent depending on filetype
     filetype plugin indent on
@@ -128,8 +131,10 @@
     :com Myfold :exec ":set foldmethod=indent"
     set foldlevel=2
     " if editing python: open file folded; zM closes and zR opens all foldings
-    autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
     autocmd FileType java set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType php set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType sh set foldmethod=indent|set foldlevel=1|set foldnestmax=1|normal zM
 
     " add spell checking and automatic wrapping at the recommended 72 columns
     " to your commit messages
