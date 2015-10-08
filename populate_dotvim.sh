@@ -48,9 +48,11 @@ function get_plugins {
 	git clone https://github.com/mattn/emmet-vim.git
 	echo "nerdtree…"
 	git clone https://github.com/scrooloose/nerdtree.git
-	echo "nerdtree-tabs…"
+	echo "vim-nerdtree-tabs…"
 	git clone https://github.com/jistr/vim-nerdtree-tabs.git
-	echo "commentary…"
+	echo "vim-surround…"
+	git clone https://github.com/tpope/vim-surround.git
+	echo "vim-commentary…"
 	git clone https://github.com/tpope/vim-commentary.git
 	echo
 }
