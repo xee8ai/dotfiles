@@ -19,7 +19,7 @@
     " activate filetype detection
     filetype on
 
-    " activate plugins
+    " activate internal plugins (e.g. needed for matchit)
     filetype plugin on
 
     " redefine leader to comma
