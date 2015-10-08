@@ -4,6 +4,7 @@
 " git clone https://github.com/mattn/emmet-vim.git
 " git clone https://github.com/scrooloose/nerdtree.git
 " git clone https://github.com/jistr/vim-nerdtree-tabs.git
+" https://github.com/tpope/vim-surround.git
 " git clone https://github.com/tpope/vim-commentary.git
 
 
@@ -17,6 +18,9 @@
 
     " activate filetype detection
     filetype on
+
+    " activate plugins
+    filetype plugin on
 
     " redefine leader to comma
     " decided not to remap leader ⇒ comma is used for backward character
@@ -165,7 +169,7 @@
     :set list
     " and define which ones (e.g. :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<)
     :set listchars=tab:\|\ ,
-    :hi SpecialKey ctermfg=66
+    :hi SpecialKey ctermfg=66 guifg=#5f8787
 
     " show trailing spaces as error (in normal mode only)
     match ErrorMsg '\s\+$'
@@ -189,3 +193,6 @@
 
     " redefine emmet leader key
     let g:user_emmet_leader_key='<C-H>'
+
+    " start matchit
+    runtime macros/matchit.vim
