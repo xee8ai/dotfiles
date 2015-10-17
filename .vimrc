@@ -78,7 +78,11 @@
     set background=dark
 
     " choose colorscheme (/usr/share/vim/vimcurrent/colors/*.vim)
-    " set t_Co=256 => problem on virtual consoles
+    " if you are going to use solarized theme on konsole: choose colorscheme
+    " Solarisiert or Solarisiert Licht in your profile
+    " if not available: check
+    " https://github.com/phiggins/konsole-colors-solarized
+    " colorscheme solarized
     colorscheme elflord
 
     " hides buffers instead of closing them (can have unwritten changes to a
