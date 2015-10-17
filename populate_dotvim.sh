@@ -44,7 +44,7 @@ function get_plugins {
 	cd $BUNDLEDIR
 	echo "Cloning plugins…"
 	echo "----------------"
-	echo "emmmet…"
+	echo "emmet…"
 	git clone https://github.com/mattn/emmet-vim.git
 	echo "nerdtree…"
 	git clone https://github.com/scrooloose/nerdtree.git
