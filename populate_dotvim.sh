@@ -54,6 +54,8 @@ function get_plugins {
 	git clone https://github.com/tpope/vim-surround.git
 	echo "vim-commentary…"
 	git clone https://github.com/tpope/vim-commentary.git
+	echo "vim-blade…"
+	git clone git://github.com/xsbeats/vim-blade.git
 	echo
 }
 
