@@ -49,7 +49,7 @@ function get_plugins {
 	echo "nerdtree…"
 	git clone https://github.com/scrooloose/nerdtree.git
 	echo "vim-colors-solarized…"
-	git://github.com/altercation/vim-colors-solarized.git
+	git clone git://github.com/altercation/vim-colors-solarized.git
 	echo "vim-nerdtree-tabs…"
 	git clone https://github.com/jistr/vim-nerdtree-tabs.git
 	echo "vim-surround…"
