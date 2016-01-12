@@ -91,16 +91,21 @@ alias ll='ls -l'
 alias la='ls -A'
 alias lla='ls -lA'
 alias l='ls -CF'
+
+alias grep='grep --color=auto'
 alias ggrep='grep -inTs --color=auto'
 alias igrep='grep -is --color=auto'
 alias sgrep='grep -s --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep -s --color=auto'
+
 alias vimr='vim -R'
 alias vim='vim -p'
+
 alias py='/usr/bin/env python3 -u'
-alias du1='du -h --max-depth=1'
 alias httpserver_python3='/usr/bin/env python3 -m http.server'
+
+alias du1='du -h --max-depth=1'
 alias gg="git log --graph --full-history --all --pretty=format:'%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --date=short"
 
 # Add an "alert" alias for long running commands.  Use like so:
