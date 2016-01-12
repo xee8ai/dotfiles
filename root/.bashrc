@@ -12,9 +12,14 @@ eval "`dircolors`"
 alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias lla='ls $LS_OPTIONS -lA'
+alias la='ls $LS_OPTIONS -A'
 alias l='ls $LS_OPTIONS -CF'
 
-alias grep='grep -i --color=auto'
+alias ggrep='grep -inTs --color=auto'
+alias igrep='grep -is --color=auto'
+alias sgrep='grep -s --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep -s --color=auto'
 
 alias aptu100='/root/bin/aptu.sh 100'
 alias aptu='/root/bin/aptu.sh'
