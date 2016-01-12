@@ -15,6 +15,7 @@ alias lla='ls $LS_OPTIONS -lA'
 alias la='ls $LS_OPTIONS -A'
 alias l='ls $LS_OPTIONS -CF'
 
+alias grep='grep --color=auto'
 alias ggrep='grep -inTs --color=auto'
 alias igrep='grep -is --color=auto'
 alias sgrep='grep -s --color=auto'
