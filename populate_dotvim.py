@@ -15,6 +15,8 @@ class DotvimPopulator():
     plugin_sources = [
             'https://github.com/mattn/emmet-vim.git',
             'https://github.com/scrooloose/nerdtree.git',
+            'git clone git://github.com/altercation/vim-colors-solarized.git',
+            'git clone https://github.com/scrooloose/syntastic.git',
             'https://github.com/jistr/vim-nerdtree-tabs.git',
             'https://github.com/tpope/vim-surround.git',
             'https://github.com/tpope/vim-commentary.git',
