@@ -124,7 +124,7 @@ class DotvimPopulator():
     def _install_pathogen(self):
         '''Installes pathogen (use also for updating).'''
 
-        print('(Re)Installing pathogen…')
+        print('(Re)Installing pathogen...')
 
         with urllib.request.urlopen('https://tpo.pe/pathogen.vim') as response, open(os.path.join(self.vim_dir, 'autoload', 'pathogen.vim'), 'wb') as out_file:
             data = response.read() # a byte object
@@ -137,7 +137,7 @@ class DotvimPopulator():
     def _install_plugin(self, name, source):
         '''Installes a given plugin (if not yet installed).'''
 
-        print('Installing {}…'.format(name))
+        print('Installing {}...'.format(name))
 
         if os.path.exists(os.path.join(self.bundle_dir, name)):
             print('Already installed.'.format(name))
@@ -173,7 +173,7 @@ class DotvimPopulator():
         plugin_dir = os.path.join(self.bundle_dir, name)
 
         if not os.path.isdir(plugin_dir):
-            print('{} not yet installed. Skipping…'.format(name))
+            print('{} not yet installed. Skipping...'.format(name))
 
         os.chdir(plugin_dir)
         subprocess.call(['git', 'pull'])
