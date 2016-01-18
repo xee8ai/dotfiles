@@ -100,7 +100,7 @@ class DotvimPopulator():
             self.vim_dir = os.path.join(self.home_dir, '.vim')
             print('vim dir is {}: '.format(self.vim_dir))
         elif self.platform is 'win':
-            # set hardcoded (as there is only one Windows I have to use)
+            # set hardcoded (as there is only one Windows I have to use :-))
             self.vim_dir = 'w:\\vimfiles'
 
         self.bundle_dir = os.path.join(self.vim_dir, 'bundle')
