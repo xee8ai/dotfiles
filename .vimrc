@@ -198,5 +198,8 @@
     " redefine emmet leader key
     let g:user_emmet_leader_key='<C-H>'
 
+    " https://github.com/scrooloose/syntastic/issues/703
+    let g:syntastic_python_checkers = ['pyflakes3']
+
     " start matchit
     runtime macros/matchit.vim
