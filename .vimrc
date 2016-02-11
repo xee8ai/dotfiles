@@ -135,6 +135,11 @@
     set wildmode=longest,list
     set wildmenu
 
+    " fast switches to enable/disable English and German spellchecking
+    :com DeSpell :exec ":set spell spelllang=de_de"
+    :com EnSpell :exec ":set spell spelllang=en"
+    :com NoSpell :exec ":set nospell"
+
     " set folding method
     :com Myfold :exec ":set foldmethod=indent"
     set foldlevel=2
@@ -145,12 +150,8 @@
     autocmd FileType sh set foldmethod=indent|set foldlevel=1|set foldnestmax=1|normal zM
 
     " add spell checking and automatic wrapping at the recommended 72 columns
-    " to your commit messages
+    " to your git commit messages
     autocmd Filetype gitcommit setlocal spell textwidth=72|set colorcolumn=51,52,73,74
-
-    :com DeSpell :exec ":set spell spelllang=de_de"
-    :com EnSpell :exec ":set spell spelllang=en"
-    :com NoSpell :exec ":set nospell"
 
     " highlight cols (as hint for line length)
     highlight ColorColumn ctermbg=232  guibg=darkblue
