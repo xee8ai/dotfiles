@@ -148,6 +148,10 @@
     " to your commit messages
     autocmd Filetype gitcommit setlocal spell textwidth=72|set colorcolumn=51,52,73,74
 
+    :com DeSpell :exec ":set spell spelllang=de_de"
+    :com EnSpell :exec ":set spell spelllang=en"
+    :com NoSpell :exec ":set nospell"
+
     " highlight cols (as hint for line length)
     highlight ColorColumn ctermbg=232  guibg=darkblue
     "execute "set colorcolumn=" . join(range(81,335), ',')
