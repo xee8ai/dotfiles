@@ -7,7 +7,6 @@
 " https://github.com/tpope/vim-surround.git
 " git clone https://github.com/tpope/vim-commentary.git
 
-
     " Use Vim settings, rather then Vi settings (much better!).
     " This must be first, because it changes other options as a side effect
     set nocompatible
@@ -73,17 +72,6 @@
 
     " activate syntax highlighting
     syntax on
-
-    " for dark background
-    set background=dark
-
-    " choose colorscheme (/usr/share/vim/vimcurrent/colors/*.vim)
-    " if you are going to use solarized theme on konsole: choose colorscheme
-    " Solarisiert or Solarisiert Licht in your profile
-    " if not available: check
-    " https://github.com/phiggins/konsole-colors-solarized
-    " colorscheme solarized
-    colorscheme elflord
 
     " hides buffers instead of closing them (can have unwritten changes to a
     " file and open a new file using :e , without being forced to write or undo
@@ -154,7 +142,7 @@
     autocmd Filetype gitcommit setlocal spell textwidth=72|set colorcolumn=51,52,73,74
 
     " highlight cols (as hint for line length)
-    highlight ColorColumn ctermbg=232  guibg=darkblue
+    " highlight ColorColumn ctermbg=232  guibg=darkblue
     "execute "set colorcolumn=" . join(range(81,335), ',')
     set colorcolumn=81,101,102,103
 
@@ -177,8 +165,8 @@
     " show invisible symbols
     :set list
     " and define which ones (e.g. :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<)
-    :set listchars=tab:\|\ ,
-    :hi SpecialKey ctermfg=66 guifg=#5f8787
+    :set listchars=tab:\ \ ,
+    " :hi SpecialKey ctermfg=66 guifg=#5f8787
 
     " show trailing spaces as error (in normal mode only)
     match ErrorMsg '\s\+$'
@@ -208,3 +196,17 @@
 
     " start matchit
     runtime macros/matchit.vim
+
+    " for dark background
+    set background=dark
+
+    " choose colorscheme (/usr/share/vim/vimcurrent/colors/*.vim)
+    " if you are going to use solarized theme on konsole: choose colorscheme
+    " Solarisiert or Solarisiert Licht in your profile
+    " if not available: check
+    " https://github.com/phiggins/konsole-colors-solarized
+    colorscheme solarized
+    " colorscheme elflord
+
+    " use F5 to toggle background between light and dark
+    call togglebg#map("<F5>")
