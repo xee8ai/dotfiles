@@ -112,6 +112,9 @@ alias gg="git log --graph --full-history --all --pretty=format:'%Cred%h%Creset %
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# command reference
+alias coref='okular ~/tutorials/linux/linux_command_reference.pdf &'
+
 # better debug output from bash scripts (bash -x);
 # source: Linux-Magazin 10/12, pg. 87
 export PS4='+${BASH_SOURCE##*/}:${LINENO}:${FUNCNAME[0]}: '
