@@ -3,6 +3,7 @@
 # Note: PS1 and umask are already set in /etc/profile. You should not
 # need this unless you want different defaults for root.
 # colorize „root“ in prompt
+# https://wiki.archlinux.de/title/Bash-Prompt_anpassen
 PS1='${debian_chroot:+($debian_chroot)}\[\033[0;31m\]\u\[\033[0m\]@\h:\w# '
 # umask 022
 umask 027
