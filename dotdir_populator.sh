@@ -15,11 +15,11 @@ fi
 case "$1" in
 	install)
 		$DIR/populate_dotvim.py install
-		$DIR/populate_consolecolors.py install
+		$DIR/populate_mybash.py install
 		;;
 	update)
 		$DIR/populate_dotvim.py update
-		$DIR/populate_consolecolors.py update
+		$DIR/populate_mybash.py update
 		;;
 	*)
 		usage_error
