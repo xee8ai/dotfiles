@@ -165,6 +165,7 @@
     " show invisible symbols
     :set list
     " and define which ones (e.g. :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<)
+    " :set listchars=tab:\|\ ,
     :set listchars=tab:\ \ ,
     " :hi SpecialKey ctermfg=66 guifg=#5f8787
 
