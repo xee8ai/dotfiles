@@ -219,7 +219,7 @@ if has("win32")
     set backspace=2
 
     " default cursor line is really ugly
-    highlight CursorLine gui=underline guibg=NONE
+    " highlight CursorLine gui=underline guibg=NONE
 
     " Open gvim maximized
     au GUIEnter * simalt ~x
