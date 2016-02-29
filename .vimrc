@@ -127,6 +127,7 @@ autocmd FileType java set foldmethod=indent|set foldlevel=2|set foldnestmax=2|no
 autocmd FileType php set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
 autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
 autocmd FileType sh set foldmethod=indent|set foldlevel=1|set foldnestmax=1|normal zM
+autocmd FileType xml set foldmethod=indent|set foldlevel=4|set foldnestmax=4|normal zM
 
 " add spell checking and automatic wrapping at the recommended 72 columns
 " to your git commit messages
