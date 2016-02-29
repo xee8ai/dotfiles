@@ -187,6 +187,12 @@ let g:user_emmet_leader_key='<C-H>'
 " https://github.com/scrooloose/syntastic/issues/703
 let g:syntastic_python_checkers = ['pyflakes3']
 
+" prevent autocompiling java files on every save (which makes :w incredibly slow!)
+" https://stackoverflow.com/questions/15937042/syntastic-disable-automatic-compilation-of-java
+" This is something of a hack, but you can trick Syntastic into not loading
+" the javac checker by pretending it's already loaded
+let g:loaded_syntastic_java_javac_checker = 1
+
 " start matchit
 runtime macros/matchit.vim
 
