@@ -162,6 +162,9 @@
     " H toggles marking the current line
     nnoremap H :set cursorline!<CR>
 
+    " enable by default
+    :set cursorline
+
     " show invisible symbols
     :set list
     " and define which ones (e.g. :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<)
