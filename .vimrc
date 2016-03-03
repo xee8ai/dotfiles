@@ -149,7 +149,10 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 nnoremap <Leader>tts :set expandtab<CR>:retab<CR>
 
 " own extension for syntax highlighting
-au BufReadPost *.ini* set syntax=cfg
+au BufNewFile,BufFilePre,BufRead *.ini* set filetype=cfg
+
+" interpret .md as markdown (rather than modula2)
+" au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 " H toggles marking the current line
 nnoremap H :set cursorline!<CR>
