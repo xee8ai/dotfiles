@@ -122,6 +122,11 @@ export PS4='+${BASH_SOURCE##*/}:${LINENO}:${FUNCNAME[0]}: '
 # needed for sudoedit using vim instead of vi on centos
 export EDITOR=/usr/bin/vim
 
+# comment the following out if there is no git autocompletion by default
+# (as is e.g. on CentOS)
+# autocompletion file can be downloaded at https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+# . ~/git-completion.bash
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
