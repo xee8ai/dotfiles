@@ -74,16 +74,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# comment the following out if there is no git autocompletion by default
-# (as is e.g. on CentOS)
-# autocompletion file can be downloaded at https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-# if [ -f ~/git-completion.bash ]; then
-# . ~/git-completion.bash
-# fi
-
 # get general aliases and exports from separate file
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
