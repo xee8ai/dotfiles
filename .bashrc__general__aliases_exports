@@ -52,3 +52,12 @@ export PS4='+${BASH_SOURCE##*/}:${LINENO}:${FUNCNAME[0]}: '
 # needed for sudoedit using vim instead of vi (e.g. on CentOS)
 # also used by mc for editor on <F4>
 export EDITOR=/usr/bin/vim
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# on systems without git completion (e.g. CentOS) simply put file git-completion.bash into users root dir
+# the file can be downloaded at https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+if [ -f ~/git-completion.bash ]; then
+	source ~/git-completion.bash
+fi
