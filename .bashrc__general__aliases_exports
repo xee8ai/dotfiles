@@ -1,10 +1,13 @@
 # this file should be available as ~/.bash_aliases (either as copy or as symlink)
 # put these to extra file for easier support of different distribution's .bashrcs
 
-# colored ls
-alias ls='ls --color=auto'
-alias dir='ls --color=auto --format=vertical'
-alias vdir='ls --color=auto --format=long'
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	alias ls='ls --color=auto'
+	alias dir='ls --color=auto --format=vertical'
+	alias vdir='ls --color=auto --format=long'
+fi
 
 # some more ls aliases
 alias ll='ls -l'
@@ -47,4 +50,5 @@ alias coref='okular ~/tutorials/linux/linux_command_reference.pdf &'
 export PS4='+${BASH_SOURCE##*/}:${LINENO}:${FUNCNAME[0]}: '
 
 # needed for sudoedit using vim instead of vi (e.g. on CentOS)
+# also used by mc for editor on <F4>
 export EDITOR=/usr/bin/vim
