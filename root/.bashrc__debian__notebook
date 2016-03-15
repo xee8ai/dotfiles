@@ -54,22 +54,16 @@ alias vimr='vim -R'
 # open multiple files in tabs
 alias vim='vim -p'
 
-# clean up, close amarok before shutdown
-alias shutdown='rm -f /etc/hosts; cp -fa /etc/hosts.original /etc/hosts; killall amarok; sleep 2; shutdown'
-alias poweroff='rm -f /etc/hosts; cp -fa /etc/hosts.original /etc/hosts; killall amarok; sleep 2; poweroff'
+# close amarok before shutdown
+alias shutdown='killall amarok; sleep 2; shutdown'
+alias poweroff='killall amarok; sleep 2; poweroff'
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-#    . /etc/bash_completion
-#fi
-
-# add /root/bin to PATH
-if test -e /root/bin; then PATH="/root/bin:"$PATH; fi
+if [ -d ~/bin ] ; then
+	PATH=~/bin:"${PATH}"
+fi
 
 # change to root directory
 cd /root
 
 # check if iptables are active
-/root/bin/check_iptables.sh
+/root/bin/r-check-iptables.sh
