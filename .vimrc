@@ -218,6 +218,8 @@ colorscheme solarized
 " use F5 to toggle solarized background between light and dark
 call togglebg#map("<F5>")
 
+" use F8 to toggle tagbar
+nmap <F8> :TagbarToggle<CR>
 
 " windows related stuff: here we use gvim because powershell integration of
 " vim is bad (especially the colors) and not useful (there are no tabs in

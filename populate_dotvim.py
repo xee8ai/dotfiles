@@ -21,6 +21,7 @@ class DotvimPopulator():
             'https://github.com/tpope/vim-surround.git',
             'https://github.com/tpope/vim-commentary.git',
             'git://github.com/xsbeats/vim-blade.git',
+            'git://github.com/majutsushi/tagbar',
     ]
 
 
