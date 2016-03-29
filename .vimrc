@@ -155,10 +155,11 @@ au BufNewFile,BufFilePre,BufRead *.ini* set filetype=cfg
 " au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 " H toggles marking the current line
-nnoremap H :set cursorline!<CR>
+nnoremap H :set cursorline!<CR> :set cursorcolumn!<cr>
 
 " enable by default
 :set cursorline
+:set cursorcolumn
 
 " show invisible symbols
 :set list
@@ -173,19 +174,32 @@ match ErrorMsg '\s\+$'
 autocmd InsertEnter * match none
 autocmd InsertLeave * match ErrorMsg '\s\+$'
 
-" change windows using tabulator
+" a more natural behavior of :split and :vsplit
+set splitbelow
+set splitright
+
+" change splitted windows using tabulator
 map <TAB> <C-w>w
 
-" change window sizes using alt key and arrows
+" change splitted window sizes using alt key and arrows
 map <a-down> <C-w>+
 map <a-up> <C-w>-
 map <a-right> <C-w>>
 map <a-left> <C-w><
 
-" Use CRTL-N to toggle nerdtree (or more correct: nerdtreetabs)
+" use CTRL-b to open tagbar and autofocus on it (on tag selection close tagbar)
+map <C-b> :TagbarToggle<cr>
+
+" set focus on newly opened tagbar
+let g:tagbar_autofocus=1
+
+" redefine fold toggling to space (as it is in global vim)
+let tagbar_map_togglefold= "<space>"
+
+" Use CTRL-n to toggle nerdtree (or more correct: nerdtreetabs)
 map <C-n> :NERDTreeTabsToggle<CR>
 
-" don't open nerdtree in gvim
+" don't autoopen nerdtree in gvim
 let g:nerdtree_tabs_open_on_gui_startup=0
 
 " redefine emmet leader key
@@ -217,9 +231,6 @@ colorscheme solarized
 
 " use F5 to toggle solarized background between light and dark
 call togglebg#map("<F5>")
-
-" use F8 to toggle tagbar
-nmap <F8> :TagbarToggle<CR>
 
 " windows related stuff: here we use gvim because powershell integration of
 " vim is bad (especially the colors) and not useful (there are no tabs in
