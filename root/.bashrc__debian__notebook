@@ -21,6 +21,9 @@ alias lla='ls $LS_OPTIONS -AlF'
 alias la='ls $LS_OPTIONS -A'
 alias l='ls $LS_OPTIONS -CF'
 
+# disable colors on htop (bad to read on solarized konsole)
+alias htop='htop --no-color'
+
 # the most commonly used grep variants
 alias grep='grep --color=auto'
 alias ggrep='grep -inTs --color=auto'
