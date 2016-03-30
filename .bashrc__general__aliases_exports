@@ -23,6 +23,9 @@ alias sgrep='grep -s --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep -s --color=auto'
 
+# disable colors on htop (bad to read on solarized konsole)
+alias htop='htop --no-color'
+
 # open file readonly
 alias vimr='vim -R'
 
