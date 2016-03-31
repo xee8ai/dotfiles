@@ -187,7 +187,7 @@ map <a-up> <C-w>-
 map <a-right> <C-w>>
 map <a-left> <C-w><
 
-" use CTRL-b to open tagbar and autofocus on it (on tag selection close tagbar)
+" use CTRL-b to open tagbar and autofocus on it
 map <C-b> :TagbarToggle<cr>
 
 " set focus on newly opened tagbar
@@ -249,4 +249,9 @@ if has("win32")
 
     " Open gvim maximized
     au GUIEnter * simalt ~x
+
+    " set path to window's ctags binary
+    " download via http://prdownloads.sourceforge.net/ctags/ctags58.zip
+    let g:tagbar_ctags_bin='w:\\_ctags\\ctags.exe'
+
 endif
