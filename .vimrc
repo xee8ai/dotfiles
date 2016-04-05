@@ -48,6 +48,9 @@ set laststatus=2
     " position
     set statusline+=\ (%l/%L,%v)\ %p%%
 
+    " add current time
+    set statusline+=\ \|\ %{strftime('%H:%M')}\ \|
+
 " show relative line numbers in smart mode (current line has absolute
 " number); for this behaviour both settings are necessary
 set number
