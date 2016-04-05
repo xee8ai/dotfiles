@@ -21,11 +21,10 @@ filetype plugin on
 set laststatus=2
 
     " buffer number
-    set statusline+=%-3.3n
+    set statusline+=\|\ %n\ \|
 
     " filename (f for filename, F for full path)
-    set statusline+=%f
-    "set statusline+=%-.100F
+    set statusline+=\ %f
 
     " status flags
     set statusline+=%h%m%r%w
@@ -37,13 +36,13 @@ set laststatus=2
     set statusline+=\ %{strlen(&fenc)?&fenc:'none'},
 
     " mode
-    set statusline+=\ %{&ff})
+    set statusline+=\ %{&ff})\ \|
 
     " right align remainder
     set statusline+=%=
 
     " character value
-    set statusline+=\ 0x%B
+    set statusline+=\|\ 0x%B\ \|
 
     " position
     set statusline+=\ (%l/%L,%v)\ %p%%
