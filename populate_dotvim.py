@@ -2,6 +2,7 @@
 
 import os
 import os.path
+import shutil
 import subprocess
 import sys
 import urllib.request
@@ -103,6 +104,7 @@ class DotvimPopulator():
         elif self.platform is 'win':
             # set hardcoded (as there is only one Windows I have to use :-))
             self.vim_dir = 'w:\\vimfiles'
+            shutil.copy('w:\\dotfiles\\.vimrc', 'w:\\_vimrc')
 
         self.bundle_dir = os.path.join(self.vim_dir, 'bundle')
 
