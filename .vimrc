@@ -231,8 +231,12 @@ set background=dark
 " if not available: check https://github.com/phiggins/konsole-colors-solarized
 colorscheme solarized
 
-" use F5 to toggle solarized background between light and dark
-call togglebg#map("<F5>")
+" use F3 to toggle solarized background between light and dark
+call togglebg#map("<F3>")
+
+" use F5 to refresh syntax highlighting
+map <F5> :syntax sync fromstart<CR>
+
 
 " windows related stuff: here we use gvim because powershell integration of
 " vim is bad (especially the colors) and not useful (there are no tabs in
