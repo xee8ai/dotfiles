@@ -200,6 +200,14 @@ let tagbar_map_togglefold= "<space>"
 
 " search for tags file also in higher directories
 set tags+=tags;/
+" map to F12 (for normal and insert mode)
+nmap <F12> g<C-]>
+imap <F12> <ESC>g<C-]>
+nmap <S-F12> :pop<CR>
+imap <S-F12> <ESC>:pop<CR>
+" open in new tab using CTRL-F12
+nmap <C-F12> <C-w><C-]><C-w>T
+imap <C-F12> <ESC><C-w><C-]><C-w>T
 
 " Use CTRL-n to toggle nerdtree (or more correct: nerdtreetabs)
 map <C-n> :NERDTreeTabsToggle<CR>
