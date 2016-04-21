@@ -198,6 +198,9 @@ let g:tagbar_autofocus=1
 " redefine fold toggling to space (as it is in global vim)
 let tagbar_map_togglefold= "<space>"
 
+" search for tags file also in higher directories
+set tags+=tags;/
+
 " Use CTRL-n to toggle nerdtree (or more correct: nerdtreetabs)
 map <C-n> :NERDTreeTabsToggle<CR>
 
