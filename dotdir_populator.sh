@@ -3,7 +3,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 function usage_error {
-	echo "Usage: $0 [install|update]"
+	echo "Usage: $0 [install|update|full]"
 	echo "Will now exit…"
 	exit 1
 }
@@ -19,6 +19,12 @@ case "$1" in
 		;;
 	update)
 		$DIR/populate_dotvim.py update
+		$DIR/populate_mybash.py update
+		;;
+	full)
+		$DIR/populate_dotvim.py install
+		$DIR/populate_dotvim.py update
+		$DIR/populate_mybash.py install
 		$DIR/populate_mybash.py update
 		;;
 	*)
