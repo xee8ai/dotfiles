@@ -24,7 +24,8 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep -s --color=auto'
 
 # disable colors on htop (bad to read on solarized konsole)
-alias htop='htop --no-color'
+# re-enabled it – man can set a colorscheme (using <F2>) => this will be stored in ~/.config/htop/htoprc
+# alias htop='htop --no-color'
 
 # open file readonly
 alias vimr='vim -R'

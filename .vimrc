@@ -4,6 +4,7 @@ set nocompatible
 
 " fire up pathogen
 call pathogen#infect()
+" generate helptags for plugins
 call pathogen#helptags()
 
 " activate filetype detection
