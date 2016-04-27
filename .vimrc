@@ -207,8 +207,8 @@ imap <F12> <ESC>g<C-]>
 nmap <S-F12> :pop<CR>
 imap <S-F12> <ESC>:pop<CR>
 " open in new tab using CTRL-F12
-nmap <C-F12> <C-w><C-]><C-w>T
-imap <C-F12> <ESC><C-w><C-]><C-w>T
+nmap <C-F12> <C-w>g<C-]><C-w>T
+imap <C-F12> <ESC><C-w>g<C-]><C-w>T
 
 " Use CTRL-n to toggle nerdtree (or more correct: nerdtreetabs)
 map <C-n> :NERDTreeTabsToggle<CR>
