@@ -24,6 +24,8 @@ class DotvimPopulator():
             'git://github.com/xsbeats/vim-blade.git',
             'git://github.com/majutsushi/tagbar.git',
             'https://github.com/vim-scripts/AutoTag.git',
+            # 'https://github.com/tpope/vim-repeat.git',
+            # 'https://github.com/svermeulen/vim-easyclip.git',
     ]
 
 
