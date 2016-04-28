@@ -121,6 +121,10 @@ class DotvimPopulator():
         elif self.platform is 'win':
             # set hardcoded (as there is only one Windows I have to use :-))
             self.vim_dir = 'w:\\vimfiles'
+            print('vim dir is {}: '.format(self.vim_dir))
+
+            # copy vimrc (for symlinks in win you need administrative rights)
+            print('Copying .vimrc...')
             shutil.copy('w:\\dotfiles\\.vimrc', 'w:\\_vimrc')
 
         self.bundle_dir = os.path.join(self.vim_dir, 'bundle')
