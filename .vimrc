@@ -237,6 +237,10 @@ set background=dark
 " choose colorscheme (/usr/share/vim/vimcurrent/colors/*.vim)
 " colorscheme elflord
 
+" define solarized visualization in vimdiff [low|normal|high]
+" Attention: define before setting the colorscheme!
+let g:solarized_diffmode="low"
+
 " use solarized as colorscheme instead of the default ones
 " if you are going to use solarized theme on KDE konsole: choose colorscheme
 " Solarisiert or Solarisiert Licht in your konsole profile
