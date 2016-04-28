@@ -13,6 +13,7 @@ import urllib.request
 class DotvimPopulator():
     '''Holds functionality to install and update vim plugins.'''
 
+    # this list holds the (git) URL from where to download the plugins
     plugin_sources = [
             'https://github.com/mattn/emmet-vim.git',
             'https://github.com/scrooloose/nerdtree.git',
@@ -23,9 +24,20 @@ class DotvimPopulator():
             'https://github.com/tpope/vim-commentary.git',
             'git://github.com/xsbeats/vim-blade.git',
             'git://github.com/majutsushi/tagbar.git',
-            'https://github.com/vim-scripts/AutoTag.git',
+            'https://github.com/ludovicchabant/vim-gutentags.git',
             # 'https://github.com/tpope/vim-repeat.git',
             # 'https://github.com/svermeulen/vim-easyclip.git',
+    ]
+
+    # if a plugin is not used anymore: add relative dirname here to delete the plugin on all systems
+    plugin_delete_dirs = [
+            'AutoTag',  # switched to vim-gutentags instead
+    ]
+
+    # this is only a dummy list to hold sources that are not used ATM
+    # use this as a reference to old times (e.g. if a plugin is needed again)
+    plugin_sources_obsolete = [
+            'https://github.com/vim-scripts/AutoTag.git',
     ]
 
 
@@ -37,6 +49,8 @@ class DotvimPopulator():
         self._define_tasks()
         self._check_args()
         self._set_environment()
+
+        self._delete_plugins()
 
         # run selected task
         self.tasks[self.task]()
@@ -151,6 +165,22 @@ class DotvimPopulator():
             return True
 
         subprocess.call(['git', 'clone', source, os.path.join(self.bundle_dir, name)])
+
+        print()
+
+
+################################################################################
+    def _delete_plugins(self):
+
+        print('Checking for plugins to delete...')
+
+        for del_plugin in self.plugin_delete_dirs:
+
+            full_path = os.path.join(self.bundle_dir, del_plugin)
+
+            if os.path.isdir(full_path):
+                shutil.rmtree(full_path)
+                print('{} deleted'.format(del_plugin))
 
         print()
 
