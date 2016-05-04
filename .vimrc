@@ -239,7 +239,7 @@ set background=dark
 
 " define solarized visualization in vimdiff [low|normal|high]
 " Attention: define before setting the colorscheme!
-let g:solarized_diffmode="low"
+let g:solarized_diffmode="normal"
 
 " use solarized as colorscheme instead of the default ones
 " if you are going to use solarized theme on KDE konsole: choose colorscheme
