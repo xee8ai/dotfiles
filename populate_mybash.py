@@ -14,6 +14,7 @@ class MyBashPopulator():
 
     plugin_sources = [
             'https://github.com/joepvd/tty-solarized.git',
+            'https://github.com/nojhan/liquidprompt.git',
     ]
 
 
