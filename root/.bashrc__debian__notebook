@@ -7,6 +7,13 @@
 # https://unix.stackexchange.com/questions/31695/how-to-make-the-terminal-display-usermachine-in-bold-letters
 # 0;31m is normal red, 1;31m is boldface red
 PS1='${debian_chroot:+($debian_chroot)}\[\033[1;31m\]\u\[\033[0m\]@\h:\w# '
+
+# check if liquidprompt is installed
+if [ -d ~/.mybash/liquidprompt ]; then
+	# Only load Liquid Prompt in interactive shells, not from a script or from scp
+	[[ $- = *i* ]] && source ~/.mybash/liquidprompt/liquidprompt
+fi
+
 # umask 022
 umask 027
 
@@ -20,9 +27,6 @@ alias ll='ls $LS_OPTIONS -lF'
 alias lla='ls $LS_OPTIONS -AlF'
 alias la='ls $LS_OPTIONS -A'
 alias l='ls $LS_OPTIONS -CF'
-
-# disable colors on htop (bad to read on solarized konsole)
-alias htop='htop --no-color'
 
 # the most commonly used grep variants
 alias grep='grep --color=auto'
