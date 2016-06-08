@@ -51,6 +51,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # command reference
 alias coref='okular ~/tutorials/linux/linux_command_reference.pdf &'
 
+# quick activation of python virtual environments
+alias activate='source ./venv/bin/activate'
 # better debug output from bash scripts (bash -x);
 # source: Linux-Magazin 10/12, pg. 87
 export PS4='+${BASH_SOURCE##*/}:${LINENO}:${FUNCNAME[0]}: '
