@@ -41,7 +41,7 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# complete update/upgrade/clean cỳcle in one command
+# complete update/upgrade/clean cycle in one command
 alias aptu100='/root/bin/aptu.sh 100'
 alias aptu="/root/bin/aptu.sh"
 
