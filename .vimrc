@@ -210,6 +210,12 @@ imap <S-F12> <ESC>:pop<CR>
 nmap <C-F12> <C-w>g<C-]><C-w>T
 imap <C-F12> <ESC><C-w>g<C-]><C-w>T
 
+" use CTRL-f to search in tags (for scrolling down (standard command on <C-f>)
+" we have direct access on main keyboard – thanks neo2 :-)
+" attention: don't remove the trailing whitespace here…
+nmap <C-f> :tselect 
+imap <C-f> <ESC>:tselect 
+
 " Use CTRL-n to toggle nerdtree (or more correct: nerdtreetabs)
 map <C-n> :NERDTreeTabsToggle<CR>
 
