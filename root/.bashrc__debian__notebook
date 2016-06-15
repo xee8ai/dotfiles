@@ -36,14 +36,14 @@ alias sgrep='grep -s --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep -s --color=auto'
 
-# complete update/upgrade/clean cỳcle in one command
-alias aptu100='/root/bin/aptu.sh 100'
-alias aptu="/root/bin/aptu.sh"
-
 # Some more alias to avoid making mistakes:
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
+# complete update/upgrade/clean cỳcle in one command
+alias aptu100='/root/bin/aptu.sh 100'
+alias aptu="/root/bin/aptu.sh"
 
 # quick overview over dir size in current directory
 alias du1='du -h --max-depth=1'

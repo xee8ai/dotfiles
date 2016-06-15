@@ -7,6 +7,13 @@
 # https://unix.stackexchange.com/questions/31695/how-to-make-the-terminal-display-usermachine-in-bold-letters
 # 0;31m is normal red, 1;31m is boldface red
 PS1='${debian_chroot:+($debian_chroot)}\[\033[1;31m\]\u\[\033[0m\]@\h:\w# '
+
+# check if liquidprompt is installed
+if [ -d ~/.mybash/liquidprompt ]; then
+	# Only load Liquid Prompt in interactive shells, not from a script or from scp
+	[[ $- = *i* ]] && source ~/.mybash/liquidprompt/liquidprompt
+fi
+
 # umask 022
 umask 027
 
@@ -29,17 +36,14 @@ alias sgrep='grep -s --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep -s --color=auto'
 
-# disable colors on htop (bad to read on solarized konsole)
-alias htop='htop --no-color'
-
-# complete update/upgrade/clean cỳcle in one command
-alias aptu100='/root/bin/aptu.sh 100'
-alias aptu="/root/bin/aptu.sh"
-
 # Some more alias to avoid making mistakes:
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
+# complete update/upgrade/clean cỳcle in one command
+alias aptu100='/root/bin/aptu.sh 100'
+alias aptu="/root/bin/aptu.sh"
 
 # quick overview over dir size in current directory
 alias du1='du -h --max-depth=1'
