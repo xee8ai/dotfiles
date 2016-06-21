@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 
+import os
 import os.path
 from pprint import pprint
 import sys
 
-script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-base_path = os.path.join(script_dir, 'gitignore')
+home_dir = os.getenv('HOME')
+base_path = os.path.join(home_dir, '.gitignore_templates', 'gitignore')
+
+if not os.path.isdir(base_path):
+    print('There is no template dir ({}). Exiting…'.format(base_path))
+    sys.exit(1)
 
 ignore_files = {
         'python': 'Python.gitignore',
@@ -24,10 +29,13 @@ header_tpl = '''
 option_list = [o for o in ignore_files.keys() if o not in default_added]
 
 def usage():
-    print('{} [{}]* target_dir'.format(sys.argv[0], '|'.join(option_list)))
+    print('Usage: {} [{}]* target_dir'.format(sys.argv[0], '|'.join(option_list)))
     print('Exiting…')
     sys.exit(1)
 
+# check if at least 3 args are given
+if len(sys.argv) < 3 :
+    usage()
 
 # check if last argument is existing directory
 target_dir = sys.argv.pop()
