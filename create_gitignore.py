@@ -6,17 +6,17 @@ from pprint import pprint
 import sys
 
 home_dir = os.getenv('HOME')
-base_path = os.path.join(home_dir, '.gitignore_templates', 'gitignore')
+base_path = os.path.join(home_dir, '.gitignore_templates')
 
 if not os.path.isdir(base_path):
     print('There is no template dir ({}). Exiting…'.format(base_path))
     sys.exit(1)
 
 ignore_files = {
-        'python': 'Python.gitignore',
-        'tags': os.path.join('Global', 'Tags.gitignore'),
-        'tex': 'TeX.gitignore',
-        'vim': os.path.join('Global', 'Vim.gitignore'),
+        'python': os.path.join('gitignore', 'Python.gitignore'),
+        'tags': os.path.join('gitignore', 'Global', 'Tags.gitignore'),
+        'tex': os.path.join('gitignore', 'TeX.gitignore'),
+        'vim': os.path.join('gitignore', 'Global', 'Vim.gitignore'),
         }
 default_added = ['tags', 'vim']
 
@@ -29,12 +29,20 @@ header_tpl = '''
 option_list = [o for o in ignore_files.keys() if o not in default_added]
 
 def usage():
-    print('Usage: {} [{}]* target_dir'.format(sys.argv[0], '|'.join(option_list)))
+    print()
+    print('Usage: {} types* target_dir'.format(sys.argv[0]))
+    print()
+    print('    Types can be multiple values from [{}]'.format('|'.join(option_list)))
+    print('    If no types are given then .gitignore will')
+    print('        be created for “{}” only.'.format('” and “'.join(default_added)))
+    print('        These will be added to each generated .gitignore file')
+    print()
     print('Exiting…')
+    print()
     sys.exit(1)
 
-# check if at least 3 args are given
-if len(sys.argv) < 3 :
+# check if at least 2 args are given
+if len(sys.argv) < 2 :
     usage()
 
 # check if last argument is existing directory
