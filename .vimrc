@@ -283,5 +283,6 @@ if has("win32")
     " set path to window's ctags binary
     " download via http://prdownloads.sourceforge.net/ctags/ctags58.zip
     let g:tagbar_ctags_bin='w:\\tools\\ctags\\ctags.exe'
+    let g:gutentags_ctags_executable='w:\\tools\\ctags\\ctags.exe'
 
 endif
