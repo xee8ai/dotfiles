@@ -80,6 +80,8 @@ class GitignoreTemplatesPopulator():
         # only supported on linux
         if sys.platform.startswith('linux'):
             self.platform = 'linux'
+        elif sys.platform.startswith('win'):
+            self.platform = 'win'
         else:
             print('ERROR: Unknown operating system ({})'.format(sys.platform))
             sys.exit(1)
@@ -90,6 +92,10 @@ class GitignoreTemplatesPopulator():
             # set environment generic
             self.home_dir = os.getenv('HOME')
             self.gitignore_templates_dir = os.path.join(self.home_dir, '.gitignore_templates')
+            print('gitignore_templates dir is {}: '.format(self.gitignore_templates_dir))
+        elif self.platform is 'win':
+            self.home_dir = 'w:'
+            self.gitignore_templates_dir = os.path.join(self.home_dir, '_gitignore_templates')
             print('gitignore_templates dir is {}: '.format(self.gitignore_templates_dir))
 
         print()

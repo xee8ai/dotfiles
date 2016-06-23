@@ -5,8 +5,15 @@ import os.path
 from pprint import pprint
 import sys
 
-home_dir = os.getenv('HOME')
-base_path = os.path.join(home_dir, '.gitignore_templates')
+if sys.platform.startswith('linux'):
+    home_dir = os.getenv('HOME')
+    base_path = os.path.join(home_dir, '.gitignore_templates')
+elif sys.platform.startswith('win'):
+    home_dir = 'w:'
+    base_path = os.path.join(home_dir, '_gitignore_templates')
+else:
+    print('Operating system {} is not supported. Exiting…'.format(sys.platform.startswith))
+    sys.exit(1)
 
 if not os.path.isdir(base_path):
     print('There is no template dir ({}). Exiting…'.format(base_path))
