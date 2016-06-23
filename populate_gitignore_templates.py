@@ -94,8 +94,7 @@ class GitignoreTemplatesPopulator():
             self.gitignore_templates_dir = os.path.join(self.home_dir, '.gitignore_templates')
             print('gitignore_templates dir is {}: '.format(self.gitignore_templates_dir))
         elif self.platform is 'win':
-            self.home_dir = 'w:'
-            self.gitignore_templates_dir = os.path.join(self.home_dir, '_gitignore_templates')
+            self.gitignore_templates_dir = 'w:\_gitignore_templates'
             print('gitignore_templates dir is {}: '.format(self.gitignore_templates_dir))
 
         print()
