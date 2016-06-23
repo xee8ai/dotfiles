@@ -1,12 +1,6 @@
-################################################################################
-# general
-################################################################################
-
-tags
-
 
 ################################################################################
-# python (https://github.com/github/gitignore/blob/master/Python.gitignore)
+# python
 ################################################################################
 
 # Byte-compiled / optimized / DLL files
@@ -62,6 +56,14 @@ coverage.xml
 
 # Django stuff:
 *.log
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
 
 # Sphinx documentation
 docs/_build/
@@ -69,16 +71,64 @@ docs/_build/
 # PyBuilder
 target/
 
+# IPython Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# dotenv
+.env
+
+# virtualenv
+venv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+
+# Rope project settings
+.ropeproject
+
+
 
 ################################################################################
-# vim (https://github.com/github/gitignore/blob/master/Global/Vim.gitignore)
+# tags
 ################################################################################
 
+# Ignore tags created by etags, ctags, gtags (GNU global) and cscope
+TAGS
+.TAGS
+!TAGS/
+tags
+.tags
+!tags/
+gtags.files
+GTAGS
+GRTAGS
+GPATH
+cscope.files
+cscope.out
+cscope.in.out
+cscope.po.out
+
+
+
+
+################################################################################
+# vim
+################################################################################
+
+# swap
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
-*.un~
+# session
 Session.vim
+# temporary
 .netrwhist
 *~
-
-
+# auto-generated tag files
+tags
