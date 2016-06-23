@@ -11,11 +11,11 @@ if sys.platform.startswith('linux'):
 elif sys.platform.startswith('win'):
     base_path = 'w:\_gitignore_templates'
 else:
-    print('Operating system {} is not supported. Exiting…'.format(sys.platform.startswith))
+    print('Operating system {} is not supported. Exiting...'.format(sys.platform.startswith))
     sys.exit(1)
 
 if not os.path.isdir(base_path):
-    print('There is no template dir ({}). Exiting…'.format(base_path))
+    print('There is no template dir ({}). Exiting...'.format(base_path))
     sys.exit(1)
 
 ignore_files = {
@@ -40,10 +40,10 @@ def usage():
     print()
     print('    Types can be multiple values from [{}]'.format('|'.join(option_list)))
     print('    If no types are given then .gitignore will')
-    print('        be created for “{}” only.'.format('” and “'.join(default_added)))
+    print('        be created for "{}" only.'.format('" and "'.join(default_added)))
     print('        These will be added to each generated .gitignore file')
     print()
-    print('Exiting…')
+    print('Exiting...')
     print()
     sys.exit(1)
 
