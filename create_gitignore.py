@@ -9,8 +9,7 @@ if sys.platform.startswith('linux'):
     home_dir = os.getenv('HOME')
     base_path = os.path.join(home_dir, '.gitignore_templates')
 elif sys.platform.startswith('win'):
-    home_dir = 'w:'
-    base_path = os.path.join(home_dir, '_gitignore_templates')
+    base_path = 'w:\_gitignore_templates'
 else:
     print('Operating system {} is not supported. Exiting…'.format(sys.platform.startswith))
     sys.exit(1)
