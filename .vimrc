@@ -200,7 +200,9 @@ let g:tagbar_autofocus=1
 let tagbar_map_togglefold= "<space>"
 
 " search for tags file also in higher directories
-set tags+=tags;/
+" not needed?: set tags+=tags;/
+set tags=tags;
+
 " map to F12 (for normal and insert mode)
 nmap <F12> g<C-]>
 imap <F12> <ESC>g<C-]>
