@@ -87,6 +87,9 @@ autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType sh set tabstop=4|set shiftwidth=4
 autocmd FileType vim set tabstop=4|set shiftwidth=4|set expandtab
 
+" enable omnicompletion
+set omnifunc=syntaxcomplete#Complete
+
 " auto indent depending on filetype
 filetype plugin indent on
 
