@@ -90,6 +90,9 @@ autocmd FileType vim set tabstop=4|set shiftwidth=4|set expandtab
 " enable omnicompletion
 set omnifunc=syntaxcomplete#Complete
 
+" call omnicompletion by Shift-Tab
+inoremap <S-TAB> <C-x><C-o>
+
 " auto indent depending on filetype
 filetype plugin indent on
 
