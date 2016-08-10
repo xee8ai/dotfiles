@@ -163,10 +163,12 @@ au BufNewFile,BufFilePre,BufRead *.ini* set filetype=cfg
 " interpret .md as markdown (rather than modula2)
 " au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
-" H toggles marking the current line
-nnoremap H :set cursorline!<CR> :set cursorcolumn!<cr>
+" H toggles highlighting of the current line and column
+" disabled because of H is also movement command (first line) and there is no
+" real need to disable the marking
+" nnoremap H :set cursorline!<CR> :set cursorcolumn!<cr>
 
-" enable by default
+" enable highlighting of current line and col by default
 :set cursorline
 :set cursorcolumn
 
