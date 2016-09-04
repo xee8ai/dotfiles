@@ -95,3 +95,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+if [ -f ~/bin/anniversary-processor/bash-processor.sh ]; then
+	~/bin/anniversary-processor/bash-processor.sh
+fi
