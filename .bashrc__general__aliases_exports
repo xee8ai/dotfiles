@@ -51,6 +51,13 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # command reference
 alias coref='okular ~/tutorials/linux/linux_command_reference.pdf &'
 
+# show current git user and mail on each git command
+if [ -f ~/dotfiles/helpers/git-user.py ]; then
+	alias git='~/dotfiles/helpers/git-user.py && git'
+else
+	alias git='echo "~/dotfiles/helpers/git-user.py does not exist" && echo "" && git'
+fi
+
 # quick activation of python virtual environments
 alias activate='source ./venv/bin/activate'
 # better debug output from bash scripts (bash -x);
