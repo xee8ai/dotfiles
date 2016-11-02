@@ -289,6 +289,18 @@ function s:updateCursorLine()
 endf
 autocmd ColorScheme * call s:updateCursorLine()
 
+" overwrite [ and ] by < and > – this is easier to reach and feels more
+" natural, especially in remembering the direction :-)
+" this hint is taken from https://github.com/tpope/vim-unimpaired#faq
+" so all the mapping of this plugin are affected (:help unimpaired)
+" this also works e.g. on ]c and [c (jumping to next change)
+" and: this mapping is additional (the original combinations will still work)
+nmap < [
+nmap > ]
+omap < [
+omap > ]
+xmap < [
+xmap > ]
 
 " windows related stuff: here we use gvim because powershell integration of
 " vim is bad (especially the colors) and not useful (there are no tabs in
