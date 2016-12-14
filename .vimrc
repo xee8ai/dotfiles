@@ -161,7 +161,7 @@ nnoremap <Leader>tts :set expandtab<CR>:retab<CR>
 au BufNewFile,BufFilePre,BufRead *.ini* set filetype=cfg
 
 " interpret .md as markdown (rather than modula2)
-" au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 " H toggles highlighting of the current line and column
 " disabled because of H is also movement command (first line) and there is no
