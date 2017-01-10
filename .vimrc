@@ -276,15 +276,15 @@ let g:gutentags_tagfile="tags"
 " for color codes check http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
 " do this after applying the colorscheme
 " :highlight CursorLineNR cterm=bold ctermfg=106
-:highlight CursorLineNR ctermfg=106
+:highlight CursorLineNR cterm=bold ctermfg=106
 
 " this function updates (=overwrites) these setting on background toggle
 " check https://www.reddit.com/r/vim/comments/2lsn8y/make_the_current_line_number_a_different_colour
 function s:updateCursorLine()
     if &background == "dark"
-        highlight CursorLineNr ctermfg=106
+        highlight CursorLineNr cterm=bold ctermfg=106
     else
-        highlight CursorLineNr ctermfg=131
+        highlight CursorLineNr cterm=bold ctermfg=131
     endif
 endf
 autocmd ColorScheme * call s:updateCursorLine()
