@@ -300,6 +300,14 @@ function s:updateCursorLine()
 endf
 autocmd ColorScheme * call s:updateCursorLine()
 
+" CtrlP settings
+" open on bottom and order matches top to bottom
+let g:ctrlp_match_window = 'bottom,order:ttb'
+" open files in new buffers
+let g:ctrlp_switch_buffer = 0
+" determine the working directory (look for nearest .git or take dir of the current file)
+let g:ctrlp_working_path_mode = 'ra'
+
 " windows related stuff: here we use gvim because powershell integration of
 " vim is bad (especially the colors) and not useful (there are no tabs in
 " powershell)
