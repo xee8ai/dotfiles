@@ -85,6 +85,9 @@ inoremap <S-TAB> <C-x><C-o>
 " auto indent depending on filetype
 filetype plugin indent on
 
+" redraw only when needed (e.g. not within macros, so they will run faster)
+set lazyredraw
+
 " temporarily switch to 'paste mode' (in insert) (Vim will switch to paste
 " mode, disabling all kinds of smartness and just pasting a whole buffer of
 " text.)
