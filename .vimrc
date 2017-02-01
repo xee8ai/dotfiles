@@ -307,6 +307,10 @@ let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 " determine the working directory (look for nearest .git or take dir of the current file)
 let g:ctrlp_working_path_mode = 'ra'
+" ignore files from .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" don't limit number of files to scan
+let g:ctrlp_max_files = 0
 
 " windows related stuff: here we use gvim because powershell integration of
 " vim is bad (especially the colors) and not useful (there are no tabs in
