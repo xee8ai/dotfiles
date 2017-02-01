@@ -15,7 +15,7 @@ filetype plugin on
 
 " redefine leader to comma
 " decided not to remap leader => comma is used for backward character
-" search
+" search => leader still is \
 " let mapleader = ","
 
 " status line configuration
@@ -58,11 +58,6 @@ set relativenumber
 
 " manual toggle relativenumber
 nnoremap <Leader>tn :set relativenumber!<CR>
-
-" in insert mode use only absolute numbers
-" commented out: confusing and slow
-" autocmd InsertEnter * :set norelativenumber
-" autocmd InsertLeave * :set relativenumber
 
 " activate syntax highlighting
 syntax on
