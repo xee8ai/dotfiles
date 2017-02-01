@@ -75,12 +75,6 @@ set softtabstop=4
 " number of spaces for '>>' and '<<'
 set shiftwidth=4
 
-" some filetype specific settings (overwrites global ones)
-autocmd FileType java set tabstop=4|set shiftwidth=4
-autocmd FileType php set tabstop=4|set shiftwidth=4
-autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
-autocmd FileType sh set tabstop=4|set shiftwidth=4
-autocmd FileType vim set tabstop=4|set shiftwidth=4|set expandtab
 
 " enable omnicompletion
 set omnifunc=syntaxcomplete#Complete
@@ -126,16 +120,35 @@ set wildmenu
 " set folding method
 :com Myfold :exec ":set foldmethod=indent"
 set foldlevel=2
-" if editing python: open file folded; zM closes and zR opens all foldings
-autocmd FileType java set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
-autocmd FileType php set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
-autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
-autocmd FileType sh set foldmethod=indent|set foldlevel=1|set foldnestmax=1|normal zM
-autocmd FileType xml set foldmethod=indent|set foldlevel=4|set foldnestmax=4|normal zM
 
-" add spell checking and automatic wrapping at the recommended 72 columns
-" to your git commit messages
-autocmd Filetype gitcommit setlocal spell textwidth=72|set colorcolumn=51,52,73,74
+" filetype specific settings; wrapped in augroup => each autocmd runs only once
+" (taken from https://dougblack.io/words/a-good-vimrc.html)
+augroup configgroup
+
+    " first: clear all the autocmd for the current group
+    autocmd!
+
+    " add spell checking and automatic wrapping at the recommended 72 columns
+    " to git commit messages
+    autocmd Filetype gitcommit setlocal spell textwidth=72|set colorcolumn=51,52,73,74
+
+    autocmd FileType java set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType java set tabstop=4|set shiftwidth=4
+
+    autocmd FileType php set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType php set tabstop=4|set shiftwidth=4
+
+    autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
+
+    autocmd FileType sh set foldmethod=indent|set foldlevel=1|set foldnestmax=1|normal zM
+    autocmd FileType sh set tabstop=4|set shiftwidth=4
+
+    autocmd FileType vim set tabstop=4|set shiftwidth=4|set expandtab
+
+    autocmd FileType xml set foldmethod=indent|set foldlevel=4|set foldnestmax=4|normal zM
+
+augroup END
 
 " highlight cols (as hint for line length)
 " highlight ColorColumn ctermbg=232  guibg=darkblue
