@@ -80,3 +80,8 @@ cd /root
 
 # check if iptables are active
 /root/bin/check_iptables.sh
+
+# disable Software Flow Control (XON/XOFF flow control)
+# this e.g. prevents vim from splitting from CtrlP-Plugin using CTRL+S
+# for details see: http://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator
+stty -ixon

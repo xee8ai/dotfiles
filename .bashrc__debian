@@ -99,3 +99,8 @@ fi
 if [ -f ~/bin/anniversary-processor/bash-processor.sh ]; then
 	~/bin/anniversary-processor/bash-processor.sh
 fi
+
+# disable Software Flow Control (XON/XOFF flow control)
+# this e.g. prevents vim from splitting from CtrlP-Plugin using CTRL+S
+# for details see: http://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator
+stty -ixon
