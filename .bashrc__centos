@@ -20,3 +20,8 @@ umask 027
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# disable Software Flow Control (XON/XOFF flow control)
+# this e.g. prevents vim from splitting from CtrlP-Plugin using CTRL+S
+# for details see: http://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator
+stty -ixon
