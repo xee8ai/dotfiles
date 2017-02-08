@@ -156,7 +156,7 @@ augroup END
 " highlight cols (as hint for line length)
 " highlight ColorColumn ctermbg=232  guibg=darkblue
 "execute "set colorcolumn=" . join(range(81,335), ',')
-set colorcolumn=81,101,102,103
+set colorcolumn=81,101,102,121,122,123,124,125,126,127,128
 
 " map za (alternate between opening and closing a fold) to spacebar
 nnoremap <space> za
