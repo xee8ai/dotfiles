@@ -17,14 +17,14 @@ alias l='ls -CF'
 
 # the most commonly used grep variants
 alias grep='grep --color=auto'
-alias ggrep='grep -inTsZ --color=auto'
+alias ggrep='grep -inTs --color=auto'
 alias igrep='grep -is --color=auto'
 alias sgrep='grep -s --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep -s --color=auto'
-alias phpgrep='grep -inTsrZ --color=auto --include=*.php'
-alias pygrep='grep -inTsrZ --color=auto --include=*.py'
-alias texgrep='grep -inTsrZ --color=auto --include=*.tex'
+alias phpgrep='grep -inTsr --color=auto --include=*.php'
+alias pygrep='grep -inTsr --color=auto --include=*.py'
+alias texgrep='grep -inTsr --color=auto --include=*.tex'
 
 # disable colors on htop (bad to read on solarized konsole)
 # re-enabled it – man can set a colorscheme (using <F2>) => this will be stored in ~/.config/htop/htoprc
