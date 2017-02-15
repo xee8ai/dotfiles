@@ -161,6 +161,9 @@ set colorcolumn=81,101,102,121,122,123,124,125,126,127,128
 " map za (alternate between opening and closing a fold) to spacebar
 nnoremap <space> za
 
+" shortcut for folding based on last search results (stored in register @/)
+nnoremap <Leader>fosr :setlocal foldexpr=getline(v:lnum)=~@/?0:1 foldmethod=expr<CR>zM
+
 " shortcut for _r_emoving _t_railing _w_hitespaces
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
