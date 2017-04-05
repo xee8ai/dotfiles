@@ -28,6 +28,7 @@ class DotvimPopulator():
             'https://github.com/tpope/vim-repeat.git',
             'git://github.com/tpope/vim-unimpaired.git',
             'https://github.com/ctrlpvim/ctrlp.vim.git',
+            'https://github.com/joonty/vdebug.git',
             # 'https://github.com/svermeulen/vim-easyclip.git',
     ]
 
