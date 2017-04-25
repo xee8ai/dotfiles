@@ -177,6 +177,9 @@ au BufNewFile,BufFilePre,BufRead *.ini* set filetype=cfg
 " interpret .md as markdown (rather than modula2)
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
+" interpret .wiki as confluencewiki – it's the only one currently used
+au BufNewFile,BufFilePre,BufRead *.wiki set filetype=confluencewiki
+
 " H toggles highlighting of the current line and column
 " disabled because of H is also movement command (first line) and there is no
 " real need to disable the marking
