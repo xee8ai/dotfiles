@@ -1,0 +1,9 @@
+
+--regex-C=/$x/x/x/e/ The ctags parser currently doesn't support comments
+--regex-C=/$x/x/x/e/ This is a work-around which works with '/' characters
+--regex-C=/$x/x/x/e/ http://stackoverflow.com/questions/10973224/how-to-add-comments-to-an-exuberant-ctags-config-file
+--regex-C=/$x/x/x/e/
+--regex-C=/$x/x/x/e/ - example file to be extended by YOU :-)
+--regex-C=/$x/x/x/e/ - local excludes (e.g. --exclude=vendor/*) are sometimes ignored and let the tags file explode
+
+--exclude=*/.git
