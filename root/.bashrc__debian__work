@@ -51,8 +51,9 @@ alias du1='du -h --max-depth=1'
 # nice overview over commit history including branches
 alias gg="git log --graph --full-history --all --pretty=format:'%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --date=short"
 
-# switch for neo2<=>de on TTY1..6
-alias asdf='/root/.neo2_layout/activate_numlock.sh; cd ~/.neo2_layout; loadkeys neo; cd ~'
+# switch for neo2<=>de on TTY1..6 (do not activate numlock on notebook without number block)
+# alias asdf='/root/.neo2_layout/activate_numlock.sh; cd ~/.neo2_layout; loadkeys neo; cd ~'
+alias asdf='cd ~/.neo2_layout; loadkeys neo; cd ~'
 alias uiae='loadkeys de'
 
 # open file readonly
