@@ -26,6 +26,7 @@ alias fgrep='fgrep -s --color=auto'
 alias phpgrep='grep -inTsr --color=auto --include=*.php'
 alias pygrep='grep -inTsr --color=auto --include=*.py'
 alias texgrep='grep -inTsr --color=auto --include=*.tex'
+alias tplgrep='grep -inTsr --color=auto --include=*.tpl'
 
 # disable colors on htop (bad to read on solarized konsole)
 # re-enabled it – man can set a colorscheme (using <F2>) => this will be stored in ~/.config/htop/htoprc
