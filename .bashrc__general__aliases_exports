@@ -71,6 +71,11 @@ export PS4='+${BASH_SOURCE##*/}:${LINENO}:${FUNCNAME[0]}: '
 # also used by mc for editor on <F4>
 export EDITOR=/usr/bin/vim
 
+# wrapper to use colordiff instead of diff
+if [ -f /usr/bin/colordiff ]; then
+	alias diff='/usr/bin/colordiff'
+fi
+
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
