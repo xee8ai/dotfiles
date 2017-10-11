@@ -1,0 +1,15 @@
+[color]
+	ui = auto
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+	keepBackup = false
+[push]
+	default = simple
+[user]
+	name = xee8ai
+	email = xee8ai@users.noreply.github.com
