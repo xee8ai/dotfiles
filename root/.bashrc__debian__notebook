@@ -21,45 +21,14 @@ umask 027
 export LS_OPTIONS='--color=auto'
 eval "`dircolors`"
 
-# some more ls aliases
-alias ls='ls $LS_OPTIONS'
-alias ll='ls $LS_OPTIONS -lF'
-alias lla='ls $LS_OPTIONS -AlF'
-alias la='ls $LS_OPTIONS -A'
-alias l='ls $LS_OPTIONS -CF'
-
-# the most commonly used grep variants
-alias grep='grep --color=auto'
-alias ggrep='grep -inTs --color=auto'
-alias igrep='grep -is --color=auto'
-alias sgrep='grep -s --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep -s --color=auto'
-
-# Some more alias to avoid making mistakes:
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+# get general aliases and exports from separate file
+if [ -f ~/.bash_aliases ]; then
+	. ~/.bash_aliases
+fi
 
 # complete update/upgrade/clean cycle in one command
 alias aptu100='/root/bin/aptu.sh 100'
 alias aptu="/root/bin/aptu.sh"
-
-# quick overview over dir size in current directory
-alias du1='du -h --max-depth=1'
-
-# nice overview over commit history including branches
-alias gg="git log --graph --full-history --all --pretty=format:'%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --date=short"
-
-# switch for neo2<=>de on TTY1..6
-alias asdf='/root/.neo2_layout/activate_numlock.sh; cd ~/.neo2_layout; loadkeys neo; cd ~'
-alias uiae='loadkeys de'
-
-# open file readonly
-alias vimr='vim -R'
-
-# open multiple files in tabs
-alias vim='vim -p'
 
 # close amarok before shutdown
 alias shutdown='killall amarok; sleep 2; shutdown'

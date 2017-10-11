@@ -58,6 +58,9 @@ for S in $SRC; do
 	rsync $RSYNCOPTS $S $DST
 done
 
+# copy the aliases file
+cp -f /home/$USERNAME/dotfiles/.bashrc__general__aliases_exports /root/.bash_aliases
+
 # change owner back to root
 chown -R root.root /root
 

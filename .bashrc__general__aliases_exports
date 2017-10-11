@@ -84,3 +84,22 @@ fi
 if [ -f ~/git-completion.bash ]; then
 	source ~/git-completion.bash
 fi
+
+# add some root-only aliases
+if [ "$(id -u)" == "0" ]; then
+
+	# switch for neo2<=>de on TTY1..6
+	alias asdf='/root/.neo2_layout/activate_numlock.sh; cd ~/.neo2_layout; loadkeys neo; cd ~'
+	alias uiae='loadkeys de'
+
+	# Some more alias to avoid making mistakes:
+	alias rm='rm -i'
+	alias cp='cp -i'
+	alias mv='mv -i'
+
+fi
+
+# and some user-only aliases
+# if [ "$(id -u)" != "0" ]; then
+
+# fi
