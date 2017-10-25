@@ -158,6 +158,10 @@ augroup END
 "execute "set colorcolumn=" . join(range(81,335), ',')
 set colorcolumn=81,101,102,121,122,123,124,125,126,127,128
 
+" force gf to open file under cursor in new tab
+nnoremap gf <C-W>gf
+vnoremap gf <C-W>gf
+
 " map za (alternate between opening and closing a fold) to spacebar
 nnoremap <space> za
 
