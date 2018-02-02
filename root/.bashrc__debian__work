@@ -63,8 +63,8 @@ alias vimr='vim -R'
 alias vim='vim -p'
 
 # clean up, close amarok before shutdown
-alias shutdown='rm -f /etc/hosts; cp -fa /etc/hosts.original /etc/hosts; killall amarok; sleep 2; shutdown'
-alias poweroff='rm -f /etc/hosts; cp -fa /etc/hosts.original /etc/hosts; killall amarok; sleep 2; poweroff'
+alias shutdown='killall amarok; sleep 2; shutdown'
+alias poweroff='killall amarok; sleep 2; poweroff'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
