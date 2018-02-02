@@ -62,6 +62,10 @@ nnoremap <Leader>tn :set relativenumber!<CR>
 " activate syntax highlighting
 syntax on
 
+" this accelerates vim-gitgutter (by updating vim window every 250ms)
+" default is 4sec
+set updatetime=250
+
 " hides buffers instead of closing them (can have unwritten changes to a
 " file and open a new file using :e , without being forced to write or undo
 " your changes first)
