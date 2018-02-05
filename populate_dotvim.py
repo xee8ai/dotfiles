@@ -28,9 +28,17 @@ class DotvimPopulator():
             'https://github.com/tpope/vim-repeat.git',
             'git://github.com/tpope/vim-unimpaired.git',
             'https://github.com/ctrlpvim/ctrlp.vim.git',
-            'https://github.com/airblade/vim-gitgutter.git',
             # 'https://github.com/joonty/vdebug.git',
             # 'https://github.com/svermeulen/vim-easyclip.git',
+    ]
+
+    # additional plugins to install on windows
+    plugin_sources_win_only = [
+    ]
+
+    # additional plugins to install on linux
+    plugin_sources_linux_only = [
+            'https://github.com/airblade/vim-gitgutter.git',    # extreme latency on gvim@win
     ]
 
     # if a plugin is not used anymore: add relative dirname here to delete the plugin on all systems
@@ -118,11 +126,16 @@ class DotvimPopulator():
         print('Used operating system is: {}'.format(self.platform))
 
         if self.platform is 'linux':
+            # add extra plugins for linux
+            self.plugin_sources.extend(self.plugin_sources_linux_only)
             # set environment generic
             self.home_dir = os.getenv('HOME')
             self.vim_dir = os.path.join(self.home_dir, '.vim')
             print('vim dir is {}: '.format(self.vim_dir))
+
         elif self.platform is 'win':
+            # add extra plugins for windows
+            self.plugin_sources.extend(self.plugin_sources_win_only)
             # set hardcoded (as there is only one Windows I have to use :-))
             self.vim_dir = 'w:\\vimfiles'
             print('vim dir is {}: '.format(self.vim_dir))
