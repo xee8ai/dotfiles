@@ -135,6 +135,10 @@ augroup configgroup
     " first: clear all the autocmd for the current group
     autocmd!
 
+    autocmd FileType apache setlocal commentstring=#\ %s
+
+    autocmd FileType cfg setlocal commentstring=#\ %s
+
     " add spell checking and automatic wrapping at the recommended 72 columns
     " to git commit messages
     autocmd Filetype gitcommit setlocal spell textwidth=72|set colorcolumn=51,52,73,74
