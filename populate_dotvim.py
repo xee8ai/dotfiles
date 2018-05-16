@@ -32,6 +32,9 @@ class DotvimPopulator():
             # 'https://github.com/svermeulen/vim-easyclip.git',
     ]
 
+    # default git command; can be overwritten using CLI arg
+    git_cmd = 'git'
+
     # additional plugins to install on windows
     plugin_sources_win_only = [
     ]
@@ -83,14 +86,21 @@ class DotvimPopulator():
         '''Check given CLI.'''
 
         def error_func():
-            print('Usage: {} [{}]'.format(sys.argv[0], '|'.join(self.tasks)))
+            print()
+            print('Usage: {} [{}]'.format(sys.argv[0], '|'.join(self.tasks)) + ' {opt_git_cmd}')
+            print('           as second argument you may pass the path to a (different) git executable')
+            print()
             sys.exit(1)
 
-        if len(sys.argv) != 2:
+        if len(sys.argv) < 2:
             error_func()
 
         if sys.argv[1] not in self.tasks:
             error_func()
+
+        # check if different git command is given
+        if len(sys.argv) > 2:
+            self.git_cmd = sys.argv[2]
 
         self.task = sys.argv[1]
 
@@ -185,7 +195,7 @@ class DotvimPopulator():
             print()
             return True
 
-        subprocess.call(['git', 'clone', source, os.path.join(self.bundle_dir, name)])
+        subprocess.call([self.git_cmd, 'clone', source, os.path.join(self.bundle_dir, name)])
 
         print()
 
@@ -233,7 +243,7 @@ class DotvimPopulator():
             print('{} not yet installed. Skipping...'.format(name))
 
         os.chdir(plugin_dir)
-        subprocess.call(['git', 'pull'])
+        subprocess.call([self.git_cmd, 'pull'])
 
         print()
 
