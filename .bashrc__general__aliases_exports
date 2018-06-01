@@ -16,6 +16,15 @@ alias la='ls -A --color=auto'
 alias lla='ls -lA --color=auto'
 alias l='ls -CF --color=auto'
 
+# quick directory changes
+alias ..='cd ..'
+alias ...='cd ../../..'
+alias ....='cd ../../../..'
+alias .....='cd ../../../../..'
+alias ......='cd ../../../../../..'
+alias .......='cd ../../../../../../..'
+alias ........='cd ../../../../../../../..'
+
 # the most commonly used grep variants
 alias grep='grep --color=auto'
 alias ggrep='grep -inTs --color=auto'
@@ -28,10 +37,6 @@ alias pygrep='grep -inTsr --color=auto --include=*.py'
 alias shgrep='grep -inTsr --color=auto --include=*.sh'
 alias texgrep='grep -inTsr --color=auto --include=*.tex'
 alias tplgrep='grep -inTsr --color=auto --include=*.tpl'
-
-# disable colors on htop (bad to read on solarized konsole)
-# re-enabled it – man can set a colorscheme (using <F2>) => this will be stored in ~/.config/htop/htoprc
-# alias htop='htop --no-color'
 
 # open file readonly
 alias vimr='vim -R'
@@ -93,7 +98,7 @@ if [ "$(id -u)" == "0" ]; then
 	alias asdf='/root/.neo2_layout/activate_numlock.sh; cd ~/.neo2_layout; loadkeys neo; cd ~'
 	alias uiae='loadkeys de'
 
-	# Some more alias to avoid making mistakes:
+	# Some aliases to avoid making mistakes:
 	alias rm='rm -i'
 	alias cp='cp -i'
 	alias mv='mv -i'
