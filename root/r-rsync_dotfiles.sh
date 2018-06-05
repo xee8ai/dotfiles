@@ -36,7 +36,7 @@ SRC="/home/$USERNAME/.vim
 # destination dir
 DST="/root"
 
-RSYNCOPTS="-avrpEl --delete"
+RSYNCOPTS="-avrpEL --delete"
 
 # change owner to $USERNAME => see better what is going to be synced
 chown -R $USERNAME.$USERNAME /root/.vim
