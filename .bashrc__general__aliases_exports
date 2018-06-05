@@ -17,7 +17,8 @@ alias lla='ls -lA --color=auto'
 alias l='ls -CF --color=auto'
 
 # quick directory changes
-alias ..='cd ..'
+alias .='cd ..'
+alias ..='cd ../..'
 alias ...='cd ../../..'
 alias ....='cd ../../../..'
 alias .....='cd ../../../../..'
