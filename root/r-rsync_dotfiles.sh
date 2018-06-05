@@ -61,6 +61,9 @@ done
 # copy the aliases file
 cp -f /home/$USERNAME/dotfiles/.bashrc__general__aliases_exports /root/.bash_aliases
 
+# copy the sync file
+cp -f /home/$USERNAME/dotfiles/root/r-rsync_dotfiles.sh /root/dotfiles
+
 # change owner back to root
 chown -R root.root /root
 
