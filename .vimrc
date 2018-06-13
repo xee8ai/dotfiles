@@ -149,7 +149,7 @@ augroup configgroup
     autocmd FileType markdown set autoindent    " indenting lists
 
     autocmd FileType php set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
-    autocmd FileType php set tabstop=4|set shiftwidth=4
+    autocmd FileType php set tabstop=4|set shiftwidth=4|set expandtab
 
     autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
     autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
