@@ -26,6 +26,21 @@ ignore_files = {
         }
 default_added = ['tags', 'vim']
 
+ctags_content = {
+        'tags': [
+            '--recurse=yes',
+            '--exclude=.git',
+            ],
+        'python': [
+            '--exclude=venv',
+            ],
+        'php': [
+            '--exclude=vendor',
+            ],
+        'tex': [],
+        'vim': [],
+        }
+
 header_tpl = '''
 ################################################################################
 # {}
@@ -66,6 +81,7 @@ for i in ignores:
         print('{} is not valid'.format(i))
         usage()
 
+
 file_parts = []
 for i in ignores:
     header = header_tpl.format(i)
@@ -81,4 +97,17 @@ file_content = '\n\n'.join(file_parts)
 gitignore_file = os.path.join(target_dir, '.gitignore')
 with open(gitignore_file, 'w') as fh:
     fh.write(file_content)
+print('Wrote {}'.format(gitignore_file))
+
+# create .ctags to keep tags file small :-)
+data = ctags_content['tags']
+for i in ignores:
+    if i != 'tags':
+        for c in ctags_content[i]:
+            data.append(c)
+ctags_file = os.path.join(target_dir, '.ctags')
+file_content = "\n".join(data)
+with open(ctags_file, 'w') as fh:
+    fh.write(file_content)
+print('Wrote {}'.format(ctags_file))
 print('Whooo!!')
