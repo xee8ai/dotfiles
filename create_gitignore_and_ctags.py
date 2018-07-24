@@ -19,6 +19,7 @@ if not os.path.isdir(base_path):
     sys.exit(1)
 
 ignore_files = {
+        'php': None,
         'python': os.path.join('gitignore', 'Python.gitignore'),
         'tags': os.path.join('gitignore', 'Global', 'Tags.gitignore'),
         'tex': os.path.join('gitignore', 'TeX.gitignore'),
@@ -85,6 +86,8 @@ for i in ignores:
 file_parts = []
 for i in ignores:
     header = header_tpl.format(i)
+    if not ignore_files[i]:
+        continue
     source = os.path.join(base_path, ignore_files[i])
     with open(source, 'r') as fh:
         content = fh.read()
