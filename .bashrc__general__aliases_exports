@@ -110,6 +110,11 @@ if [ "$(id -u)" == "0" ]; then
 
 fi
 
+# use self compiled vim if available (e.g. on CentOS there is no python3 support – but needed for vdebug)
+if [ -d "$HOME/.local/vim/bin/" ] ; then
+	PATH="$HOME/.local/vim/bin/:$PATH"
+fi
+
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
 
