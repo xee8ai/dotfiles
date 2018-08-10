@@ -143,25 +143,25 @@ augroup configgroup
     " to git commit messages
     autocmd Filetype gitcommit setlocal spell textwidth=72|set colorcolumn=51,52,73,74
 
-    autocmd FileType java set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType java set foldmethod=indent|set foldlevel=2|set foldnestmax=2
     autocmd FileType java set tabstop=4|set shiftwidth=4
 
     autocmd FileType markdown set autoindent    " indenting lists
 
-    autocmd FileType php set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType php set foldmethod=indent|set foldlevel=2|set foldnestmax=2
     " et disabled until switch to PSR-4
     " autocmd FileType php set tabstop=4|set shiftwidth=4|set expandtab
     autocmd FileType php set tabstop=4|set shiftwidth=4
 
-    autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2|normal zM
+    autocmd FileType python set foldmethod=indent|set foldlevel=2|set foldnestmax=2
     autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
 
-    autocmd FileType sh set foldmethod=indent|set foldlevel=1|set foldnestmax=1|normal zM
+    autocmd FileType sh set foldmethod=indent|set foldlevel=1|set foldnestmax=1
     autocmd FileType sh set tabstop=4|set shiftwidth=4
 
     autocmd FileType vim set tabstop=4|set shiftwidth=4|set expandtab
 
-    autocmd FileType xml set foldmethod=indent|set foldlevel=4|set foldnestmax=4|normal zM
+    autocmd FileType xml set foldmethod=indent|set foldlevel=4|set foldnestmax=4
 
 augroup END
 
