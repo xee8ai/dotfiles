@@ -340,6 +340,18 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " don't limit number of files to scan
 let g:ctrlp_max_files = 0
 
+" check if vdebug_options exist; create empty if not
+if !exists('g:vdebug_options')
+    let g:vdebug_options = {}
+endif
+
+" add path mappings for vdebug paths (because of docker)
+" if there will ever be multiple dockers using the same “key”
+" check out https://grzegorowski.com/docker-and-vdebug-for-php-debugging
+" (using vim-projectroot) or
+" https://github.com/vim-vdebug/vdebug/issues/197 (using vim-localvimrc)
+let g:vdebug_options['path_maps'] = {"/usr/local/vufind" : "/home/par/data/projects/finc/vufind3/vufind2"}
+
 " windows related stuff: here we use gvim because powershell integration of
 " vim is bad (especially the colors) and not useful (there are no tabs in
 " powershell)
