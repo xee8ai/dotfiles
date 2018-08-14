@@ -33,12 +33,15 @@ alias igrep='grep -is --color=auto'
 alias sgrep='grep -s --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep -s --color=auto'
-alias phpgrep='grep -inTsr --color=auto --include=*.php'
-alias phtmlgrep='grep -inTsr --color=auto --include=*.phtml'
-alias pygrep='grep -inTsr --color=auto --include=*.py'
+
+# some aliases to grep certain filename suffixes only
+alias confgrep='grep -inTsr --color=auto --include=*.{cfg,conf,ini}'
+alias htmlgrep='grep -inTsr --color=auto --include=*.{htm,html}'
+alias phpgrep='grep -inTsr --color=auto --include=*.{phtml,php,php3,php4,php5}'
+alias pygrep='grep -inTsr --color=auto --include=*.{py,pyw}'
 alias shgrep='grep -inTsr --color=auto --include=*.sh'
 alias texgrep='grep -inTsr --color=auto --include=*.tex'
-alias tplgrep='grep -inTsr --color=auto --include=*.tpl'
+alias tplgrep='grep -inTsr --color=auto --include=*.{tpl,blade.php}'
 
 # open file readonly
 alias vimr='vim -R'
