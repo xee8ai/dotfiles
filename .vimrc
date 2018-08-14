@@ -56,6 +56,10 @@ set laststatus=2
 set number
 set relativenumber
 
+" backspace not usable in insert mode in self compiled vim – setting
+" explicitely
+set backspace=indent,eol,start
+
 " manual toggle relativenumber
 nnoremap <Leader>tn :set relativenumber!<CR>
 
