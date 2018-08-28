@@ -3,6 +3,10 @@
 SRC_DIR="$HOME/src"
 VIM_SRC_DIR="$SRC_DIR/vim"
 
+if [ ! -d $SRC_DIR ]; then
+	mkdir -p $SRC_DIR
+fi
+
 cd $SRC_DIR
 
 if [ ! -d $VIM_SRC_DIR ]; then
