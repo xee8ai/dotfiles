@@ -301,8 +301,8 @@ colorscheme solarized
 " use F3 to toggle solarized background between light and dark
 call togglebg#map("<F3>")
 
-" use F5 to refresh syntax highlighting
-map <F5> :syntax sync fromstart<CR>
+" use \r to refresh syntax highlighting (F5 is used by vdebug)
+map <Leader>rf :syntax sync fromstart<CR>
 
 " shortcut to overwrite syntax highlighting for folds – sometimes I want more
 " [d]iscreet [f]olds
