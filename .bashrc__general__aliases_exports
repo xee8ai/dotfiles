@@ -45,12 +45,6 @@ alias shgrep='grep -inTsr --color=auto --include=*.sh'
 alias texgrep='grep -inTsr --color=auto --include=*.tex'
 alias tplgrep='grep -inTsr --color=auto --include=*.{tpl,blade.php}'
 
-# open file readonly
-alias vimr='vim -R'
-
-# open multiple files in tabs
-alias vim='vim -p'
-
 alias py='/usr/bin/env python3 -u'
 alias httpserver_python3='/usr/bin/env python3 -m http.server'
 
@@ -84,10 +78,6 @@ alias activate='source ./venv/bin/activate'
 # source: Linux-Magazin 10/12, pg. 87
 export PS4='+${BASH_SOURCE##*/}:${LINENO}:${FUNCNAME[0]}: '
 
-# needed for sudoedit using vim instead of vi (e.g. on CentOS)
-# also used by mc for editor on <F4>
-export EDITOR=/usr/bin/vim
-
 # wrapper to use colordiff instead of diff
 if [ -f /usr/bin/colordiff ]; then
 	alias diff='/usr/bin/colordiff'
@@ -119,7 +109,20 @@ fi
 # use self compiled vim if available (e.g. on CentOS there is no python3 support – but needed for vdebug)
 if [ -d "$HOME/.local/vim/bin/" ] ; then
 	PATH="$HOME/.local/vim/bin/:$PATH"
+	VIM_EXECUTABLE=$HOME/.local/vim/bin/vim
+else
+	VIM_EXECUTABLE=$(which vim)
 fi
+
+# needed for sudoedit using vim instead of vi (e.g. on CentOS)
+# also used by mc for editor on <F4>
+export EDITOR=$VIM_EXECUTABLE
+
+# open file readonly
+alias vimr="$VIM_EXECUTABLE -R"
+
+# open multiple files in tabs
+alias vim="$VIM_EXECUTABLE -p"
 
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
