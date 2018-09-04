@@ -279,6 +279,9 @@ let g:syntastic_python_checkers = ['pyflakes3']
 " the javac checker by pretending it's already loaded
 let g:loaded_syntastic_java_javac_checker = 1
 
+" disable syntastic by default (can be really slow on huge files)
+let g:syntastic_mode_map = { 'mode': 'passive' }
+
 " start matchit
 runtime macros/matchit.vim
 
