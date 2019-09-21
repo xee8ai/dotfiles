@@ -38,6 +38,10 @@ if [ -d ~/bin ] ; then
 	PATH=~/bin:"${PATH}"
 fi
 
+# add /sbin and /usr/sbin to path for Debian 10/Buster
+# https://unix.stackexchange.com/questions/482569/debian-10-buster-update-grub-command-not-found
+PATH="/sbin:/usr/sbin:${PATH}"
+
 # change to root directory
 cd /root
 
