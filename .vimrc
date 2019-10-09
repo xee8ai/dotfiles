@@ -176,6 +176,10 @@ set colorcolumn=81,101,102,121,122,123,124,125,126,127,128
 nnoremap gf <C-W>gf
 vnoremap gf <C-W>gf
 
+" use Alt and PageDown/PageUp to run through buffers
+noremap <A-PageDown> :bnext<CR>
+noremap <A-PageUp> :bprevious<CR>
+
 " map za (alternate between opening and closing a fold) to spacebar
 nnoremap <space> za
 
