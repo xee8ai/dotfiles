@@ -120,7 +120,7 @@ fi
 export EDITOR=$VIM_EXECUTABLE
 
 # open file readonly
-alias vimr="$VIM_EXECUTABLE -R"
+alias vimr="$VIM_EXECUTABLE -pR"
 
 # open multiple files in tabs
 alias vim="$VIM_EXECUTABLE -p"
