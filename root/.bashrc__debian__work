@@ -79,13 +79,13 @@ if test -e /root/bin; then PATH="/root/bin:"$PATH; fi
 # change to root directory
 cd /root
 
-# check if iptables are active
-/root/bin/check_iptables.sh
-
 # disable Software Flow Control (XON/XOFF flow control)
 # this e.g. prevents vim from splitting from CtrlP-Plugin using CTRL+S
 # for details see: http://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator
 # but for interactive shells only (http://stackoverflow.com/questions/24623021/getting-stty-standard-input-inappropriate-ioctl-for-device-when-using-scp-thro
 # and http://unix.stackexchange.com/questions/26676/how-to-check-if-a-shell-is-login-interactive-batch)
 # e.g. preventing errors around “stty: standard input: Inappropriate ioctl for device” on shell scripts using ssh connection
-[[ $- == *i* ]] && stty -ixon
+if [[ $- == *i* ]]; then
+	stty -ixon
+	/root/bin/r-check_iptables.sh
+fi
