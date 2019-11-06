@@ -63,6 +63,9 @@ set backspace=indent,eol,start
 " manual toggle relativenumber
 nnoremap <Leader>tn :set relativenumber!<CR>
 
+" toggle linenumbering
+nnoremap <Leader>nn :set number!<CR>:set norelativenumber!<CR>
+
 " activate syntax highlighting
 syntax on
 
