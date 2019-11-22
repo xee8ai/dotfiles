@@ -1,0 +1,117 @@
+#! /bin/bash
+### BEGIN INIT INFO
+# Provides:          xee__iptables
+# Required-Start:    mountkernfs $local_fs
+# Required-Stop:     mountkernfs $local_fs
+# X-Start-Before:    networking
+# X-Stop-After:      networking
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Packet filter (using iptables) for IPv4 and IPv6
+# Description:       Debian init script for iptables (inspired by https://github.com/Sirtea/iptables-init-debian/blob/master/iptables)
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+IPTABLES="/sbin/iptables"
+IP6TABLES="/sbin/ip6tables"
+IPTABLES_SAVE="/sbin/iptables-save"
+IP6TABLES_SAVE="/sbin/ip6tables-save"
+IPTABLES_RESTORE="/sbin/iptables-restore"
+IP6TABLES_RESTORE=/"sbin/ip6tables-restore"
+
+IPTABLES_RULES="/etc/iptables.rules"
+IP6TABLES_RULES="/etc/ip6tables.rules"
+
+NULLIFY_COUNTERS='s/\[[0-9]*:[0-9]*\]/\[0:0\]/g'
+REMOVE_COMMENTS='s/^\#.*//g'
+
+function do_start {
+    # ip4
+    if [ -e "$IPTABLES_RULES" ]; then
+        log_daemon_msg "Starting iptables service" "xee__iptables"
+        $IPTABLES_RESTORE < $IPTABLES_RULES
+        log_end_msg $?
+    else
+        log_action_msg "No rules saved for iptables"
+    fi
+
+    # ip6
+    if [ -e "$IP6TABLES_RULES" ]; then
+        log_daemon_msg "Starting ip6tables service" "xee__iptables"
+        $IP6TABLES_RESTORE < $IP6TABLES_RULES
+        log_end_msg $?
+    else
+        log_action_msg "No rules saved for ip6tables"
+    fi
+}
+
+function do_stop {
+    # ip4
+    log_daemon_msg "Stopping iptables service" "xee__iptables"
+    $IPTABLES -F
+    $IPTABLES -X
+    $IPTABLES -P INPUT ACCEPT
+    $IPTABLES -P FORWARD ACCEPT
+    $IPTABLES -P OUTPUT ACCEPT
+    log_end_msg $?
+
+    # ip6
+    log_daemon_msg "Stopping ip6tables service" "ip6tables"
+    $IP6TABLES -F
+    $IP6TABLES -X
+    $IP6TABLES -P INPUT ACCEPT
+    $IP6TABLES -P FORWARD ACCEPT
+    $IP6TABLES -P OUTPUT ACCEPT
+    log_end_msg $?
+}
+
+function do_save {
+    # ip4
+    log_daemon_msg "Saving iptables rules" "xee__iptables"
+    $IPTABLES_SAVE | sed $REMOVE_COMMENTS | sed "$NULLIFY_COUNTERS" > $IPTABLES_RULES
+    log_end_msg $?
+
+    # ip6
+    log_daemon_msg "Saving ip6tables rules" "xee__iptables"
+    $IP6TABLES_SAVE | sed $REMOVE_COMMENTS | sed "$NULLIFY_COUNTERS" > $IP6TABLES_RULES
+    log_end_msg $?
+}
+
+function do_show {
+	echo
+	echo "========================================================"
+	echo "iptables"
+	echo "========"
+    $IPTABLES_SAVE
+	echo
+	echo "========================================================"
+	echo "ip6tables"
+	echo "========"
+    $IP6TABLES_SAVE
+}
+
+case "$1" in
+    start)
+        do_start
+    ;;
+    stop)
+        do_stop
+    ;;
+    save)
+        do_save
+    ;;
+    restart)
+        do_stop
+        do_start
+    ;;
+    show)
+        do_show
+    ;;
+    *)
+        echo "Usage: /etc/init.d/xee__iptables {start|stop|restart|save|show}"
+        exit 1
+    ;;
+esac
+
+exit 0
