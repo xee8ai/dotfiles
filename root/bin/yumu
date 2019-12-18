@@ -20,11 +20,10 @@ declare -a CMDS=(
 for CMD in "${CMDS[@]}"; do
         echo
         echo
-        echo "----------------------------------------------------------------"
 		setCons
         echo "Running $CMD…"
+        echo
 		tput sgr0
-        echo "----------------------------------------------------------------"
         $CMD
 done
 
