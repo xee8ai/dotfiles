@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # needs the following packages:
-# yum install python34-devel gcc-c++ ncurses-devel
+# yum install python3-devel gcc-c++ ncurses-devel
 
 SRC_DIR="$HOME/src"
 VIM_SRC_DIR="$SRC_DIR/vim"
