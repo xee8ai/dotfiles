@@ -68,9 +68,9 @@ alias ashow='apt-cache show'
 
 # show current git user and mail on each git command
 if [ -f ~/dotfiles/helpers/git-user.py ]; then
-	alias git='~/dotfiles/helpers/git-user.py && git'
+	alias gu='~/dotfiles/helpers/git-user.py'
 else
-	alias git='echo "~/dotfiles/helpers/git-user.py does not exist" && echo "" && git'
+	alias gu='echo "~/dotfiles/helpers/git-user.py does not exist"'
 fi
 
 # quick activation of python virtual environments
