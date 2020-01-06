@@ -9,22 +9,26 @@ function setCons {
 }
 
 declare -a CMDS=(
-        'yum update'
-        'cd /etc'
-        'git show HEAD'
-        'find /etc -name *rpmsave'
-        'find /etc -name *rpmnew'
-        'find /etc -name *rpmorig'
+	'yum update'
+	'cd /etc'
+	'git show HEAD'
+	'cd /'	# needed for find to function as expected (expands wildcards before execution)
+	'find /etc -name *rpmsave'
+	'find /etc -name *rpmnew'
+	'find /etc -name *rpmorig'
 )
 
 for CMD in "${CMDS[@]}"; do
-        echo
-        echo
+	if [[ ! $CMD == "cd "* ]]; then
+		# show every command except the helper directory changes
+		echo
+		echo
 		setCons
-        echo "Running $CMD…"
-        echo
+		echo "Running $CMD…"
+		echo
 		tput sgr0
-        $CMD
+	fi
+	$CMD
 done
 
 echo
