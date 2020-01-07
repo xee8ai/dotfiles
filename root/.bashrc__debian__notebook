@@ -30,9 +30,9 @@ fi
 alias aptu100='/root/bin/aptu.sh 100'
 alias aptu="/root/bin/aptu.sh"
 
-# close amarok and safely delete all (unencrypted) PDFs in /tmp before shutdown
-alias shutdown='killall amarok; sleep 2; /root/bin/shred_sensitive_tmp_data.sh; shutdown'
-alias poweroff='killall amarok; sleep 2; /root/bin/shred_sensitive_tmp_data.sh; poweroff'
+# close clementine and safely delete all (unencrypted) PDFs in /tmp before shutdown
+alias shutdown='killall clementine; sleep 2; /root/bin/shred_sensitive_tmp_data.sh; shutdown'
+alias poweroff='killall clementine; sleep 2; /root/bin/shred_sensitive_tmp_data.sh; poweroff'
 
 if [ -d ~/bin ] ; then
 	PATH=~/bin:"${PATH}"
