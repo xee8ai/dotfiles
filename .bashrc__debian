@@ -78,7 +78,11 @@ esac
 # check if liquidprompt is installed
 if [ -d ~/.mybash/liquidprompt ]; then
 	# Only load Liquid Prompt in interactive shells, not from a script or from scp
+	# local version (git) is used
 	[[ $- = *i* ]] && source ~/.mybash/liquidprompt/liquidprompt
+elif [ -d /usr/share/liquidprompt ]; then
+	# installed via apt-get
+	[[ $- = *i* ]] && source /usr/share/liquidprompt/liquidprompt
 fi
 
 # get general aliases and exports from separate file
