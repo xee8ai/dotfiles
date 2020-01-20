@@ -87,5 +87,5 @@ cd /root
 # e.g. preventing errors around “stty: standard input: Inappropriate ioctl for device” on shell scripts using ssh connection
 if [[ $- == *i* ]]; then
 	stty -ixon
-	/root/bin/r-check_iptables.sh
+	/root/bin/r-check-iptables.sh
 fi
