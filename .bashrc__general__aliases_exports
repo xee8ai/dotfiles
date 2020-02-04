@@ -125,6 +125,12 @@ alias vimr="$VIM_EXECUTABLE -pR"
 # open multiple files in tabs
 alias vim="$VIM_EXECUTABLE -p"
 
+# aliases for phpcs/phpcbf
+alias pfix='phpcbf --colors --standard=PSR12'
+alias pfixmodified='git ls-files --modified | grep "\.php$" | xargs phpcbf --colors --standard=PSR12'
+alias psniff='phpcs --colors --standard=PSR12'
+alias psniffmodified='git ls-files --modified | grep "\.php$" | xargs phpcs --colors --standard=PSR12'
+
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
 
