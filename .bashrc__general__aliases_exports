@@ -126,10 +126,10 @@ alias vimr="$VIM_EXECUTABLE -pR"
 alias vim="$VIM_EXECUTABLE -p"
 
 # aliases for phpcs/phpcbf
-alias pfix='phpcbf --colors --standard=PSR12'
-alias pfixmodified='git ls-files --modified | grep "\.php$" | xargs phpcbf --colors --standard=PSR12'
-alias psniff='phpcs --colors --standard=PSR12'
-alias psniffmodified='git ls-files --modified | grep "\.php$" | xargs phpcs --colors --standard=PSR12'
+alias pfix='vendor/bin/phpcbf --colors'
+alias pfixmodified='git ls-files --modified | grep "\.php$" | xargs vendor/bin/phpcbf --colors'
+alias psniff='vendor/bin/phpcs --colors'
+alias psniffmodified='git ls-files --modified | grep "\.php$" | xargs vendor/bin/phpcs --colors'
 
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
