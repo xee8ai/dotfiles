@@ -33,6 +33,7 @@ COMMIT
 -A INPUT -p tcp -m state --state ESTABLISHED -j ACCEPT
 -A INPUT -p udp -m state --state ESTABLISHED -j ACCEPT
 -A INPUT -p icmp -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp --icmp-type 8 -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 22 -m state --state NEW -j XEE__INPUT_SSH
 -A OUTPUT -m state --state INVALID -j DROP
 -A OUTPUT -o lo -j ACCEPT
