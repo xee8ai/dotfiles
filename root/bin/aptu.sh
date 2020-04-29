@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Workaround for not compatible RP version
 #echo "Reinstalling RequestPolicy…"
 #/root/bin/r-reinstall_requestpolicy.sh
