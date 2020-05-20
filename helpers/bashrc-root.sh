@@ -14,5 +14,11 @@ source /home/$USERNAME/.mybash/liquidprompt/liquidprompt
 
 source /home/$USERNAME/dotfiles/.bashrc__general__aliases_exports
 
-alias vimr="vim -u /home/$USERNAME/dotfiles/.vimrc -R -p"
-alias vim="vim -u /home/$USERNAME/dotfiles/.vimrc -p"
+if [ -e /home/$USERNAME/src/vim/src/vim ]; then
+        VIM='/home/$USERNAME/src/vim/src/vim'
+else
+        VIM='/usr/bin/env vim'
+fi
+
+alias vimr="$VIM -u /home/$USERNAME/dotfiles/.vimrc -R -p"
+alias vim="$VIM -u /home/$USERNAME/dotfiles/.vimrc -p"
