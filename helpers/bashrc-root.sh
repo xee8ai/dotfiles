@@ -22,3 +22,4 @@ fi
 
 alias vimr="$VIM -u /home/$USERNAME/dotfiles/.vimrc -R -p"
 alias vim="$VIM -u /home/$USERNAME/dotfiles/.vimrc -p"
+alias vimdiff="$VIM -u /home/$USERNAME/dotfiles/.vimrc -d"
