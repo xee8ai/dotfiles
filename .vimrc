@@ -199,6 +199,7 @@ nnoremap <Leader>tts :set expandtab<CR>:retab<CR>
 " own extension for syntax highlighting
 au BufNewFile,BufFilePre,BufRead *.ini set filetype=cfg
 au BufNewFile,BufFilePre,BufRead *.conf set filetype=cfg
+au BufNewFile,BufFilePre,BufRead /home/*/.ssh/*.config set filetype=sshconfig
 
 " interpret .md as markdown (rather than modula2)
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
