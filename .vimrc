@@ -344,7 +344,7 @@ autocmd ColorScheme * call s:updateCursorLine()
 " CtrlP settings
 " open on bottom and order matches top to bottom, add settings for number of
 " results
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:100'
 " open files in new buffers
 let g:ctrlp_switch_buffer = 0
 " determine the working directory (look for nearest .git or take dir of the current file)
@@ -353,6 +353,9 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 " don't limit number of files to scan
 let g:ctrlp_max_files = 0
+
+" use CtrlP to search tags
+nnoremap <leader>( :CtrlPTag<cr>
 
 " check if vdebug_options exist; create empty if not
 if !exists('g:vdebug_options')
