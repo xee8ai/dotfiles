@@ -16,6 +16,7 @@ class DotvimPopulator():
     # this list holds the (git) URL from where to download the plugins
     plugin_sources = [
             'https://github.com/altercation/vim-colors-solarized.git',
+            'https://github.com/cohama/lexima.vim.git',
             'https://github.com/ctrlpvim/ctrlp.vim.git',
             'https://github.com/jistr/vim-nerdtree-tabs.git',
             'https://github.com/ludovicchabant/vim-gutentags.git',
