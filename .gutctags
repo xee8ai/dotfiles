@@ -6,4 +6,5 @@
 --regex-C=/$x/x/x/e/ - example file to be extended by YOU :-)
 --regex-C=/$x/x/x/e/ - local excludes (e.g. --exclude=vendor/*) are sometimes ignored and let the tags file explode
 
+--recurse=yes
 --exclude=*/.git
