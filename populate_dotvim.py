@@ -16,7 +16,6 @@ class DotvimPopulator():
     # this list holds the (git) URL from where to download the plugins
     plugin_sources = [
             'https://github.com/altercation/vim-colors-solarized.git',
-            'https://github.com/cohama/lexima.vim.git',
             'https://github.com/ctrlpvim/ctrlp.vim.git',
             'https://github.com/jistr/vim-nerdtree-tabs.git',
             'https://github.com/ludovicchabant/vim-gutentags.git',
@@ -47,12 +46,14 @@ class DotvimPopulator():
     # if a plugin is not used anymore: add relative dirname here to delete the plugin on all systems
     plugin_delete_dirs = [
             'AutoTag',  # switched to vim-gutentags instead
+            'lexima.vim',   # lexima auto completer – annoying with changes
     ]
 
     # this is only a dummy list to hold sources that are not used ATM
     # use this as a reference to old times (e.g. if a plugin is needed again)
     plugin_sources_obsolete = [
             'https://github.com/vim-scripts/AutoTag.git',
+            'https://github.com/cohama/lexima.vim.git',
     ]
 
 
