@@ -39,6 +39,9 @@ set laststatus=2
     " mode
     set statusline+=\ %{&ff})\ \|
 
+    " vim-gitgutter summary
+    set statusline+=\ %{GitStatus()}\ \|
+
     " right align remainder
     set statusline+=%=
 
@@ -368,6 +371,12 @@ endif
 " (using vim-projectroot) or
 " https://github.com/vim-vdebug/vdebug/issues/197 (using vim-localvimrc)
 let g:vdebug_options['path_maps'] = {"/usr/local/vufind" : "/home/par/data/projects/finc/vufind3/vufind2"}
+
+" vim-gitgutter: function to get summary; used in statusline
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
 
 " windows related stuff: here we use gvim because powershell integration of
 " vim is bad (especially the colors) and not useful (there are no tabs in
