@@ -70,6 +70,7 @@ nnoremap <Leader>tn :set relativenumber!<CR>
 nnoremap <Leader>nn :set number!<CR>:set norelativenumber!<CR>
 
 " activate syntax highlighting
+" ! define before colorscheme
 syntax on
 
 " this accelerates vim-gitgutter (by updating vim window every 250ms)
@@ -298,6 +299,7 @@ let g:syntastic_mode_map = { 'mode': 'passive' }
 runtime macros/matchit.vim
 
 " use dark background
+" ! define before colorscheme
 set background=dark
 
 " choose colorscheme (/usr/share/vim/vimcurrent/colors/*.vim)
@@ -377,6 +379,11 @@ function! GitStatus()
   let [a,m,r] = GitGutterGetHunkSummary()
   return printf('+%d ~%d -%d', a, m, r)
 endfunction
+
+" vim-gitgutter: fix issue with grey background in SignColumn
+" first line fixes on vim start, second on toggling scheme using F3
+highlight! link SignColumn guibg
+autocmd ColorScheme * highlight! link SignColumn guibg
 
 " windows related stuff: here we use gvim because powershell integration of
 " vim is bad (especially the colors) and not useful (there are no tabs in
