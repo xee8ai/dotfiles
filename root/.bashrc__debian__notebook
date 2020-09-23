@@ -8,14 +8,39 @@
 # 0;31m is normal red, 1;31m is boldface red
 PS1='${debian_chroot:+($debian_chroot)}\[\033[1;31m\]\u\[\033[0m\]@\h:\w# '
 
+# don't put duplicate lines or lines starting with space in the history file
+# and erase all older occurences of a command from history
+# See bash(1) for more options
+HISTCONTROL=ignoreboth:erasedups
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=10000
+HISTFILESIZE=10000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
 # check if liquidprompt is installed
-if [ -d ~/.mybash/liquidprompt ]; then
-	# Only load Liquid Prompt in interactive shells, not from a script or from scp
-	[[ $- = *i* ]] && source ~/.mybash/liquidprompt/liquidprompt
+if [[ $- = *i* ]]; then
+    if [ -d /usr/share/liquidprompt ]; then
+        # installed via apt-get
+        echo "Using system installed liquidprompt."
+        source /usr/share/liquidprompt/liquidprompt
+    elif [ -d ~/.mybash/liquidprompt ]; then
+        # Only load Liquid Prompt in interactive shells, not from a script or from scp
+        # local version (git) is used
+        echo "Using liquidprompt from git."
+        source ~/.mybash/liquidprompt/liquidprompt
+    fi
 fi
 
-# umask 022
-umask 027
+# set umask to 022 again to avoid random problems (e.g. with update-mime-database or git checkouts)
+umask 022
+# umask 027
 
 # You may uncomment the following lines if you want `ls' to be colorized:
 export LS_OPTIONS='--color=auto'
@@ -31,8 +56,8 @@ alias aptu100='/root/bin/aptu.sh 100'
 alias aptu="/root/bin/aptu.sh"
 
 # close clementine and safely delete all (unencrypted) PDFs in /tmp before shutdown
-alias shutdown='killall clementine; sleep 2; /root/bin/shred_sensitive_tmp_data.sh; shutdown'
-alias poweroff='killall clementine; sleep 2; /root/bin/shred_sensitive_tmp_data.sh; poweroff'
+alias shutdown='killall clementine; killall keepassxc; sleep 2; shutdown'
+alias poweroff='killall clementine; killall keepassxc; sleep 2; poweroff'
 
 if [ -d ~/bin ] ; then
 	PATH=~/bin:"${PATH}"
