@@ -66,6 +66,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias coref='okular ~/tutorials/linux/linux_command_reference.pdf &'
 
 # quick search/show packages
+alias apol='apt-cache policy'
 alias asearch='apt-cache search'
 alias ashow='apt-cache show'
 
