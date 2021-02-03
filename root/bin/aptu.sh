@@ -6,12 +6,29 @@ set -e
 #echo "Reinstalling RequestPolicy…"
 #/root/bin/r-reinstall_requestpolicy.sh
 
-LOGPATH="/root/log"
+LOGPATH="/tmp"
+LOGFILE=$LOGPATH"/root-aptu__"$(date -Iseconds)".log"
+mkdir -p $LOGPATH
+TEE=" 2>&1 | tee -a $LOGFILE"
 
 function setCons {
 	tput smul
 	tput bold
 	tput setaf 123
+}
+
+function logAndRun {
+	CMD=$1
+	echo
+	setCons
+	echo $CMD…
+	echo "" >> $LOGFILE
+	echo "----------------------------------------" >> $LOGFILE
+	echo "$(date -Iseconds)" >> $LOGFILE
+	echo "$CMD" >> $LOGFILE
+	echo "--------------------" >> $LOGFILE
+	tput sgr0
+	eval $CMD$TEE
 }
 
 if [ -n "$1" ]; then
@@ -21,76 +38,37 @@ else
 fi
 
 # CMD="apt-get purge ~c"
-# echo
-# setCons
-# echo $CMD…
-# tput sgr0
-# $CMD
+# logAndRun "$CMD"
 
 # CMD="apt-get purge ~o"
-# echo
-# setCons
-# echo $CMD…
-# tput sgr0
-# $CMD
+# logAndRun "$CMD"
 
 CMD="apt-get autoremove"
-echo
-setCons
-echo $CMD…
-tput sgr0
-$CMD
+logAndRun "$CMD"
 
 CMD="nice -n 10$DLLIMIT apt-get update"
-echo
-setCons
-echo $CMD…
-tput sgr0
-$CMD
+logAndRun "$CMD"
 
 CMD="nice -n 10 apt-get$DLLIMIT dist-upgrade"
-echo
-setCons
-echo $CMD…
-tput sgr0
-$CMD
+logAndRun "$CMD"
 
 # apt-get upgrade in testing oft gebraucht (wenn gerade wieder Abhängigkeiten nicht erfüllt sind…)
 CMD="nice -n 10 apt-get$DLLIMIT upgrade"
-echo
-setCons
-echo $CMD…
-tput sgr0
-$CMD
+logAndRun "$CMD"
 
 CMD="apt-get autoclean"
+logAndRun "$CMD"
+
 CMD="apt-get clean"
-echo
-setCons
-echo $CMD…
-tput sgr0
-$CMD
+logAndRun "$CMD"
 
 CMD="apt autoremove"
-echo
-setCons
-echo $CMD…
-tput sgr0
-$CMD
+logAndRun "$CMD"
 
 CMD="/root/bin/installed_packets.sh"
-echo
-setCons
-echo $CMD…
-tput sgr0
-$CMD
+logAndRun "$CMD"
 
 CMD="/root/bin/search_for_missing_packets.sh"
-echo
-setCons
-echo $CMD…
-tput sgr0
-#echo "… deactivated"
-/root/bin/search_for_missing_packets.sh
+logAndRun "$CMD"
 
 echo
