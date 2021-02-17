@@ -376,9 +376,14 @@ let g:vdebug_options['path_maps'] = {"/usr/local/vufind" : "/home/par/data/proje
 
 " vim-gitgutter: function to get summary; used in statusline
 function! GitStatus()
-        if exists('*GitGutterGetHunkSummary')
-        let [a,m,r] = GitGutterGetHunkSummary()
-        return printf('+%d ~%d -%d', a, m, r)
+    if exists('*GitGutterGetHunkSummary')
+        let l:hunkSummary = GitGutterGetHunkSummary()
+        if  (empty(l:hunkSummary))
+            return ''
+        else
+            let [a,m,r] = l:hunkSummary
+            return printf('+%d ~%d -%d', a, m, r)
+        endif
     else
         return 'gitgutter n/a'
     endif
