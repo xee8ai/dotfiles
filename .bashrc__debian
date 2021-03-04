@@ -2,6 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# switch shell language to english to see english e.g. error messages
+LANGUAGE=en_US.UTF-8
+
 umask 027
 
 # If not running interactively, don't do anything

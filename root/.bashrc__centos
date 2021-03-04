@@ -1,5 +1,8 @@
 # .bashrc
 
+# switch shell language to english to see english e.g. error messages
+LANGUAGE=en_US.UTF-8
+
 # check if liquidprompt is installed
 if [ -d ~/.mybash/liquidprompt ]; then
         # Only load Liquid Prompt in interactive shells, not from a script or from scp

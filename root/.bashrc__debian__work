@@ -8,6 +8,9 @@
 # 0;31m is normal red, 1;31m is boldface red
 PS1='${debian_chroot:+($debian_chroot)}\[\033[1;31m\]\u\[\033[0m\]@\h:\w# '
 
+# switch shell language to english to see english e.g. error messages
+LANGUAGE=en_US.UTF-8
+
 # check if liquidprompt is installed
 if [ -d ~/.mybash/liquidprompt ]; then
 	# Only load Liquid Prompt in interactive shells, not from a script or from scp
