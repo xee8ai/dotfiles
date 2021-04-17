@@ -53,4 +53,8 @@ fi
 # but for interactive shells only (http://stackoverflow.com/questions/24623021/getting-stty-standard-input-inappropriate-ioctl-for-device-when-using-scp-thro
 # and http://unix.stackexchange.com/questions/26676/how-to-check-if-a-shell-is-login-interactive-batch)
 # e.g. preventing errors around “stty: standard input: Inappropriate ioctl for device” on shell scripts using ssh connection
-[[ $- == *i* ]] && stty -ixon
+if [[ $- == *i* ]]; then
+	stty -ixon
+	date -Is > ~/.last_interactive_login
+	/root/bin/r-check-iptables.sh
+fi
