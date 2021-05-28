@@ -4,31 +4,45 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
-IP4=$(iptables -nL | grep -c "policy DROP")
-IP6=$(ip6tables -nL | grep -c "policy DROP")
+# store result in this file; can be used e.g. for icinga checks
+CHECKFILE="/tmp/root-iptables_check_state"
 
-STATUS="${GREEN}OK${NC}"
+date -u -Iseconds > $CHECKFILE
+
+IP4=$(/usr/sbin/iptables -nL | grep -c "policy DROP")
+IP6=$(/usr/sbin/ip6tables -nL | grep -c "policy DROP")
 
 echo
-echo "Checking firewall settings…"
+echo "Checking packet filter…"
 
 if test $IP4 -ne 3; then
 	echo
 	echo "Problem with iptables:"
 	echo "======================"
-	iptables -nL
-	STATUS="${RED}ERROR${NC}"
+	/usr/sbin/iptables -nL
+	COLOR=$RED
+	STATUS="ERROR"
+	CODE=1
 	echo
-fi
-
-if test $IP6 -ne 3; then
+elif test $IP6 -ne 3; then
 	echo
 	echo "Problem with ip6tables:"
 	echo "======================="
-	ip6tables -nL
-	STATUS="${RED}ERROR${NC}"
+	/usr/sbin/ip6tables -nL
+	COLOR=$RED
+	STATUS="ERROR"
+	CODE=1
 	echo
+else
+	COLOR=$GREEN
+	STATUS="OK"
+	CODE=0
 fi
 
-echo -e $STATUS
+echo $STATUS >> $CHECKFILE
+
+OUTSTATUS="${COLOR}${STATUS}${NC}"
+echo -e $OUTSTATUS
 echo
+
+exit $CODE
