@@ -10,9 +10,19 @@
 
 USERNAME='xee8ai'
 
-source /home/$USERNAME/.mybash/liquidprompt/liquidprompt
+FILEPATH="/home/$USERNAME/.mybash/liquidprompt/liquidprompt"
+if [ -e $FILEPATH ]; then
+	source $FILEPATH
+else
+	echo "Ignoring non-existing $FILEPATH…"
+fi
 
-source /home/$USERNAME/dotfiles/.bashrc__general__aliases_exports
+FILEPATH="/home/$USERNAME/dotfiles/.bashrc__general__aliases_exports"
+if [ -e $FILEPATH ]; then
+	source $FILEPATH
+else
+	echo "Ignoring non-existing $FILEPATH…"
+fi
 
 if [ -e /home/$USERNAME/src/vim/src/vim ]; then
         VIM='/home/$USERNAME/src/vim/src/vim'
