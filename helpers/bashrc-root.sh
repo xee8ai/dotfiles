@@ -8,7 +8,8 @@
 
 # source /home/xee8ai/bashrc-root.sh
 
-USERNAME='xee8ai'
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+USERNAME=$(echo "/home/par/dotfiles/helpers" | cut -d'/' -f3)
 
 FILEPATH="/home/$USERNAME/.mybash/liquidprompt/liquidprompt"
 if [ -e $FILEPATH ]; then
