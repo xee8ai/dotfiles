@@ -30,6 +30,6 @@ else
         VIM='/usr/bin/env vim'
 fi
 
-alias vimr="$VIM -u /home/$USERNAME/dotfiles/.vimrc -R -p"
-alias vim="$VIM -u /home/$USERNAME/dotfiles/.vimrc -p"
-alias vimdiff="$VIM -u /home/$USERNAME/dotfiles/.vimrc -d"
+alias vimr="$VIM -u /home/$USERNAME/dotfiles/.vimrc --cmd 'set rtp^=/home/$USERNAME/.vim' -R -p"
+alias vim="$VIM -u /home/$USERNAME/dotfiles/.vimrc --cmd 'set rtp^=/home/$USERNAME/.vim' -p"
+alias vimdiff="$VIM -u /home/$USERNAME/dotfiles/.vimrc --cmd 'set rtp^=/home/$USERNAME/.vim' -d"
