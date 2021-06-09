@@ -26,9 +26,9 @@ else
 fi
 
 if [ -e /home/$USERNAME/src/vim/src/vim ]; then
-        VIM='/home/$USERNAME/src/vim/src/vim'
+        VIM="/home/$USERNAME/src/vim/src/vim"
 else
-        VIM='/usr/bin/env vim'
+        VIM="/usr/bin/env vim"
 fi
 
 alias vimr="$VIM -u /home/$USERNAME/dotfiles/.vimrc --cmd 'set rtp^=/home/$USERNAME/.vim' -R -p"
