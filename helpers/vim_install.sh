@@ -17,6 +17,10 @@ if [ ! -d $DST_DIR ]; then
 	mkdir -p $DST_DIR
 fi
 
+if [ -d $VIM_DST_DIR ]; then
+	rm -rf $VIM_DST_DIR
+fi
+
 cd $SRC_DIR
 
 if [ ! -d $VIM_SRC_DIR ]; then
