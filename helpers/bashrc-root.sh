@@ -25,8 +25,9 @@ else
 	echo "Ignoring non-existing $FILEPATH…"
 fi
 
-if [ -e /home/$USERNAME/src/vim/src/vim ]; then
-        VIM="/home/$USERNAME/src/vim/src/vim"
+LOCALVIMPATH="/home/$USERNAME/.local/vim/bin/vim"
+if [ -e $LOCALVIMPATH ]; then
+        VIM=$LOCALVIMPATH
 else
         VIM="/usr/bin/env vim"
 fi
