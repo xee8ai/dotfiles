@@ -15,22 +15,15 @@
 
 IPTABLES="/sbin/iptables"
 IP6TABLES="/sbin/ip6tables"
-IPTABLES_SAVE="/sbin/iptables-save"
-IP6TABLES_SAVE="/sbin/ip6tables-save"
-IPTABLES_RESTORE="/sbin/iptables-restore"
-IP6TABLES_RESTORE=/"sbin/ip6tables-restore"
 
-IPTABLES_RULES="/etc/iptables.rules"
-IP6TABLES_RULES="/etc/ip6tables.rules"
-
-NULLIFY_COUNTERS='s/\[[0-9]*:[0-9]*\]/\[0:0\]/g'
-REMOVE_COMMENTS='s/^\#.*//g'
+IPTABLES_RULES="/etc/iptables.rules.sh"
+IP6TABLES_RULES="/etc/ip6tables.rules.sh"
 
 function do_start {
     # ip4
     if [ -e "$IPTABLES_RULES" ]; then
         log_daemon_msg "Starting iptables service" "xee__iptables"
-        $IPTABLES_RESTORE < $IPTABLES_RULES
+        /bin/bash $IPTABLES_RULES
         log_end_msg $?
     else
         log_action_msg "No rules saved for iptables"
@@ -39,7 +32,7 @@ function do_start {
     # ip6
     if [ -e "$IP6TABLES_RULES" ]; then
         log_daemon_msg "Starting ip6tables service" "xee__iptables"
-        $IP6TABLES_RESTORE < $IP6TABLES_RULES
+        /bin/bash $IP6TABLES_RULES
         log_end_msg $?
     else
         log_action_msg "No rules saved for ip6tables"
@@ -57,7 +50,7 @@ function do_stop {
     log_end_msg $?
 
     # ip6
-    log_daemon_msg "Stopping ip6tables service" "ip6tables"
+    log_daemon_msg "Stopping ip6tables service" "xee__iptables"
     $IP6TABLES -F
     $IP6TABLES -X
     $IP6TABLES -P INPUT ACCEPT
@@ -66,29 +59,17 @@ function do_stop {
     log_end_msg $?
 }
 
-function do_save {
-    # ip4
-    log_daemon_msg "Saving iptables rules" "xee__iptables"
-    $IPTABLES_SAVE | sed $REMOVE_COMMENTS | sed "$NULLIFY_COUNTERS" > $IPTABLES_RULES
-    log_end_msg $?
-
-    # ip6
-    log_daemon_msg "Saving ip6tables rules" "xee__iptables"
-    $IP6TABLES_SAVE | sed $REMOVE_COMMENTS | sed "$NULLIFY_COUNTERS" > $IP6TABLES_RULES
-    log_end_msg $?
-}
-
 function do_show {
 	echo
 	echo "========================================================"
 	echo "iptables"
 	echo "========"
-    $IPTABLES_SAVE
+    $IPTABLES -nL -v
 	echo
 	echo "========================================================"
 	echo "ip6tables"
 	echo "========"
-    $IP6TABLES_SAVE
+    $IP6TABLES -nL -v
 }
 
 case "$1" in
@@ -98,9 +79,6 @@ case "$1" in
     stop)
         do_stop
     ;;
-    save)
-        do_save
-    ;;
     restart)
         do_stop
         do_start
@@ -109,7 +87,7 @@ case "$1" in
         do_show
     ;;
     *)
-        echo "Usage: /etc/init.d/xee__iptables {start|stop|restart|save|show}"
+        echo "Usage: /etc/init.d/xee__iptables {start|stop|restart|show}"
         exit 1
     ;;
 esac
