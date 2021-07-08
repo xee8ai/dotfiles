@@ -1,0 +1,55 @@
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+table inet filter {
+
+        chain INPUT {
+                type filter hook input priority 0
+                policy drop
+
+                ct state invalid  counter drop
+
+                jump XEE_TCP_CHECKS
+
+                iifname "lo" counter accept
+
+                ip protocol tcp ct state established  counter accept
+                ip protocol udp ct state established  counter accept
+                ip protocol icmp ct state related,established  counter accept
+
+                icmp type echo-request ct state new,related,established  counter accept
+
+                tcp dport 22  jump XEE_INPUT_SSH
+                tcp dport {80, 443}  jump XEE_INPUT_WEB
+        }
+
+        chain XEE_TCP_CHECKS {
+                tcp flags & (fin|syn|rst|psh|ack|urg) == 0x0 counter drop
+                tcp flags & (fin|syn) == fin|syn counter drop
+                tcp flags & (syn|rst) == syn|rst counter drop
+                tcp flags & (fin|rst) == fin|rst counter drop
+                tcp flags & (fin|ack) == fin counter drop
+                tcp flags & (psh|ack) == psh counter drop
+                tcp flags & (ack|urg) == urg counter drop
+        }
+
+        chain XEE_INPUT_SSH {
+                ip saddr 192.168.122.0/24  accept
+        }
+
+        chain XEE_INPUT_WEB {
+                ip saddr 192.168.122.0/24  accept
+        }
+
+        chain FORWARD {
+                type filter hook forward priority 0
+                policy accept
+        }
+
+        chain OUTPUT {
+                type filter hook output priority 0
+                policy accept
+        }
+
+}
