@@ -11,6 +11,7 @@ table inet filter {
                 ct state invalid  counter drop
 
                 jump XEE_TCP_CHECKS
+				jump FWKNOP_INPUT
 
                 iifname "lo" counter accept
 
@@ -50,6 +51,9 @@ table inet filter {
         chain OUTPUT {
                 type filter hook output priority 0
                 policy accept
+        }
+
+        chain FWKNOP_INPUT {
         }
 
 }
