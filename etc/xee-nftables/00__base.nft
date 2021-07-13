@@ -4,56 +4,66 @@ flush ruleset
 
 table inet filter {
 
-        chain INPUT {
-                type filter hook input priority 0
-                policy drop
+    chain INPUT {
+        type filter hook input priority 0
+        policy drop
 
-                ct state invalid  counter drop
+        # drop invalid packets
+        ct state invalid counter drop comment "dropped invalid packets"
 
-                jump XEE_TCP_CHECKS
-				jump FWKNOP_INPUT
+        # run checks for some tcp flag combinations
+        jump XEE_TCP_CHECKS
 
-                iifname "lo" counter accept
+        # allow ping
+        icmp type echo-request limit rate 4/second accept
 
-                ip protocol tcp ct state established  counter accept
-                ip protocol udp ct state established  counter accept
-                ip protocol icmp ct state related,established  counter accept
+        # allow traffic from established and related
+        ct state established,related accept
 
-                icmp type echo-request ct state new,related,established  counter accept
+        # accept incoming traffic from loopback interface
+        iifname "lo" accept
 
-                tcp dport 22  jump XEE_INPUT_SSH
-                tcp dport {80, 443}  jump XEE_INPUT_WEB
-        }
+        # check if there are rules defined by fwknop
+        jump FWKNOP_INPUT
 
-        chain XEE_TCP_CHECKS {
-                tcp flags & (fin|syn|rst|psh|ack|urg) == 0x0 counter drop
-                tcp flags & (fin|syn) == fin|syn counter drop
-                tcp flags & (syn|rst) == syn|rst counter drop
-                tcp flags & (fin|rst) == fin|rst counter drop
-                tcp flags & (fin|ack) == fin counter drop
-                tcp flags & (psh|ack) == psh counter drop
-                tcp flags & (ack|urg) == urg counter drop
-        }
+        # handle special traffic in own chains
+        tcp dport 22  jump XEE_INPUT_SSH
+        tcp dport {80, 443}  jump XEE_INPUT_WEB
+    }
 
-        chain XEE_INPUT_SSH {
-                ip saddr 192.168.122.0/24  accept
-        }
+    chain XEE_TCP_CHECKS {
+        tcp flags & (fin|syn|rst|psh|ack|urg) == 0x0 counter drop comment "dropped tcp flag related"
+        tcp flags & (fin|syn) == fin|syn counter drop comment "dropped tcp flag related"
+        tcp flags & (syn|rst) == syn|rst counter drop comment "dropped tcp flag related"
+        tcp flags & (fin|rst) == fin|rst counter drop comment "dropped tcp flag related"
+        tcp flags & (fin|ack) == fin counter drop comment "dropped tcp flag related"
+        tcp flags & (psh|ack) == psh counter drop comment "dropped tcp flag related"
+        tcp flags & (ack|urg) == urg counter drop comment "dropped tcp flag related"
+    }
 
-        chain XEE_INPUT_WEB {
-                ip saddr 192.168.122.0/24  accept
-        }
+    chain XEE_INPUT_SSH {
+        ip saddr 192.168.122.0/24 accept
+        counter comment "dropped incoming ssh packets"
+    }
 
-        chain FORWARD {
-                type filter hook forward priority 0
-                policy accept
-        }
+    chain XEE_INPUT_WEB {
+        ip saddr 192.168.122.0/24 accept
+        counter comment "dropped incoming http(s) packets"
+    }
 
-        chain OUTPUT {
-                type filter hook output priority 0
-                policy accept
-        }
+    chain FORWARD {
+        type filter hook forward priority 0
+        # we are not a router
+        policy drop
+        counter comment "dropped forward packets"
+    }
 
-        chain FWKNOP_INPUT {
-        }
+    chain OUTPUT {
+        type filter hook output priority 0
+        policy accept
+    }
+
+    chain FWKNOP_INPUT {
+    }
 
 }
