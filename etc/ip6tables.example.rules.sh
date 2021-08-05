@@ -5,7 +5,7 @@
 # if one of the hostnames cannot be resolved the complete ruleset will not be applied
 # resulting in an completely open setting after a restart!
 
-IP6TABLES="/sbin/ip6tables"
+IP6TABLES="/sbin/ip6tables -w"
 
 
 ################################################################################
