@@ -88,12 +88,12 @@ class GitignoreTemplatesPopulator():
 
         print('Used operating system is: {}'.format(self.platform))
 
-        if self.platform is 'linux':
+        if self.platform == 'linux':
             # set environment generic
             self.home_dir = os.getenv('HOME')
             self.gitignore_templates_dir = os.path.join(self.home_dir, '.gitignore_templates')
             print('gitignore_templates dir is {}: '.format(self.gitignore_templates_dir))
-        elif self.platform is 'win':
+        elif self.platform == 'win':
             self.gitignore_templates_dir = 'w:\_gitignore_templates'
             print('gitignore_templates dir is {}: '.format(self.gitignore_templates_dir))
 

@@ -136,7 +136,7 @@ class DotvimPopulator():
 
         print('Used operating system is: {}'.format(self.platform))
 
-        if self.platform is 'linux':
+        if self.platform == 'linux':
             # add extra plugins for linux
             self.plugin_sources.extend(self.plugin_sources_linux_only)
             # set environment generic
@@ -144,7 +144,7 @@ class DotvimPopulator():
             self.vim_dir = os.path.join(self.home_dir, '.vim')
             print('vim dir is {}: '.format(self.vim_dir))
 
-        elif self.platform is 'win':
+        elif self.platform == 'win':
             # add extra plugins for windows
             self.plugin_sources.extend(self.plugin_sources_win_only)
             # set hardcoded (as there is only one Windows I have to use :-))

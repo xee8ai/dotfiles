@@ -87,7 +87,7 @@ class MyBashPopulator():
 
         print('Used operating system is: {}'.format(self.platform))
 
-        if self.platform is 'linux':
+        if self.platform == 'linux':
             # set environment generic
             self.home_dir = os.getenv('HOME')
             self.mybash_dir = os.path.join(self.home_dir, '.mybash')
