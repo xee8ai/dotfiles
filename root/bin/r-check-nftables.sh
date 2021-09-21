@@ -5,7 +5,7 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 # store result in this file; can be used e.g. for icinga checks
-CHECKFILE="/tmp/root-iptables_check_state"
+CHECKFILE="/tmp/root-packetfilter_check_state"
 
 date -u -Iseconds > $CHECKFILE
 
