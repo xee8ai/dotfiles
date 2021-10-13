@@ -68,8 +68,8 @@ alias coref='okular ~/tutorials/linux/linux_command_reference.pdf &'
 
 # quick search/show packages
 alias apol='apt-cache policy'
-alias asearch='apt-cache search'
-alias ashow='apt-cache show'
+alias asearch='echo && apt-cache search'
+alias ashow='echo && apt-cache show'
 
 # show current git user and mail on each git command
 if [ -f ~/dotfiles/helpers/git-user.py ]; then
