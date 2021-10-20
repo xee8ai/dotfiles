@@ -19,6 +19,7 @@ if not os.path.isdir(base_path):
     sys.exit(1)
 
 ignore_files = {
+        'c': os.path.join('gitignore', 'C.gitignore'),
         'php': None,
         'python': os.path.join('gitignore', 'Python.gitignore'),
         'tags': os.path.join('gitignore', 'Global', 'Tags.gitignore'),
@@ -28,15 +29,16 @@ ignore_files = {
 default_added = ['tags', 'vim']
 
 ctags_content = {
-        'tags': [
-            '--recurse=yes',
-            '--exclude=.git',
+        'c': [],
+        'php': [
+            '--exclude=vendor',
             ],
         'python': [
             '--exclude=venv',
             ],
-        'php': [
-            '--exclude=vendor',
+        'tags': [
+            '--recurse=yes',
+            '--exclude=.git',
             ],
         'tex': [],
         'vim': [],
