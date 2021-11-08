@@ -37,6 +37,9 @@ shopt -s histappend
 HISTSIZE=1000000
 HISTFILESIZE=1000000
 
+# add timestamp to command history
+HISTTIMEFORMAT="| %Y-%m-%d %T |  "
+
 source /etc/bash_completion.d/git
 
 # umask setting causes right problems in nmsprime – disabled by par

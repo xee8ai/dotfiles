@@ -25,6 +25,9 @@ shopt -s histappend
 HISTSIZE=1000000
 HISTFILESIZE=1000000
 
+# add timestamp to command history
+HISTTIMEFORMAT="| %Y-%m-%d %T |  "
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
