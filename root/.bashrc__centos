@@ -4,9 +4,17 @@
 LANGUAGE=en_US.UTF-8
 
 # check if liquidprompt is installed
-if [ -d ~/.mybash/liquidprompt ]; then
+if [[ $- = *i* ]]; then
+    if [ -d /usr/share/liquidprompt ]; then
+        # installed via apt-get
+        echo "Using system installed liquidprompt."
+        source /usr/share/liquidprompt/liquidprompt
+    elif [ -d ~/.mybash/liquidprompt ]; then
         # Only load Liquid Prompt in interactive shells, not from a script or from scp
-        [[ $- = *i* ]] && source ~/.mybash/liquidprompt/liquidprompt
+        # local version (git) is used
+        echo "Using liquidprompt from git."
+        source ~/.mybash/liquidprompt/liquidprompt
+    fi
 fi
 
 # User specific aliases and functions
