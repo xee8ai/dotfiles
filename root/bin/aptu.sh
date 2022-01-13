@@ -75,4 +75,7 @@ logAndRun "$CMD"
 CMD="/root/bin/search_for_missing_packets.sh"
 logAndRun "$CMD"
 
+CMD="find /etc -name *.dpkg-*"
+logAndRun "$CMD"
+
 echo
