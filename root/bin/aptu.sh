@@ -68,10 +68,10 @@ logAndRun "$CMD"
 CMD="/root/bin/installed_packets.sh"
 logAndRun "$CMD"
 
-CMD="/root/bin/search_for_missing_packets.sh"
-logAndRun "$CMD"
+# CMD="/root/bin/search_for_missing_packets.sh"
+# logAndRun "$CMD"
 
-CMD="find /etc -name *.dpkg-*"
+CMD='cd / && find /etc -name "*.dpkg-*" -o -name "*.ucf-*" -o -name "*.old"'
 logAndRun "$CMD"
 
 echo
