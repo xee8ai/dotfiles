@@ -12,11 +12,9 @@ mkdir -p $LOGPATH
 TEE=" 2>&1 | tee -a $LOGFILE"
 
 function setCons {
-	if [[ $- == *i* ]]; then
-		tput smul
-		tput bold
-		tput setaf 123
-	fi
+	tput smul
+	tput bold
+	tput setaf 123
 }
 
 function logAndRun {
@@ -29,9 +27,7 @@ function logAndRun {
 	echo "$(date -Iseconds)" >> $LOGFILE
 	echo "$CMD" >> $LOGFILE
 	echo "--------------------" >> $LOGFILE
-	if [[ $- == *i* ]]; then
-		tput sgr0
-	fi
+	tput sgr0
 	eval $CMD$TEE
 }
 
