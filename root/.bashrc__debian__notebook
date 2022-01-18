@@ -65,13 +65,16 @@ alias aptu="/root/bin/aptu.sh"
 alias shutdown='killall clementine; killall keepassxc; sleep 2; shutdown'
 alias poweroff='killall clementine; killall keepassxc; sleep 2; poweroff'
 
-if [ -d ~/bin ] ; then
-	PATH=~/bin:"${PATH}"
-fi
-
-# add /sbin and /usr/sbin to path for Debian 10/Buster
-# https://unix.stackexchange.com/questions/482569/debian-10-buster-update-grub-command-not-found
-PATH="/sbin:/usr/sbin:${PATH}"
+# add to PATH
+#     /sbin and /usr/sbin to path for Debian 10/Buster: https://unix.stackexchange.com/questions/482569/debian-10-buster-update-grub-command-not-found
+PATHS_TO_ADD="
+/root/bin
+/user/sbin
+/sbin
+"
+for P in $PATHS_TO_ADD; do
+    if test -e $P; then PATH="$P:$PATH"; fi
+done
 
 # change to root directory
 cd /root
