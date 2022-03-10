@@ -37,11 +37,11 @@ else
 	DLLIMIT=""
 fi
 
-# CMD="apt-get purge ~c"
-# logAndRun "$CMD"
+CMD="aptitude purge ~c"
+logAndRun "$CMD"
 
-# CMD="apt-get purge ~o"
-# logAndRun "$CMD"
+CMD="aptitude purge ~o"
+logAndRun "$CMD"
 
 CMD="apt-get autoremove"
 logAndRun "$CMD"
