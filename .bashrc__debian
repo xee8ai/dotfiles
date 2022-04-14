@@ -124,4 +124,7 @@ fi
 if [[ $- == *i* ]]; then
 	stty -ixon
 	date -Is > ~/.last_interactive_login
+	if [ -f /home/par/bin/bashrc_addon.sh ]; then
+		/home/par/bin/bashrc_addon.sh
+	fi
 fi
