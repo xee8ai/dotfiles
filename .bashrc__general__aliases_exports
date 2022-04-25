@@ -9,6 +9,11 @@ if [ -x /usr/bin/dircolors ]; then
 	alias vdir='ls --color=auto --format=long'
 fi
 
+# prevent destruction
+alias chgrp='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chown='chown --preserve-root'
+
 # some more ls aliases
 alias l.='ls -d .* --color=auto'
 alias ll='ls -l --color=auto --time-style=+\ \ %Y-%m-%d\ %H:%M:%S\ \ '
