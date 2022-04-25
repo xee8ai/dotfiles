@@ -168,6 +168,8 @@ augroup configgroup
     autocmd FileType sh set foldmethod=indent|set foldlevel=1|set foldnestmax=1
     autocmd FileType sh set tabstop=4|set shiftwidth=4
 
+    autocmd FileType tex set tabstop=4|set shiftwidth=4|set expandtab
+
     autocmd FileType vim set tabstop=4|set shiftwidth=4|set expandtab
 
     autocmd FileType xml set foldmethod=indent|set foldlevel=4|set foldnestmax=4
