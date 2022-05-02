@@ -26,6 +26,9 @@ table inet filter {
         # check if there are rules defined by fwknop
         jump FWKNOP_INPUT
 
+        # check if libvirt guest traffic (e.g. dhcp client requests)
+        jump LIBVIRT_BRIDGE
+
         # handle special traffic in own chains
         tcp dport 22  jump XEE_INPUT_SSH
         tcp dport {80, 443}  jump XEE_INPUT_WEB
@@ -51,10 +54,22 @@ table inet filter {
         counter comment "dropped incoming http(s) packets"
     }
 
+    # dummy rule; traffic from/to libvirt guests has to be accepted here (=inet)
+    # otherwise the ACCEPT in ip/ip6 tables would not be used
+    chain LIBVIRT_BRIDGE {
+        iifname "virbr0" accept
+        oifname "virbr0" accept
+    }
+
     chain FORWARD {
         type filter hook forward priority 0
+
         # we are not a router
         policy drop
+
+        # check if libvirt guest traffic (e.g. to the internet)
+        jump LIBVIRT_BRIDGE
+
         counter comment "dropped forward packets"
     }
 
