@@ -1,6 +1,10 @@
 #!/bin/bash
 
-HOST="xeebook"
+HOSTNAME="xeebook"
+
+if [ "$#" -lt 1 ]; then
+	echo "Usage: $0 [open|close]"
+fi
 
 NFT="/sbin/nft"
 CUT="/usr/bin/cut"
@@ -19,7 +23,7 @@ PORTS=$3
 PORTS=22
 
 
-IPS=$(dig +short $HOST)
+IPS=$(dig +short $HOSTNAME)
 for IP in $IPS; do
     if [ "$JOB" == "open" ]; then
         CMD="$NFT add rule $TABLE $CHAIN ip saddr $IP tcp dport { $PORTS } accept comment \"$COMMENT\""
