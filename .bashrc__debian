@@ -111,6 +111,15 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# add alternative bin directories in home
+ALTBINS=$(ls -1 -- ~ | grep "altbin-")
+for ALTBIN in $ALTBINS; do
+    P=$HOME/$ALTBIN
+    if [ -d $P ]; then 
+        PATH="$PATH:$P"
+    fi
+done
+
 if [ -f ~/bin/anniversary-processor/bash-processor.sh ]; then
     ~/bin/anniversary-processor/bash-processor.sh
 fi
@@ -122,9 +131,9 @@ fi
 # and http://unix.stackexchange.com/questions/26676/how-to-check-if-a-shell-is-login-interactive-batch)
 # e.g. preventing errors around “stty: standard input: Inappropriate ioctl for device” on shell scripts using ssh connection
 if [[ $- == *i* ]]; then
-	stty -ixon
-	date -Is > ~/.last_interactive_login
-	if [ -f /home/par/bin/bashrc_addon.sh ]; then
-		/home/par/bin/bashrc_addon.sh
-	fi
+    stty -ixon
+    date -Is > ~/.last_interactive_login
+    if [ -f /home/par/bin/bashrc_addon.sh ]; then
+        /home/par/bin/bashrc_addon.sh
+    fi
 fi
