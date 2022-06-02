@@ -1,10 +1,6 @@
 #!/bin/bash
 
-set -e
-
-# Workaround for not compatible RP version
-#echo "Reinstalling RequestPolicy…"
-#/root/bin/r-reinstall_requestpolicy.sh
+set -euo pipefail
 
 LOGPATH="/tmp"
 LOGFILE=$LOGPATH"/root-aptu__"$(date -Iseconds)".log"
@@ -31,10 +27,15 @@ function logAndRun {
 	eval $CMD$TEE
 }
 
-if [ -n "$1" ]; then
-	DLLIMIT=" -o Acquire::http::DL-Limit=100"
-else
+if [ "$#" -eq 0 ]; then
 	DLLIMIT=""
+elif [ "$#" -eq 1 ]; then
+	if [ -n "$1" ]; then
+		DLLIMIT=" -o Acquire::http::DL-Limit=100"
+	fi
+else
+	echo "Too much arguments"
+	exit 1
 fi
 
 CMD="aptitude purge ~c"
