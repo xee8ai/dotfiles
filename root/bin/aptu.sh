@@ -38,6 +38,9 @@ else
 	exit 1
 fi
 
+CMD="apt-get autoremove"
+logAndRun "$CMD"
+
 CMD="aptitude purge ~c"
 logAndRun "$CMD"
 
