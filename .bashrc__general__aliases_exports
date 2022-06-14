@@ -141,6 +141,9 @@ alias pfixmodified='git ls-files --modified | grep "\.php$" | xargs vendor/bin/p
 alias psniff='vendor/bin/phpcs --colors'
 alias psniffmodified='git ls-files --modified | grep "\.php$" | xargs vendor/bin/phpcs --colors'
 
+# todo.txt
+alias t='mkdir -p ~/.topydo && topydo -t ~/.topydo/todo.txt -d ~/.topydo/done.txt'
+
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
 
