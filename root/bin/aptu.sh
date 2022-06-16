@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+APT="/usr/bin/apt"
+APTGET="/usr/bin/apt-get"
+APTITUDE="/usr/bin/aptitude"
+FIND="/usr/bin/find"
+NICE="/usr/bin/nice"
+
 LOGPATH="/tmp"
 LOGFILE=$LOGPATH"/root-aptu__"$(date -Iseconds)".log"
 mkdir -p $LOGPATH
@@ -38,35 +44,35 @@ else
 	exit 1
 fi
 
-CMD="apt-get autoremove"
+CMD="$APTGET autoremove"
 logAndRun "$CMD"
 
-CMD="aptitude purge ~c"
+CMD="$APTITUDE purge ~c"
 logAndRun "$CMD"
 
-CMD="aptitude purge ~o"
+CMD="$APTITUDE purge ~o"
 logAndRun "$CMD"
 
-CMD="apt-get autoremove"
+CMD="$APTGET autoremove"
 logAndRun "$CMD"
 
-CMD="nice -n 10$DLLIMIT apt-get update"
+CMD="$NICE -n 10$DLLIMIT $APTGET update"
 logAndRun "$CMD"
 
-CMD="nice -n 10 apt-get$DLLIMIT dist-upgrade"
+CMD="$NICE -n 10 $APTGET$DLLIMIT dist-upgrade"
 logAndRun "$CMD"
 
 # apt-get upgrade in testing oft gebraucht (wenn gerade wieder Abhängigkeiten nicht erfüllt sind…)
-CMD="nice -n 10 apt-get$DLLIMIT upgrade"
+CMD="$NICE -n 10 $APTGET$DLLIMIT upgrade"
 logAndRun "$CMD"
 
-CMD="apt-get autoclean"
+CMD="$APTGET autoclean"
 logAndRun "$CMD"
 
-CMD="apt-get clean"
+CMD="$APTGET clean"
 logAndRun "$CMD"
 
-CMD="apt autoremove"
+CMD="$APT autoremove"
 logAndRun "$CMD"
 
 CMD="/root/bin/installed_packets.sh"
@@ -75,7 +81,17 @@ logAndRun "$CMD"
 # CMD="/root/bin/search_for_missing_packets.sh"
 # logAndRun "$CMD"
 
-CMD='cd / && find /etc -name "*.dpkg-*" -o -name "*.ucf-*" -o -name "*.old"'
-logAndRun "$CMD"
+FINDDIRS="
+/etc
+/srv
+/sys
+/usr
+/var/lib
+"
+
+for FINDDIR in $FINDDIRS; do
+	CMD='cd / && '$FIND' '$FINDDIR' -name "*.dpkg-*" -o -name "*.ucf-*" -o -name "*.old"'
+	logAndRun "$CMD"
+done
 
 echo
