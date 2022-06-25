@@ -144,6 +144,9 @@ alias psniffmodified='git ls-files --modified | grep "\.php$" | xargs vendor/bin
 # todo.txt
 alias t='mkdir -p ~/.topydo && topydo -t ~/.topydo/todo.txt -d ~/.topydo/done.txt'
 
+# notes
+alias n="mkdir -p ~/notes && $VIM_EXECUTABLE ~/notes/*"
+
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
 
