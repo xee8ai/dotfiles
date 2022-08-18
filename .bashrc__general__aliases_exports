@@ -51,6 +51,7 @@ alias pygrep='grep -inTsr --color=auto --include=*.{py,pyw}'
 alias shgrep='grep -inTsr --color=auto --include=*.sh'
 alias texgrep='grep -inTsr --color=auto --include=*.tex'
 alias tplgrep='grep -inTsr --color=auto --include=*.{tpl,blade.php}'
+alias xmlgrep='grep -inTsr --color=auto --include=*.{xml,xsd,xsl,xfo,dtd}'
 
 alias py='/usr/bin/env python3 -u'
 alias httpserver_python3='/usr/bin/env python3 -m http.server'
