@@ -146,7 +146,7 @@ alias psniffmodified='git ls-files --modified | grep "\.php$" | xargs vendor/bin
 alias t='mkdir -p ~/.topydo && topydo -t ~/.topydo/todo.txt -d ~/.topydo/done.txt'
 
 # notes
-alias n="mkdir -p ~/notes && cd ~/notes && $VIM_EXECUTABLE -p *.md && git add . && git commit -m \"Autocommit $(date -Iseconds)\""
+alias n="mkdir -p ~/notes && cd ~/notes && $VIM_EXECUTABLE -p *.md && git add . && git commit -m \"Autocommit\""
 
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
