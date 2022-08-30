@@ -27,6 +27,9 @@ fi
 # it seems so – apply to a better varname
 USERNAME=$1
 
+# create target directory
+mkdir -p /root/dotfiles
+
 # define source dirs to sync from
 SRC="/home/$USERNAME/.vim
 /home/$USERNAME/.mybash
