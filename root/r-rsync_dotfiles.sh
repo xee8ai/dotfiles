@@ -42,10 +42,10 @@ DST="/root"
 RSYNCOPTS="-avrpEL --delete"
 
 # change owner to $USERNAME => see better what is going to be synced
-chown -R $USERNAME.$USERNAME /root/.vim
-chown -R $USERNAME.$USERNAME /root/.vimrc
-chown -R $USERNAME.$USERNAME /root/.mybash
-chown -R $USERNAME.$USERNAME /root/.neo2_layout
+chown -R $USERNAME:$USERNAME /root/.vim
+chown -R $USERNAME:$USERNAME /root/.vimrc
+chown -R $USERNAME:$USERNAME /root/.mybash
+chown -R $USERNAME:$USERNAME /root/.neo2_layout
 
 # sync files
 for S in $SRC; do
@@ -71,6 +71,6 @@ cp -f /home/$USERNAME/dotfiles/root/r-rsync_dotfiles.sh /root/dotfiles
 cp -rf /home/$USERNAME/dotfiles/helpers /root/dotfiles
 
 # change owner back to root
-chown -R root.root /root
+chown -R root:root /root
 
 echo
