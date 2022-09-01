@@ -15,10 +15,7 @@ declare -a CMDS=(
 	'cd /etc'
 	'git show HEAD'
 	'cd /'	# needed for find to function as expected (expands wildcards before execution)
-	'find /etc -name *bak'
-	'find /etc -name *rpmsave'
-	'find /etc -name *rpmnew'
-	'find /etc -name *rpmorig'
+	'find /etc -name "*.bak" -o -name "*.rpmsave" -o -name "*.rpmnew" -o -name "*.rpmorig"'
 )
 
 for CMD in "${CMDS[@]}"; do
