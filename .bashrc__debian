@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+USERNAME=$(whoami)
+
 # switch shell language to english to see english e.g. error messages
 LANGUAGE=en_US.UTF-8
 
@@ -136,4 +138,19 @@ if [[ $- == *i* ]]; then
     if [ -f /home/par/bin/bashrc_addon.sh ]; then
         /home/par/bin/bashrc_addon.sh
     fi
+
+	# show content of the memofile if exists and size is greater than zero
+	MEMOFILE="/home/$USERNAME/.memo_bashrc"
+	if [ -f $MEMOFILE ]; then
+		if [ $(stat --printf="%s" $MEMOFILE) -gt 0 ]; then
+			echo
+			echo "--- MEMO -------------------------------"
+			cat $MEMOFILE
+			echo "----------------------------------------"
+			echo
+		fi
+	else
+		touch $MEMOFILE
+	fi
+
 fi
