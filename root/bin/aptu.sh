@@ -14,34 +14,34 @@ mkdir -p $LOGPATH
 TEE=" 2>&1 | tee -a $LOGFILE"
 
 function setCons {
-	tput smul
-	tput bold
-	tput setaf 123
+    tput smul
+    tput bold
+    tput setaf 123
 }
 
 function logAndRun {
-	CMD=$1
-	echo
-	setCons
-	echo $CMD…
-	echo "" >> $LOGFILE
-	echo "----------------------------------------" >> $LOGFILE
-	echo "$(date -Iseconds)" >> $LOGFILE
-	echo "$CMD" >> $LOGFILE
-	echo "--------------------" >> $LOGFILE
-	tput sgr0
-	eval $CMD$TEE
+    CMD=$1
+    echo
+    setCons
+    echo $CMD…
+    echo "" >> $LOGFILE
+    echo "----------------------------------------" >> $LOGFILE
+    echo "$(date -Iseconds)" >> $LOGFILE
+    echo "$CMD" >> $LOGFILE
+    echo "--------------------" >> $LOGFILE
+    tput sgr0
+    eval $CMD$TEE
 }
 
 if [ "$#" -eq 0 ]; then
-	DLLIMIT=""
+    DLLIMIT=""
 elif [ "$#" -eq 1 ]; then
-	if [ -n "$1" ]; then
-		DLLIMIT=" -o Acquire::http::DL-Limit=100"
-	fi
+    if [ -n "$1" ]; then
+        DLLIMIT=" -o Acquire::http::DL-Limit=100"
+    fi
 else
-	echo "Too much arguments"
-	exit 1
+    echo "Too much arguments"
+    exit 1
 fi
 
 CMD="$APTGET autoremove"
@@ -81,6 +81,8 @@ logAndRun "$CMD"
 # CMD="/root/bin/search_for_missing_packets.sh"
 # logAndRun "$CMD"
 
+CWD=$(pwd)
+
 FINDDIRS="
 /etc
 /srv
@@ -88,10 +90,11 @@ FINDDIRS="
 /usr
 /var/lib
 "
-
 for FINDDIR in $FINDDIRS; do
-	CMD='cd / && '$FIND' '$FINDDIR' -name "*.dpkg-*" -o -name "*.ucf-*" -o -name "*.old"'
-	logAndRun "$CMD"
+    CMD='cd / && '$FIND' '$FINDDIR' -name "*.dpkg-*" -o -name "*.ucf-*" -o -name "*.old"'
+    logAndRun "$CMD"
 done
+
+cd $CWD
 
 echo
