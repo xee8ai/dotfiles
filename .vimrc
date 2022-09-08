@@ -158,6 +158,7 @@ augroup configgroup
     autocmd FileType java set tabstop=4|set shiftwidth=4
 
     autocmd FileType markdown set autoindent    " indenting lists
+    autocmd FileType markdown set tabstop=4|set shiftwidth=4|set expandtab
 
     autocmd FileType php set foldmethod=indent|set foldlevel=2|set foldnestmax=2
     autocmd FileType php set tabstop=4|set shiftwidth=4|set expandtab
@@ -166,7 +167,7 @@ augroup configgroup
     autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
 
     autocmd FileType sh set foldmethod=indent|set foldlevel=1|set foldnestmax=1
-    autocmd FileType sh set tabstop=4|set shiftwidth=4
+    autocmd FileType sh set tabstop=4|set shiftwidth=4|set expandtab
 
     autocmd FileType tex set tabstop=4|set shiftwidth=4|set expandtab
 
