@@ -83,20 +83,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# check if liquidprompt is installed
-if [[ $- = *i* ]]; then
-    if [ -d /usr/share/liquidprompt ]; then
-        # installed via apt-get
-        echo "Using system installed liquidprompt."
-        source /usr/share/liquidprompt/liquidprompt
-    elif [ -d ~/.mybash/liquidprompt ]; then
-        # Only load Liquid Prompt in interactive shells, not from a script or from scp
-        # local version (git) is used
-        echo "Using liquidprompt from git."
-        source ~/.mybash/liquidprompt/liquidprompt
-    fi
-fi
-
 # get general aliases and exports from separate file
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -117,7 +103,7 @@ fi
 ALTBINS=$(ls -1 -- ~ | grep "altbin-")
 for ALTBIN in $ALTBINS; do
     P=$HOME/$ALTBIN
-    if [ -d $P ]; then 
+    if [ -d $P ]; then
         PATH="$PATH:$P"
     fi
 done
@@ -134,23 +120,38 @@ fi
 # e.g. preventing errors around “stty: standard input: Inappropriate ioctl for device” on shell scripts using ssh connection
 if [[ $- == *i* ]]; then
     stty -ixon
-    date -Is > ~/.last_interactive_login
-    if [ -f /home/par/bin/bashrc_addon.sh ]; then
-        /home/par/bin/bashrc_addon.sh
+
+    # check if liquidprompt is installed
+    if [ -d /usr/share/liquidprompt ]; then
+        # installed via apt-get
+        echo "Using system installed liquidprompt."
+        source /usr/share/liquidprompt/liquidprompt
+    elif [ -d ~/.mybash/liquidprompt ]; then
+        # Only load Liquid Prompt in interactive shells, not from a script or from scp
+        # local version (git) is used
+        echo "Using liquidprompt from git."
+        source ~/.mybash/liquidprompt/liquidprompt
     fi
 
-	# show content of the memofile if exists and size is greater than zero
-	MEMOFILE="/home/$USERNAME/.memo_bashrc"
-	if [ -f $MEMOFILE ]; then
-		if [ $(stat --printf="%s" $MEMOFILE) -gt 0 ]; then
-			echo
-			echo "--- MEMO -------------------------------"
-			cat $MEMOFILE
-			echo "----------------------------------------"
-			echo
-		fi
-	else
-		touch $MEMOFILE
-	fi
+    # file to extend the (git) standard .bashrc by stuff needed only on certain profiles
+    ADDONFILE="/home/$USERNAME/bin/bashrc_addon.sh"
+    if [ -f $ADDONFILE ]; then
+        $ADDONFILE
+    fi
 
+    # show content of the memofile if exists and size is greater than zero
+    MEMOFILE="/home/$USERNAME/.memo_bashrc"
+    if [ -f $MEMOFILE ]; then
+        if [ $(stat --printf="%s" $MEMOFILE) -gt 0 ]; then
+            echo
+            echo "--- MEMO -------------------------------"
+            cat $MEMOFILE
+            echo "----------------------------------------"
+            echo
+        fi
+    else
+        touch $MEMOFILE
+    fi
+
+    date -Is > ~/.last_interactive_login
 fi

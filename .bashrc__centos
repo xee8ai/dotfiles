@@ -3,15 +3,9 @@
 # switch shell language to english to see english e.g. error messages
 LANGUAGE=en_US.UTF-8
 
-# check if liquidprompt is installed
-if [ -d ~/.mybash/liquidprompt ]; then
-	# Only load Liquid Prompt in interactive shells, not from a script or from scp
-	[[ $- = *i* ]] && source ~/.mybash/liquidprompt/liquidprompt
-fi
-
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+    . /etc/bashrc
 fi
 
 # don't put duplicate lines or lines starting with space in the history file
@@ -46,6 +40,39 @@ fi
 # and http://unix.stackexchange.com/questions/26676/how-to-check-if-a-shell-is-login-interactive-batch)
 # e.g. preventing errors around “stty: standard input: Inappropriate ioctl for device” on shell scripts using ssh connection
 if [[ $- == *i* ]]; then
-	stty -ixon
-	date -Is > ~/.last_interactive_login
+    stty -ixon
+
+    # check if liquidprompt is installed
+    if [ -d /usr/share/liquidprompt ]; then
+        # installed via apt-get
+        echo "Using system installed liquidprompt."
+        source /usr/share/liquidprompt/liquidprompt
+    elif [ -d ~/.mybash/liquidprompt ]; then
+        # Only load Liquid Prompt in interactive shells, not from a script or from scp
+        # local version (git) is used
+        echo "Using liquidprompt from git."
+        source ~/.mybash/liquidprompt/liquidprompt
+    fi
+
+    # file to extend the (git) standard .bashrc by stuff needed only on certain profiles
+    ADDONFILE="/home/$USERNAME/bin/bashrc_addon.sh"
+    if [ -f $ADDONFILE ]; then
+        $ADDONFILE
+    fi
+
+    # show content of the memofile if exists and size is greater than zero
+    MEMOFILE="/home/$USERNAME/.memo_bashrc"
+    if [ -f $MEMOFILE ]; then
+        if [ $(stat --printf="%s" $MEMOFILE) -gt 0 ]; then
+            echo
+            echo "--- MEMO -------------------------------"
+            cat $MEMOFILE
+            echo "----------------------------------------"
+            echo
+        fi
+    else
+        touch $MEMOFILE
+    fi
+
+    date -Is > ~/.last_interactive_login
 fi
