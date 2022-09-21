@@ -1,21 +1,23 @@
+[alias]
+    pullall = !git pull && git submodule update --init --recursive
 [color]
-	ui = auto
+    ui = auto
 [core]
-	editor = vim
+    editor = vim
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
+    tool = vimdiff
+    conflictstyle = diff3
 [difftool]
-	prompt = false
+    prompt = false
 [mergetool]
-	prompt = false
-	keepBackup = false
+    prompt = false
+    keepBackup = false
 [pull]
-	ff = only
+    ff = only
 [push]
-	default = simple
+    default = simple
 [user]
-	name = xee8ai
-	email = xee8ai@users.noreply.github.com
+    name = xee8ai
+    email = xee8ai@users.noreply.github.com
