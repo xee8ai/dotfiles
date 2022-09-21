@@ -55,5 +55,6 @@ if [ -f $GIT_USER ]; then
     PYTHON3_VERSION=$(/usr/bin/env python3 --version)
     if [ $? -eq 0 ]; then
         alias gu=$GIT_USER
+        alias git='aliaswrapperfunc(){ git "$@" && '$GIT_USER';  unset -f aliaswrapperfunc; }; aliaswrapperfunc'  # idea from https://unix.stackexchange.com/questions/3773/how-to-pass-parameters-to-an-alias
     fi
 fi
