@@ -55,13 +55,13 @@ if [[ $- == *i* ]]; then
     fi
 
     # file to extend the (git) standard .bashrc by stuff needed only on certain profiles
-    ADDONFILE="/home/$USERNAME/bin/bashrc_addon.sh"
+    ADDONFILE="$HOME/bin/bashrc_addon.sh"
     if [ -f $ADDONFILE ]; then
         $ADDONFILE
     fi
 
     # show content of the memofile if exists and size is greater than zero
-    MEMOFILE="/home/$USERNAME/.memo_bashrc"
+    MEMOFILE="$HOME/.memo_bashrc"
     if [ -f $MEMOFILE ]; then
         if [ $(stat --printf="%s" $MEMOFILE) -gt 0 ]; then
             echo

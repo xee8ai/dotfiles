@@ -3,7 +3,7 @@
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    test -r $HOME/.dircolors && eval "$(dircolors -b $HOME/.dircolors)" || eval "$(dircolors -b)"
 	alias ls='ls --color=auto'
 	alias dir='ls --color=auto --format=vertical'
 	alias vdir='ls --color=auto --format=long'
@@ -70,7 +70,7 @@ alias gps="git pull && git submodule update --init --recursive"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # command reference
-alias coref='okular ~/tutorials/linux/linux_command_reference.pdf &'
+alias coref="okular $HOME/tutorials/linux/linux_command_reference.pdf &"
 
 # quick search/show packages
 alias apol='apt-cache policy'
@@ -78,10 +78,13 @@ alias asearch='echo && apt-cache search'
 alias ashow='echo && apt-cache show'
 
 # show current git user and mail on each git command
-if [ -f ~/dotfiles/helpers/git-user.py ]; then
-	alias gu='~/dotfiles/helpers/git-user.py'
-else
-	alias gu='echo "~/dotfiles/helpers/git-user.py does not exist"'
+GIT_USER="$HOME/dotfiles/helpers/git-user.py"
+alias gu='echo "~/dotfiles/helpers/git-user.py does not exist"'
+if [ -f $GIT_USER ]; then
+    PYTHON3_VERSION=$(/usr/bin/env python3 --version)
+    if [ $? -eq 0 ]; then
+        alias gu="$GIT_USER"
+    fi
 fi
 
 # quick activation of python virtual environments
@@ -100,8 +103,8 @@ fi
 
 # on systems without git completion (e.g. CentOS) simply put file git-completion.bash into users root dir
 # the file can be downloaded at https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-if [ -f ~/git-completion.bash ]; then
-	source ~/git-completion.bash
+if [ -f $HOME/git-completion.bash ]; then
+	source $HOME/git-completion.bash
 fi
 
 # add some root-only aliases
@@ -143,10 +146,10 @@ alias psniff='vendor/bin/phpcs --colors'
 alias psniffmodified='git ls-files --modified | grep "\.php$" | xargs vendor/bin/phpcs --colors'
 
 # todo.txt
-alias t='mkdir -p ~/.topydo && topydo -t ~/.topydo/todo.txt -d ~/.topydo/done.txt'
+alias t="mkdir -p $HOME/.topydo && topydo -t $HOME/.topydo/todo.txt -d $HOME/.topydo/done.txt"
 
 # notes
-alias n="mkdir -p ~/notes && cd ~/notes && $VIM_EXECUTABLE -p *.md && git add . && git commit -m \"Autocommit\""
+alias n="mkdir -p $HOME/notes && cd $HOME/notes && $VIM_EXECUTABLE -p *.md && git add . && git commit -m \"Autocommit\""
 
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then

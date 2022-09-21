@@ -8,6 +8,7 @@
 
 # source /home/xee8ai/bashrc-root.sh
 
+# we have to extract the username from scriptdir (because $USER and whoami are “root”)
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 USERNAME=$(echo "$SCRIPT_DIR" | cut -d'/' -f3)
 
@@ -43,6 +44,16 @@ GITCONFIG_ROOT_BACKUP="/root/.gitconfig-root"
 GITCONFIG_USER="/home/$USERNAME/.gitconfig"
 if [ -e $GITCONFIG_ROOT_BACKUP ]; then
     echo "Symlinking $GITCONFIG_ROOT to $GITCONFIG_USER"
-    rm -f $GITCONFIG_ROOT
+    unlink $GITCONFIG_ROOT
     ln -s $GITCONFIG_USER $GITCONFIG_ROOT
+fi
+
+# check if git user exists and add alias
+GIT_USER="/home/$USERNAME/dotfiles/helpers/git-user.py"
+alias gu='echo "~/dotfiles/helpers/git-user.py does not exist"'
+if [ -f $GIT_USER ]; then
+    PYTHON3_VERSION=$(/usr/bin/env python3 --version)
+    if [ $? -eq 0 ]; then
+        alias gu=$GIT_USER
+    fi
 fi
