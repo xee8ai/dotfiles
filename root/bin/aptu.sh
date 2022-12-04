@@ -78,8 +78,15 @@ logAndRun "$CMD"
 CMD="/root/bin/installed_packets.sh"
 logAndRun "$CMD"
 
-# CMD="/root/bin/search_for_missing_packets.sh"
-# logAndRun "$CMD"
+if [ -x /root/bin/update-flatpaks.sh ]; then
+    CMD="/root/bin/update-flatpaks.sh"
+    logAndRun "$CMD"
+fi
+
+if [ -x /root/bin/search_for_missing_packets.sh ]; then
+    CMD="/root/bin/search_for_missing_packets.sh"
+    logAndRun "$CMD"
+fi
 
 CWD=$(pwd)
 
