@@ -1,16 +1,16 @@
 #!/bin/bash
 
-if [ ! -x $FLATPAK ]; then
-    echo "flatpak seems not to be installed"
-    exit 1
+if [ ! -x /usr/bin/flatpak ]; then
+    echo "flatpak seems not to be installed – nothing to update"
+    exit
 fi
 
-APPS=$(flatpak list --app | tr [:space:] ' ' | tr -s ' ' | cut -d' ' -f2)
+APPS=$(/usr/bin/flatpak list --app | tr [:space:] ' ' | tr -s ' ' | cut -d' ' -f2)
 
 for APP in $APPS; do
     echo
     echo "--------------------------------------------------------------------------------"
-    CMD="flatpak update $APP"
+    CMD="/usr/bin/flatpak update $APP"
     echo $CMD
     $CMD
 done
