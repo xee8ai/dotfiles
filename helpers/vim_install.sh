@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# needs the following packages:
-# yum install python3-devel gcc-c++ ncurses-devel
+echo "needs the following packages:"
+echo "sudo yum install python3-devel gcc-c++ ncurses-devel"
+read -p "Press <ENTER> to continue…"
 
 SRC_DIR="$HOME/src"
 VIM_SRC_DIR="$SRC_DIR/vim"
