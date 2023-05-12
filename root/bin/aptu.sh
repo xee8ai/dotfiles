@@ -98,7 +98,7 @@ FINDDIRS="
 /var/lib
 "
 for FINDDIR in $FINDDIRS; do
-    CMD='cd / && '$FIND' '$FINDDIR' -name "*.dpkg-*" -o -name "*.ucf-*" -o -name "*.old"'
+    CMD='cd / && '$FIND' '$FINDDIR' -name "*.dpkg-*" -o -name "*.ucf-*" -o -name "*.old" -o -name "*.merge-error"'
     logAndRun "$CMD"
 done
 
