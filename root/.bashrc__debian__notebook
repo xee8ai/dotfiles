@@ -48,8 +48,8 @@ alias aptu100='/root/bin/aptu.sh 100'
 alias aptu="/root/bin/aptu.sh"
 
 # close clementine and safely delete all (unencrypted) PDFs in /tmp before shutdown
-alias shutdown='killall clementine; killall keepassxc; sleep 2; /root/bin/rotate_users_xsession-errors.sh; shutdown'
-alias poweroff='killall clementine; killall keepassxc; sleep 2; /root/bin/rotate_users_xsession-errors.sh; poweroff'
+alias shutdown='/root/bin/run_before_poweroff.sh; shutdown'
+alias poweroff='/root/bin/run_before_poweroff.sh; poweroff'
 
 # add to PATH
 #     /sbin and /usr/sbin to path for Debian 10/Buster: https://unix.stackexchange.com/questions/482569/debian-10-buster-update-grub-command-not-found

@@ -53,8 +53,8 @@ alias aptu100='/root/bin/aptu.sh 100'
 alias aptu="/root/bin/aptu.sh"
 
 # cleanup before shutdown
-alias shutdown='killall clementine; sleep 2; /root/bin/rotate_users_xsession-errors.sh; shutdown'
-alias poweroff='killall clementine; sleep 2; /root/bin/rotate_users_xsession-errors.sh; poweroff'
+alias shutdown='/root/bin/run_before_poweroff.sh; shutdown'
+alias poweroff='/root/bin/run_before_poweroff.sh; poweroff'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
