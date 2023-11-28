@@ -152,6 +152,9 @@ alias t="mkdir -p $HOME/.topydo && topydo -t $HOME/.topydo/todo.txt -d $HOME/.to
 # notes
 alias n="mkdir -p $HOME/notes && cd $HOME/notes && $VIM_EXECUTABLE -p *.md && git add . && git commit -m \"Autocommit\""
 
+# get rid of sudo on docker commands
+alias docker="sudo docker"
+
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
 
