@@ -22,6 +22,7 @@ ignore_files = {
         'c': os.path.join('gitignore', 'C.gitignore'),
         'java': os.path.join('gitignore', 'Java.gitignore'),
         'php': None,
+        'laravel': os.path.join('gitignore', 'Laravel.gitignore'),
         'python': os.path.join('gitignore', 'Python.gitignore'),
         'tags': os.path.join('gitignore', 'Global', 'Tags.gitignore'),
         'tex': os.path.join('gitignore', 'TeX.gitignore'),
@@ -32,6 +33,9 @@ default_added = ['tags', 'vim']
 ctags_content = {
         'c': [],
         'java': [],
+        'laravel': [
+            '--exclude=vendor',
+            ],
         'php': [
             '--exclude=vendor',
             ],
@@ -52,7 +56,7 @@ header_tpl = '''
 ################################################################################
 '''
 
-option_list = [o for o in ignore_files.keys() if o not in default_added]
+option_list = [o for o in sorted(ignore_files.keys()) if o not in default_added]
 
 def usage():
     print()
