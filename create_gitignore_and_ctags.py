@@ -102,6 +102,7 @@ for i in ignores:
     part = header + '\n' + content
     file_parts.append(part)
 
+file_parts.append(header_tpl.format('Manually added entries'))
 
 file_content = '\n\n'.join(file_parts)
 
