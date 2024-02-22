@@ -1,8 +1,12 @@
 #!/usr/sbin/nft -f
 
-flush ruleset
+# flush rules in own table
+# on boot that doesn't exist – so we define it first
+table inet xee-filter {
+}
+flush table inet xee-filter
 
-table inet filter {
+table inet xee-filter {
 
     chain INPUT {
         type filter hook input priority 0
