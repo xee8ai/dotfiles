@@ -13,6 +13,7 @@
   network inet raw,
   network inet dgram,
   network inet6 dgram,
+  network netlink raw,
   network packet raw,
   network packet dgram,
 
@@ -46,7 +47,7 @@
   /dev/tty rw,
   /etc/fwknop/cycle_nftables.sh rix,
   /etc/iproute2/* r,
-  /sbin/ntf rix,
+  /sbin/nft rix,
   /usr/bin/cut rix,
   /usr/bin/grep rix,
   /usr/bin/head rix,
