@@ -1,12 +1,15 @@
 #!/usr/sbin/nft -f
 
+define DOCKER_INTERFACE = docker0
+define DOCKER_IP = 10.111.0.0/14
+
 # flush rules in own table
 # on boot that doesn't exist – so we define it first
-table inet xee-filter {
+table inet xee-rules-inet {
 }
-flush table inet xee-filter
+flush table inet xee-rules-inet
 
-table inet xee-filter {
+table inet xee-rules-inet {
 
     chain INPUT {
         type filter hook input priority 0
@@ -30,12 +33,18 @@ table inet xee-filter {
         # check if there are rules defined by fwknop
         jump FWKNOP_INPUT
 
-        # check if libvirt guest traffic (e.g. dhcp client requests)
+        # check if libvirt guest traffic
         jump LIBVIRT_BRIDGE
+
+        # check if docker traffic
+        jump DOCKER
 
         # handle special traffic in own chains
         tcp dport 22  jump XEE_INPUT_SSH
         tcp dport {80, 443}  jump XEE_INPUT_WEB
+
+        # accept neighbour discovery otherwise IPv6 connectivity breaks
+        icmpv6 type { nd-neighbor-solicit, nd-router-advert, nd-neighbor-advert } accept
     }
 
     chain XEE_TCP_CHECKS {
@@ -65,14 +74,25 @@ table inet xee-filter {
         oifname "virbr0" accept
     }
 
+    # dummy rule; traffic from/to docker containers has to be accepted here (=inet)
+    chain DOCKER {
+        ip saddr $DOCKER_IP accept
+        ip daddr $DOCKER_IP accept
+    }
+
     chain FORWARD {
         type filter hook forward priority 0
 
         # we are not a router
         policy drop
 
-        # check if libvirt guest traffic (e.g. to the internet)
+        ct state vmap { established : accept, related : accept, invalid : drop }
+
+        # check if libvirt guest traffic
         jump LIBVIRT_BRIDGE
+
+        # check if docker traffic
+        jump DOCKER
 
         counter comment "dropped forward packets"
     }
@@ -83,6 +103,14 @@ table inet xee-filter {
     }
 
     chain FWKNOP_INPUT {
+    }
+
+    chain postrouting {
+        type nat hook postrouting priority srcnat
+        policy accept
+
+        # masquerade outgoing docker traffic
+        oifname != $DOCKER_INTERFACE ip saddr $DOCKER_IP masquerade
     }
 
 }
