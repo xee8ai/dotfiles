@@ -58,3 +58,9 @@ if [ -f $GIT_USER ]; then
         alias git='aliaswrapperfunc(){ git "$@" && '$GIT_USER';  unset -f aliaswrapperfunc; }; aliaswrapperfunc'  # idea from https://unix.stackexchange.com/questions/3773/how-to-pass-parameters-to-an-alias
     fi
 fi
+
+# add bin extend dir to path
+BINEXTEND=/home/$USERNAME/dotfiles/bin-extend
+if [ -d $BINEXTEND ]; then
+    PATH="$PATH:$BINEXTEND"
+fi

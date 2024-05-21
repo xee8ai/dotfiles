@@ -106,6 +106,12 @@ for ALTBIN in $ALTBINS; do
     fi
 done
 
+# add bin extend dir to path
+BINEXTEND=$HOME/dotfiles/bin-extend
+if [ -d $BINEXTEND ]; then
+    PATH="$PATH:$BINEXTEND"
+fi
+
 if [ -f ~/bin/anniversary-processor/bash-processor.sh ]; then
     ~/bin/anniversary-processor/bash-processor.sh
 fi
