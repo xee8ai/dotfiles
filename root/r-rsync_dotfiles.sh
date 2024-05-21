@@ -68,7 +68,10 @@ cp -f /home/$USERNAME/dotfiles/.bashrc__general__aliases_exports /root/.bash_ali
 cp -f /home/$USERNAME/dotfiles/root/r-rsync_dotfiles.sh /root/dotfiles
 
 # copy the helpers
-cp -rf /home/$USERNAME/dotfiles/helpers /root/dotfiles
+rsync $RSYNCOPTS /home/$USERNAME/dotfiles/helpers /root/dotfiles
+
+# copy the bin extender
+rsync $RSYNCOPTS /home/$USERNAME/dotfiles/bin-extend /root/dotfiles
 
 # change owner back to root
 chown -R root:root /root

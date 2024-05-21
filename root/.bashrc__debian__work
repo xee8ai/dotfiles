@@ -74,6 +74,12 @@ for P in $PATHS_TO_ADD; do
     if test -e $P; then PATH="$P:$PATH"; fi
 done
 
+# add bin extend dir to path
+BINEXTEND=/root/dotfiles/bin-extend
+if [ -d $BINEXTEND ]; then
+    PATH="$PATH:$BINEXTEND"
+fi
+
 # change to root directory
 cd /root
 
