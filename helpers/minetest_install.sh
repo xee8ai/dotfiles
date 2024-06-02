@@ -1,7 +1,7 @@
 #!/bin/bash
 
-MINETEST_VERSION="5.7.0"
-IRRLICHT_VERSION="1.9.0mt10"
+MINETEST_VERSION="5.8.0"
+IRRLICHT_VERSION="1.9.0mt13"
 
 MINETEST_GIT="https://github.com/minetest/minetest.git"
 IRRLICHT_GIT="https://github.com/minetest/irrlicht.git"
