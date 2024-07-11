@@ -29,7 +29,8 @@ def analyze_content(content):
     max_delta_crit = 2 * max_delta_warn
 
     if len(content) != 2:
-        print(f'CRITICAL: Malformed status file, expect 2 lines but got {len(content)}')
+        output = "\\n".join(content)
+        print(f'CRITICAL: Malformed status file, expect 2 lines but got {len(content)}: {output}')
         sys.exit(2)
 
     # try to calculate delta between checktime and now
