@@ -147,8 +147,10 @@ augroup configgroup
     autocmd!
 
     autocmd FileType apache setlocal commentstring=#\ %s
+    autocmd FileType apache set tabstop=4|set shiftwidth=4|set expandtab
 
     autocmd FileType cfg setlocal commentstring=#\ %s
+    autocmd FileType cfg set tabstop=4|set shiftwidth=4|set expandtab
 
     " add spell checking and automatic wrapping at the recommended 72 columns
     " to git commit messages
