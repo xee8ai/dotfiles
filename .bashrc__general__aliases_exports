@@ -78,15 +78,16 @@ alias asearch='echo && apt-cache search'
 alias ashow='echo && apt-cache show'
 
 # show current git user and mail on each git command
-GIT_USER="$HOME/dotfiles/helpers/git-user.py"
-alias gu='echo "~/dotfiles/helpers/git-user.py does not exist"'
-if [ -f $GIT_USER ]; then
-    PYTHON3_VERSION=$(/usr/bin/env python3 --version)
-    if [ $? -eq 0 ]; then
-        alias gu="$GIT_USER"
-        alias git='aliaswrapperfunc(){ git "$@" && '$HOME'/dotfiles/helpers/git-user.py;  unset -f aliaswrapperfunc; }; aliaswrapperfunc'  # idea from https://unix.stackexchange.com/questions/3773/how-to-pass-parameters-to-an-alias
-    fi
-fi
+# commented out: causing several problems e.g. with autocompletion
+# GIT_USER="$HOME/dotfiles/helpers/git-user.py"
+# alias gu='echo "~/dotfiles/helpers/git-user.py does not exist"'
+# if [ -f $GIT_USER ]; then
+#     PYTHON3_VERSION=$(/usr/bin/env python3 --version)
+#     if [ $? -eq 0 ]; then
+#         alias gu="$GIT_USER"
+#         alias git='aliaswrapperfunc(){ git "$@" && '$HOME'/dotfiles/helpers/git-user.py;  unset -f aliaswrapperfunc; }; aliaswrapperfunc'  # idea from https://unix.stackexchange.com/questions/3773/how-to-pass-parameters-to-an-alias
+#     fi
+# fi
 
 # quick activation of python virtual environments
 alias activate='source ./venv/bin/activate'
