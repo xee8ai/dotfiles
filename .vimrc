@@ -407,7 +407,7 @@ if has("win32")
 
     " set environment
     set encoding=utf-8
-    set guifont=Consolas:h9
+    set guifont=Hack:h10
 
     " Windows-specific backspace problem
     set backspace=2
