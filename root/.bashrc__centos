@@ -16,7 +16,7 @@ alias shutdown='/root/bin/centos_molly_guard.sh shutdown'
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
+    . /etc/bashrc
 fi
 
 # don't put duplicate lines or lines starting with space in the history file
@@ -42,6 +42,12 @@ source /etc/bash_completion.d/git
 # get general aliases and exports from separate file
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
 # add bin extend dir to path
@@ -95,3 +101,5 @@ if [[ $- == *i* ]]; then
 
     date -Is > ~/.last_interactive_login
 fi
+
+export PATH
