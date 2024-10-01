@@ -2,6 +2,8 @@
 
 # switch shell language to english to see english e.g. error messages
 LANGUAGE=en_US.UTF-8
+LANG=en_US.UTF-8
+LC_MESSAGES=en_US.UTF-8
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then

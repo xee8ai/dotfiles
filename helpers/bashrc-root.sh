@@ -8,6 +8,11 @@
 
 # source /home/xee8ai/bashrc-root.sh
 
+# switch shell language to english to see english e.g. error messages
+LANGUAGE=en_US.UTF-8
+LANG=en_US.UTF-8
+LC_MESSAGES=en_US.UTF-8
+
 # we have to extract the username from scriptdir (because $USER and whoami are “root”)
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 USERNAME=$(echo "$SCRIPT_DIR" | cut -d'/' -f3)
