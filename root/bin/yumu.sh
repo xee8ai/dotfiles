@@ -20,6 +20,7 @@ declare -a CMDS=(
     'find /sys -name "*.bak" -o -name "*.rpmsave" -o -name "*.rpmnew" -o -name "*.rpmorig"'
     'find /usr -name "*.bak" -o -name "*.rpmsave" -o -name "*.rpmnew" -o -name "*.rpmorig"'
     'find /var/lib -name "*.bak" -o -name "*.rpmsave" -o -name "*.rpmnew" -o -name "*.rpmorig"'
+    'yum list installed > /root/installed_packets'
 )
 
 CWD=$(pwd)
