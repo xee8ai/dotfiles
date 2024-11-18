@@ -47,13 +47,14 @@
   /dev/tty rw,
   /etc/fwknop/cycle_nftables.sh rix,
   /etc/iproute2/* r,
+  /sbin/iptables rix,
   /sbin/nft rix,
+  /usr/bin/bash rix,
   /usr/bin/cut rix,
   /usr/bin/grep rix,
   /usr/bin/head rix,
   /usr/bin/sed rix,
   /usr/sbin/nft rix,
-  /usr/bin/bash rix,
   /tmp/cmd w,
 
 }
