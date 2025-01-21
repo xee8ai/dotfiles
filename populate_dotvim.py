@@ -17,6 +17,7 @@ class DotvimPopulator():
     plugin_sources = [
             'https://github.com/altercation/vim-colors-solarized.git',
             'https://github.com/ctrlpvim/ctrlp.vim.git',
+            'https://github.com/github/copilot.vim',
             'https://github.com/jistr/vim-nerdtree-tabs.git',
             'https://github.com/ludovicchabant/vim-gutentags.git',
             'https://github.com/majutsushi/tagbar.git',
