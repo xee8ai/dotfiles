@@ -102,6 +102,14 @@ for FINDDIR in $FINDDIRS; do
     logAndRun "$CMD"
 done
 
+if [ -s /etc/apt/preferences.d/apt-listbugs ]; then
+    echo
+    setCons
+    echo "The following packets are held back by apt-listbugs:"
+    tput sgr0
+    cat /etc/apt/preferences.d/apt-listbugs
+fi
+
 cd $CWD
 
 echo
