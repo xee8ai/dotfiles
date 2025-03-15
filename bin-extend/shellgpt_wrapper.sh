@@ -7,6 +7,8 @@ SGPT_BIN="$SGPT_DIR/bin"
 SGPT_ENV=$SGPT_BIN"/venv"
 SGPT_CONVERSATIONS="$SGPT_DIR/conversations"
 
+HELPER_LIST_MODELS="list_ollama_models.py"
+
 if ! test -d "$SGPT_ENV"; then
     echo "$SGPT_ENV does not exist – will install ShellGPT there"
     mkdir -p $SGPT_BIN
@@ -17,6 +19,22 @@ if ! test -d "$SGPT_ENV"; then
     . venv/bin/activate
     echo "Installing shell-gpt[litellm]…"
     pip install shell-gpt[litellm]
+    pip install ollama
+echo "#!/usr/bin/env python3
+
+import ollama
+
+ollama_client = ollama.Client()
+ollama_models_raw = ollama_client.list().model_dump()
+
+models = []
+
+for ollama_model_raw in ollama_models_raw['models']:
+    models.append(ollama_model_raw['model'])
+
+for model in sorted(models):
+    print(f'ollama/{model}')" > $HELPER_LIST_MODELS
+    chmod 750 $HELPER_LIST_MODELS
 fi
 
 if ! test -f "$SGPT_CONFIG"; then
@@ -28,22 +46,38 @@ if ! test -f "$SGPT_CONFIG"; then
 
     echo "Storing original config file at "$SGPT_CONFIG".original"
     cp -a $SGPT_CONFIG $SGPT_CONFIG".original"
+
+    echo "Available models:"
+    echo "-----------------"
+    ./$HELPER_LIST_MODELS
+    echo
+    read -p "Choose default model: " MODEL
     echo "Adapting config for local use (following https://www.tuxedocomputers.com/de/ShellGPT-und-Ollama-Erste-Schritte-mit-AI-und-Ihrem-TUXEDO.tuxedo)"
-    sed -i 's#^DEFAULT_MODEL=.*#DEFAULT_MODEL=ollama/NAME_OF_MODEL:SIZE#g' $SGPT_CONFIG
+    sed -i 's#^DEFAULT_MODEL=.*#DEFAULT_MODEL='$MODEL'#g' $SGPT_CONFIG
     sed -i 's/^OPENAI_USE_FUNCTIONS=.*/OPENAI_USE_FUNCTIONS=false/g' $SGPT_CONFIG
     sed -i 's/^USE_LITELLM=.*/USE_LITELLM=true/g' $SGPT_CONFIG
 
-
-
-    exit 1
 fi
 
+cd $SGPT_BIN
+. venv/bin/activate
 
 TOPIC=$(echo $1 | sed 's/\s/_/g')
 
-MODEL=$(egrep "^DEFAULT_MODEL=" $SGPT_CONFIG | cut -d'=' -f 2 | sed 's#/#_#g' | sed 's/:/_/g')
+DEFAULT_MODEL=$(egrep "^DEFAULT_MODEL=" $SGPT_CONFIG | cut -d'=' -f 2)
+echo "Available models:"
+echo "-----------------"
+./$HELPER_LIST_MODELS
+echo
+read -p "Choose model (default: "$DEFAULT_MODEL"): " MODEL
+if test -z "$MODEL"; then
+    MODEL=$DEFAULT_MODEL
+fi
 
-CACHE_NAME=$(date -Iseconds | sed 's/:/-/g' | sed 's/+.*//g' | sed 's/T/t/g')"__"$MODEL
+MODEL_STRING=$(echo $MODEL | sed 's#/#_#g' | sed 's/:/_/g')
+
+echo "USING: "$MODEL
+CACHE_NAME=$(date -Iseconds | sed 's/:/-/g' | sed 's/+.*//g' | sed 's/T/t/g')"__"$MODEL_STRING
 if ! test -z "$TOPIC"; then
     CACHE_NAME=$CACHE_NAME"__"$TOPIC
 fi
@@ -60,9 +94,11 @@ CHAT_CACHE_FILE=$(egrep "^CHAT_CACHE_PATH=" $SGPT_CONFIG | cut -d'=' -f 2)"/"$CA
 # cat $SGPT_CONFIG
 # echo "----------------------------------------"
 
-cd $SGPT_BIN
-. venv/bin/activate
-sgpt --repl $CACHE_NAME
+CMD="sgpt --model $MODEL --repl $CACHE_NAME"
+echo "OK, let's start:"
+echo $CMD
+echo
+$CMD
 
 echo "TODO: Read "$CHAT_CACHE_FILE" an convert to human readable (HTML?) format."
 
