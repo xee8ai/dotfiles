@@ -243,6 +243,7 @@ class DotvimPopulator():
 
         if not os.path.isdir(plugin_dir):
             print('{} not yet installed. Skipping...'.format(name))
+            print()
             return
 
         os.chdir(plugin_dir)
