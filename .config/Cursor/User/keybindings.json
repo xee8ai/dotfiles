@@ -1,0 +1,48 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+i",
+        "command": "composerMode.agent"
+    },
+    {
+        "key": "f3",
+        "command": "workbench.action.toggleLightDarkThemes",
+        "when": "workbenchState == 'workspace' || workbenchState == 'folder'"
+    },
+    {
+        "key": "tab",
+        "command": "workbench.action.focusNextGroup",
+        "when": "editorTextFocus && vim.active && vim.mode == 'normal'"
+    },
+    {
+        "key": "shift+tab",
+        "command": "workbench.action.focusPreviousGroup",
+        "when": "editorTextFocus && vim.active && vim.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+v shift+tab",
+        "command": "extension.vim_shift+tab",
+        "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+v tab",
+        "command": "extension.vim_tab",
+        "when": "editorTextFocus && vim.active && !inDebugRepl && !inlineEditIsVisible && vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "workbench.action.toggleAuxiliaryBar"
+    },
+    {
+        "key": "ctrl+alt+b",
+        "command": "-workbench.action.toggleAuxiliaryBar"
+    },
+]
