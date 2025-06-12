@@ -23,7 +23,7 @@ function logAndRun {
     CMD=$1
     echo
     setCons
-    echo $CMD…
+    echo "$(hostname): $CMD…"
     echo "" >> $LOGFILE
     echo "----------------------------------------" >> $LOGFILE
     echo "$(date -Iseconds)" >> $LOGFILE
