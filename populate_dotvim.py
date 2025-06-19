@@ -76,6 +76,7 @@ class DotvimPopulator:
         self.tasks = {
             "install": self.install,
             "update": self.update,
+            "remove_orphaned": self.remove_orphaned,
         }
 
     ################################################################################
@@ -260,6 +261,29 @@ class DotvimPopulator:
             if name is None:
                 continue
             self._update_plugin(name)
+
+    ################################################################################
+    def remove_orphaned(self):
+        """Remove plugins not longer in list."""
+
+        self._make_dirs()
+        installed_plugins = os.listdir(self.bundle_dir)
+
+        for source in self.plugin_sources:
+            plugin = self._get_plugin_name_from_source(source)
+            if plugin in installed_plugins:
+                installed_plugins.remove(plugin)
+
+        for plugin in installed_plugins:
+            plugin_path = os.path.join(self.bundle_dir, plugin)
+            print(f"Deleting {plugin}: ")
+            try:
+                shutil.rmtree(plugin_path)
+                print("Done")
+                print()
+            except Exception as ex:
+                print(f"ERROR: {repr(ex)}")
+                print()
 
 
 ################################################################################
