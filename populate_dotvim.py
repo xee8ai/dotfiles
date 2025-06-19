@@ -17,7 +17,7 @@ class DotvimPopulator:
     plugin_sources = [
         "https://github.com/altercation/vim-colors-solarized.git",
         "https://github.com/ctrlpvim/ctrlp.vim.git",
-        "https://github.com/gergap/vim-ollama.git",
+        # "https://github.com/gergap/vim-ollama.git",
         "https://github.com/jistr/vim-nerdtree-tabs.git",
         "https://github.com/ludovicchabant/vim-gutentags.git",
         "https://github.com/majutsushi/tagbar.git",
@@ -28,7 +28,7 @@ class DotvimPopulator:
         "https://github.com/tpope/vim-repeat.git",
         "https://github.com/tpope/vim-surround.git",
         "https://github.com/tpope/vim-unimpaired.git",
-        "https://github.com/vim-vdebug/vdebug.git",
+        # "https://github.com/vim-vdebug/vdebug.git",
         "https://github.com/xsbeats/vim-blade.git",
     ]
 
