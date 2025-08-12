@@ -113,7 +113,7 @@ fi
 if [ "$(id -u)" == "0" ]; then
 
 	# switch for neo2<=>de on TTY1..6
-	alias asdf='/root/.neo2_layout/activate_numlock.sh; cd ~/.neo2_layout; loadkeys neo; cd ~'
+	alias asdf='/root/.neo2_layout/activate_numlock.sh; cd ~/.neo2_layout; loadkeys neo.map; cd ~'
 	alias uiae='loadkeys de'
 
 	# Some aliases to avoid making mistakes:
