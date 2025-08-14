@@ -3,8 +3,8 @@
 set -euo pipefail
 
 APT="/usr/bin/apt"
-APTGET="/usr/bin/apt-get"
-APTITUDE="/usr/bin/aptitude"
+# APTGET="/usr/bin/apt-get"
+# APTITUDE="/usr/bin/aptitude"
 FIND="/usr/bin/find"
 NICE="/usr/bin/nice"
 
@@ -33,43 +33,32 @@ function logAndRun {
     eval $CMD$TEE
 }
 
-if [ "$#" -eq 0 ]; then
-    DLLIMIT=""
-elif [ "$#" -eq 1 ]; then
-    if [ -n "$1" ]; then
-        DLLIMIT=" -o Acquire::http::DL-Limit=100"
-    fi
-else
-    echo "Too much arguments"
-    exit 1
-fi
-
-CMD="$APTGET autoremove"
+CMD="$APT autoremove"
 logAndRun "$CMD"
 
-CMD="$APTITUDE purge ~c"
+CMD="$APT purge ~c"
 logAndRun "$CMD"
 
-CMD="$APTITUDE purge ~o"
+CMD="$APT purge ~o"
 logAndRun "$CMD"
 
-CMD="$APTGET autoremove"
+CMD="$APT autoremove"
 logAndRun "$CMD"
 
-CMD="$NICE -n 10$DLLIMIT $APTGET update"
+CMD="$NICE -n 10 $APT update"
 logAndRun "$CMD"
 
-CMD="$NICE -n 10 $APTGET$DLLIMIT dist-upgrade"
+CMD="$NICE -n 10 $APT dist-upgrade"
 logAndRun "$CMD"
 
 # apt-get upgrade in testing oft gebraucht (wenn gerade wieder Abhängigkeiten nicht erfüllt sind…)
-CMD="$NICE -n 10 $APTGET$DLLIMIT upgrade"
+CMD="$NICE -n 10 $APT upgrade"
 logAndRun "$CMD"
 
-CMD="$APTGET autoclean"
+CMD="$APT autoclean"
 logAndRun "$CMD"
 
-CMD="$APTGET clean"
+CMD="$APT clean"
 logAndRun "$CMD"
 
 CMD="$APT autoremove"
