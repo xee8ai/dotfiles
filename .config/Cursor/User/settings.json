@@ -1,15 +1,14 @@
 {
     "editor.cursorStyle": "block",
     "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": false,
     "editor.fontSize": 16,
-    "editor.fontLigatures": true,
     "editor.fontVariations": true,
-    "editor.lineNumbers": "relative",
+    "editor.letterSpacing": 0,
     "editor.lineHeight": 1.2,
-    "editor.letterSpacing": 0
+    "editor.lineNumbers": "relative",
 
     "remote.SSH.remotePlatform": {
-        "nms.develrocky": "linux"
     },
 
     "vim.relativenumber": true,
@@ -28,7 +27,12 @@
 
     "window.commandCenter": true,
 
-    "workbench.colorTheme": "Solarized Dark",
+    "workbench.colorTheme": "Solarized Light",
     "workbench.preferredDarkColorTheme": "Solarized Dark",
-    "workbench.preferredLightColorTheme": "Solarized Light"
+    "workbench.preferredLightColorTheme": "Solarized Light",
+    "cursor.composer.textSizeScale": 1.15,
+    "editor.renderWhitespace": "trailing",
+    "editor.wordWrap": "on",
+    "cursor.diffs.useCharacterLevelDiffs": true,
+    "git.autofetch": true
 }

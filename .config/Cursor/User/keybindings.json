@@ -45,4 +45,8 @@
         "key": "ctrl+alt+b",
         "command": "-workbench.action.toggleAuxiliaryBar"
     },
+    {
+        "key": "ctrl+e",
+        "command": "composerMode.background"
+    },
 ]
