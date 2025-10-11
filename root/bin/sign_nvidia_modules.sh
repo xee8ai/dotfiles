@@ -10,7 +10,8 @@ nvidia-drm.ko
 
 for VERSION in $(ls -1 /lib/modules); do
     echo
-    SHORT_VERSION=$(echo $VERSION | cut -d . -f 1-2)
+    # SHORT_VERSION=$(echo $VERSION | cut -d . -f 1-2)
+    SHORT_VERSION=$(echo $VERSION | cut -d"-" -f 1)
     MODULES_DIR=/lib/modules/$VERSION/updates/dkms
     KBUILD_DIR=/usr/lib/linux-kbuild-$SHORT_VERSION
 
