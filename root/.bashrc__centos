@@ -44,6 +44,13 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_aliases_local ]; then
+    source ~/.bash_aliases_local
+else
+    echo "# Add your locally used aliases (not contained in .bash_aliases) here" > ~/.bash_aliases_local
+    echo "" >> ~/.bash_aliases_local
+fi
+
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
