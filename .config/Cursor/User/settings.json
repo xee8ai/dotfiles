@@ -1,4 +1,6 @@
 {
+    "cursor.composer.textSizeScale": 1.15,
+    "cursor.diffs.useCharacterLevelDiffs": true,
     "editor.cursorStyle": "block",
     "editor.fontFamily": "JetBrains Mono",
     "editor.fontLigatures": false,
@@ -7,6 +9,10 @@
     "editor.letterSpacing": 0,
     "editor.lineHeight": 1.2,
     "editor.lineNumbers": "relative",
+    "editor.renderWhitespace": "trailing",
+    "editor.wordWrap": "on",
+
+    "git.autofetch": true,
 
     "remote.SSH.remotePlatform": {
     },
@@ -29,10 +35,5 @@
 
     "workbench.colorTheme": "Solarized Light",
     "workbench.preferredDarkColorTheme": "Solarized Dark",
-    "workbench.preferredLightColorTheme": "Solarized Light",
-    "cursor.composer.textSizeScale": 1.15,
-    "editor.renderWhitespace": "trailing",
-    "editor.wordWrap": "on",
-    "cursor.diffs.useCharacterLevelDiffs": true,
-    "git.autofetch": true
+    "workbench.preferredLightColorTheme": "Solarized Light"
 }
