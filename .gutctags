@@ -8,3 +8,4 @@
 
 --recurse=yes
 --exclude=*/.git
+--exclude=venv
