@@ -1,0 +1,121 @@
+#!/usr/sbin/nft -f
+
+# flush rules in own table
+# on boot that doesn't exist – so we define it first
+table inet xee-rules-inet {
+}
+flush table inet xee-rules-inet
+
+table inet xee-rules-inet {
+
+    chain INPUT {
+        type filter hook input priority 0
+        policy drop
+
+        # drop invalid packets
+        ct state invalid counter drop comment "dropped invalid packets"
+
+        # run checks for some tcp flag combinations
+        jump XEE_TCP_CHECKS
+
+        # allow ping
+        icmp type echo-request limit rate 4/second accept
+
+        # allow traffic from established and related
+        ct state established,related accept
+
+        # accept incoming traffic from loopback interface
+        iifname "lo" accept
+
+        # check if there are rules defined by fwknop
+        jump FWKNOP_INPUT
+
+        # handle special traffic in own chains
+        tcp dport 22  jump XEE_INPUT_SSH
+        tcp dport {80, 443}  jump XEE_INPUT_WEB
+
+        # accept neighbour discovery otherwise IPv6 connectivity breaks
+        icmpv6 type { nd-neighbor-solicit, nd-router-advert, nd-neighbor-advert } accept
+    }
+
+    chain XEE_TCP_CHECKS {
+        tcp flags & (fin|syn|rst|psh|ack|urg) == 0x0 counter drop comment "dropped tcp flag related"
+        tcp flags & (fin|syn) == fin|syn counter drop comment "dropped tcp flag related"
+        tcp flags & (syn|rst) == syn|rst counter drop comment "dropped tcp flag related"
+        tcp flags & (fin|rst) == fin|rst counter drop comment "dropped tcp flag related"
+        tcp flags & (fin|ack) == fin counter drop comment "dropped tcp flag related"
+        tcp flags & (psh|ack) == psh counter drop comment "dropped tcp flag related"
+        tcp flags & (ack|urg) == urg counter drop comment "dropped tcp flag related"
+    }
+
+    chain XEE_INPUT_SSH {
+        ip saddr 192.168.122.0/24 accept
+        counter comment "dropped incoming ssh packets"
+    }
+
+    chain XEE_INPUT_WEB {
+        ip saddr 192.168.122.0/24 accept
+        counter comment "dropped incoming http(s) packets"
+    }
+
+    chain FORWARD {
+        type filter hook forward priority 0
+
+        # we are not a router
+        policy drop
+
+        ct state vmap { established : accept, related : accept, invalid : drop }
+
+        counter comment "dropped forward packets"
+    }
+
+    chain OUTPUT {
+        type filter hook output priority 0
+        policy drop
+
+        # allow traffic from established and related
+        ct state established,related accept
+
+        # allow localhost
+        oifname "lo" accept
+
+        # allow all ICMP
+        ip protocol icmp accept
+        ip protocol icmpv6 accept
+
+        # special rules for certain ports
+        udp dport 53  jump XEE_OUTPUT_DNS
+        tcp dport 53  jump XEE_OUTPUT_DNS
+        udp dport 123  jump XEE_OUTPUT_NTP
+        tcp dport 22  jump XEE_OUTPUT_SSH
+        tcp dport {80, 443, 8080}  jump XEE_OUTPUT_WEB
+    }
+
+    chain XEE_OUTPUT_SSH {
+        # whitelist to permit ssh to some IPs only
+        # prevent cursor from using my forwarded key everywhere
+        ip daddr 192.168.122.0/24 accept
+    }
+
+    chain XEE_OUTPUT_WEB {
+        ip daddr 192.168.0.0/16 drop
+        ip daddr 172.16.0.0/12 drop
+        ip daddr 10.0.0.0/8 drop
+
+        # e.g. “apt update”
+        ip daddr 0.0.0.0/0 accept
+        ip6 daddr ::/0 accept
+    }
+
+    chain XEE_OUTPUT_DNS {
+        ip daddr 192.168.122.1/32 accept
+    }
+
+    chain XEE_OUTPUT_NTP {
+        ip daddr 0.0.0.0/0 accept
+        ip6 daddr ::/0 accept
+    }
+
+    chain FWKNOP_INPUT {
+    }
+}
