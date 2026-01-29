@@ -70,22 +70,30 @@ alias poweroff='/root/bin/run_before_poweroff.sh; poweroff'
 #    . /etc/bash_completion
 #fi
 
-# add to PATH
-# /sbin and /usr/sbin to path for Debian 10/Buster: https://unix.stackexchange.com/questions/482569/debian-10-buster-update-grub-command-not-found
-PATHS_TO_ADD="
-/root/bin
-/user/sbin
-/sbin
-"
-for P in $PATHS_TO_ADD; do
-    if test -e $P; then PATH="$P:$PATH"; fi
+# Add multiple directories to PATH
+# Array of directories to add
+declare -a PATH_DIRS=(
+    "/user/sbin"
+    "/sbin"
+    "$HOME/bin"
+    "$HOME/.local/bin"
+    "$HOME/dotfiles/bin-extend"
+)
+# Loop through array and add to PATH if directory exists and not already in PATH
+for dir in "${PATH_DIRS[@]}"; do
+    if [ -d "$dir" ]; then
+        # Check if directory is not already in PATH
+        case ":$PATH:" in
+            *:"$dir":*)
+                # Directory already in PATH, skip
+                ;;
+            *)
+                # Directory not in PATH, add it
+                PATH="$PATH:$dir"
+                ;;
+        esac
+    fi
 done
-
-# add bin extend dir to path
-BINEXTEND=/root/dotfiles/bin-extend
-if [ -d $BINEXTEND ]; then
-    PATH="$PATH:$BINEXTEND"
-fi
 
 # change to root directory
 cd /root

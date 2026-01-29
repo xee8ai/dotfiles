@@ -42,11 +42,28 @@ else
     echo "" >> ~/.bash_aliases_local
 fi
 
-# add bin extend dir to path
-BINEXTEND=$HOME/dotfiles/bin-extend
-if [ -d $BINEXTEND ]; then
-    PATH="$PATH:$BINEXTEND"
-fi
+# Add multiple directories from home directory to PATH
+# Array of directories to add (relative to $HOME)
+declare -a PATH_DIRS=(
+    "$HOME/bin"
+    "$HOME/.local/bin"
+    "$HOME/dotfiles/bin-extend"
+)
+# Loop through array and add to PATH if directory exists and not already in PATH
+for dir in "${PATH_DIRS[@]}"; do
+    if [ -d "$dir" ]; then
+        # Check if directory is not already in PATH
+        case ":$PATH:" in
+            *:"$dir":*)
+                # Directory already in PATH, skip
+                ;;
+            *)
+                # Directory not in PATH, add it
+                PATH="$PATH:$dir"
+                ;;
+        esac
+    fi
+done
 
 # disable Software Flow Control (XON/XOFF flow control)
 # this e.g. prevents vim from splitting from CtrlP-Plugin using CTRL+S
