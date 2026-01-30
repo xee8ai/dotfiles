@@ -38,17 +38,17 @@ ctags_content = {
     "c": [],
     "java": [],
     "laravel": [
-        "--exclude=vendor",
+        "--exclude=vendor/*",
     ],
     "php": [
-        "--exclude=vendor",
+        "--exclude=vendor/*",
     ],
     "python": [
-        "--exclude=venv",
+        "--exclude=venv/*",
     ],
     "tags": [
         "--recurse=yes",
-        "--exclude=.git",
+        "--exclude=.git/*",
     ],
     "tex": [],
     "vim": [],
@@ -123,9 +123,17 @@ for i in ignores:
     if i != "tags":
         for c in ctags_content[i]:
             data.append(c)
-ctags_file = os.path.join(target_dir, ".ctags")
+
+ctags_files = [
+    os.path.join(target_dir, ".ctags"),
+    os.path.join(target_dir, ".gutctags"),
+]
 file_content = "\n".join(data)
-with open(ctags_file, "w") as fh:
-    fh.write(file_content)
-print("Wrote {}".format(ctags_file))
+
+for ctags_file in ctags_files:
+    with open(ctags_file, "w") as fh:
+        fh.write(file_content)
+    print(f"Wrote {ctags_file}")
+
+print()
 print("Whooo!!")
