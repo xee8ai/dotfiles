@@ -156,6 +156,14 @@ alias n="mkdir -p $HOME/notes && cd $HOME/notes && $VIM_EXECUTABLE -p *.md && gi
 # get rid of sudo on docker commands
 alias docker="sudo docker"
 
+# Wrapper for Cursor CLI to logout after exit
+# This way no auth info stays on a remote machine while for the next run the API key is available in the bash env
+# Use function instead of alias to be able to pass args to the first agent call
+agent() {
+    $HOME/.local/bin/agent "$@";
+    $HOME/.local/bin/agent logout;
+}
+
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
 
