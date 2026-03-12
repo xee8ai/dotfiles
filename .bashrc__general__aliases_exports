@@ -163,6 +163,10 @@ agent() {
     $HOME/.local/bin/agent "$@";
     $HOME/.local/bin/agent logout;
 }
+claude() {
+    $HOME/.local/bin/claude "$@";
+    $HOME/.local/bin/claude logout;
+}
 
 # and some user-only aliases
 # if [ "$(id -u)" != "0" ]; then
