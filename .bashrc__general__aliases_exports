@@ -165,7 +165,7 @@ agent() {
 }
 claude() {
     $HOME/.local/bin/claude "$@";
-    $HOME/.local/bin/claude logout;
+    # $HOME/.local/bin/claude logout;
 }
 
 # and some user-only aliases
