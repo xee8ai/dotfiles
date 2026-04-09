@@ -159,6 +159,8 @@ augroup configgroup
     autocmd FileType java set foldmethod=indent|set foldlevel=2|set foldnestmax=2
     autocmd FileType java set tabstop=4|set shiftwidth=4
 
+    autocmd FileType json set tabstop=4|set shiftwidth=4|set expandtab
+
     autocmd FileType markdown set autoindent    " indenting lists
     autocmd FileType markdown set tabstop=4|set shiftwidth=4|set expandtab
 
