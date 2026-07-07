@@ -17,20 +17,23 @@ class DotvimPopulator:
     plugin_sources = [
         "https://github.com/altercation/vim-colors-solarized.git",
         "https://github.com/ctrlpvim/ctrlp.vim.git",
-        # "https://github.com/gergap/vim-ollama.git",
         "https://github.com/jistr/vim-nerdtree-tabs.git",
+        "https://github.com/kristijanhusak/vim-dadbod-completion.git",
+        "https://github.com/kristijanhusak/vim-dadbod-ui.git",
         "https://github.com/ludovicchabant/vim-gutentags.git",
         "https://github.com/majutsushi/tagbar.git",
         "https://github.com/mattn/emmet-vim.git",
         "https://github.com/scrooloose/nerdtree.git",
         "https://github.com/scrooloose/syntastic.git",
         "https://github.com/tpope/vim-commentary.git",
+        "https://github.com/tpope/vim-dadbod.git",
         "https://github.com/tpope/vim-fugitive.git",
         "https://github.com/tpope/vim-repeat.git",
         "https://github.com/tpope/vim-surround.git",
         "https://github.com/tpope/vim-unimpaired.git",
-        # "https://github.com/vim-vdebug/vdebug.git",
         "https://github.com/xsbeats/vim-blade.git",
+        # "https://github.com/gergap/vim-ollama.git",
+        # "https://github.com/vim-vdebug/vdebug.git",
     ]
 
     # default git command; can be overwritten using CLI arg

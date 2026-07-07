@@ -179,6 +179,10 @@ augroup configgroup
 
     autocmd FileType xml set foldmethod=indent|set foldlevel=4|set foldnestmax=4
 
+    " dadbod completion wiring
+    autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+    autocmd FileType mysql setlocal omnifunc=vim_dadbod_completion#omni
+
 augroup END
 
 " highlight cols (as hint for line length)
