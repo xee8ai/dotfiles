@@ -1,5 +1,11 @@
 [alias]
     pullall = !git pull && git submodule update --init --recursive
+[blame]
+    ignoreRevsFile = .git-blame-ignore-revs
+    # optional: show `?` on lines git cannot re-attribute after skipping a rev
+    markUnblamableLines = true
+    # optional: prefix `*` on lines that came from an ignored rev
+    markIgnoredLines = true
 [color]
     ui = auto
 [core]
