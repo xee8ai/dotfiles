@@ -103,6 +103,7 @@ declare -a PATH_DIRS=(
     "$HOME/bin"
     "$HOME/.local/bin"
     "$HOME/dotfiles/bin-extend"
+    "$HOME/.opencode/bin"
 )
 # Loop through array and add to PATH if directory exists and not already in PATH
 for dir in "${PATH_DIRS[@]}"; do
