@@ -4,15 +4,15 @@
 # (first line: time of the check, rest: output of "composer audit --format=json").
 
 import argparse
-from datetime import datetime, timezone
+from datetime import datetime
 import json
 import sys
 
 default_infile = "/tmp/ls-dev-composer_audit_state"
 
-# writer script is expected to run hourly – add five minutes tolerance
-default_max_delta_warn = 3900
-default_max_delta_crit = 2 * default_max_delta_warn
+# writer script runs the audit once a day – time (minutes) after midnight in
+# which a state file from yesterday is still fine
+default_grace = 30
 
 # advisories without a (known) severity are counted as "unknown" and handled
 # as critical – better safe than sorry
@@ -26,16 +26,10 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Check the state of composer audit")
     parser.add_argument("--file", default=default_infile, help="state file to read")
     parser.add_argument(
-        "--max-age-warn",
+        "--grace",
         type=int,
-        default=default_max_delta_warn,
-        help="age of the state file (seconds) to raise WARNING",
-    )
-    parser.add_argument(
-        "--max-age-crit",
-        type=int,
-        default=default_max_delta_crit,
-        help="age of the state file (seconds) to raise CRITICAL",
+        default=default_grace,
+        help="minutes after midnight in which a state file from yesterday is still fine",
     )
     parser.add_argument(
         "--ignore-abandoned",
@@ -63,34 +57,43 @@ def read_infile(infile):
 
 
 ################################################################################
-def check_age(checktime_raw, max_delta_warn, max_delta_crit):
+def check_age(checktime_raw, grace):
 
-    # try to calculate delta between checktime and now
+    # the audit script writes the state file once a day – so the state is fine
+    # if it is from today (local time)
     try:
-        now = datetime.now(timezone.utc)
-        checktime = datetime.fromisoformat(checktime_raw)
-        delta = round((now - checktime).total_seconds())
+        now = datetime.now().astimezone()
+        checktime = datetime.fromisoformat(checktime_raw).astimezone()
+        age_days = (now.date() - checktime.date()).days
+        midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        minutes_since_midnight = (now - midnight).total_seconds() / 60
     except Exception as ex:
-        print(f"CRITICAL: Could not calculate time delta ({type(ex).__name__} – {ex})")
+        print(f"CRITICAL: Could not calculate state age ({type(ex).__name__} – {ex})")
         sys.exit(2)
 
-    if delta < 0:
+    if checktime > now:
         print(
             f"CRITICAL: Audit script claims to be executed in future ({checktime_raw})??"
         )
         sys.exit(2)
 
-    if delta > max_delta_crit:
-        print(
-            f"CRITICAL: Last audit script run was {delta} sec ago – check your cron job."
-        )
-        sys.exit(2)
+    if age_days == 0:
+        return
 
-    if delta > max_delta_warn:
+    # give the cron job some time to write today's state
+    if age_days == 1 and minutes_since_midnight <= grace:
+        return
+
+    if age_days == 1:
         print(
-            f"WARNING: Last audit script run was {delta} sec ago – check your cron job."
+            f"WARNING: Last audit script run was yesterday ({checktime_raw}) – check your cron job."
         )
         sys.exit(1)
+
+    print(
+        f"CRITICAL: Last audit script run was {age_days} days ago ({checktime_raw}) – check your cron job."
+    )
+    sys.exit(2)
 
 
 ################################################################################
@@ -177,7 +180,7 @@ if __name__ == "__main__":
         args = parse_args()
         content = read_infile(args.file)
         checktime_raw, _, report_raw = content.partition("\n")
-        check_age(checktime_raw.strip(), args.max_age_warn, args.max_age_crit)
+        check_age(checktime_raw.strip(), args.grace)
         report = parse_report(report_raw)
         analyze_report(report, checktime_raw.strip(), args.ignore_abandoned)
     except Exception as ex:

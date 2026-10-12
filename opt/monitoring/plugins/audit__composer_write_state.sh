@@ -16,6 +16,16 @@ if test -z "$PROJECT_DIR"; then
         exit 1
 fi
 
+# the audit is done once a day only: nothing to do if the state file has been
+# written today (so cron can call this script every few minutes to get a
+# missing state file rebuilt soon, e.g. after a reboot)
+if test -f "$CHECKFILE"; then
+        CHECKTIME=$(head -n 1 "$CHECKFILE")
+        if test -n "$CHECKTIME" && test "$(date -d "$CHECKTIME" +%F 2> /dev/null)" = "$(date +%F)"; then
+                exit 0
+        fi
+fi
+
 # write to a temp file first – the plugin shall never see a half written state
 TMPFILE=$(mktemp "${CHECKFILE}.XXXXXX") || exit 1
 trap 'rm -f "$TMPFILE" "$TMPFILE.err"' EXIT
