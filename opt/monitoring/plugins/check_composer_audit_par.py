@@ -4,14 +4,14 @@
 # (first line: time of the check, rest: output of "composer audit --format=json").
 
 import argparse
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import sys
 
 default_infile = "/tmp/ls-dev-composer_audit_state"
 
-# writer script runs the audit once a day – time (minutes) after midnight in
-# which a state file from yesterday is still fine
+# writer script runs the audit at least every 24h – time (minutes) a state file
+# may be older than that
 default_grace = 30
 
 # advisories without a (known) severity are counted as "unknown" and handled
@@ -29,7 +29,7 @@ def parse_args():
         "--grace",
         type=int,
         default=default_grace,
-        help="minutes after midnight in which a state file from yesterday is still fine",
+        help="minutes a state file may be older than 24h",
     )
     parser.add_argument(
         "--ignore-abandoned",
@@ -59,14 +59,12 @@ def read_infile(infile):
 ################################################################################
 def check_age(checktime_raw, grace):
 
-    # the audit script writes the state file once a day – so the state is fine
-    # if it is from today (local time)
+    # the audit script rewrites the state file at least every 24h – so the
+    # state is fine if it is not older than that
     try:
         now = datetime.now().astimezone()
         checktime = datetime.fromisoformat(checktime_raw).astimezone()
-        age_days = (now.date() - checktime.date()).days
-        midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
-        minutes_since_midnight = (now - midnight).total_seconds() / 60
+        age = now - checktime
     except Exception as ex:
         print(f"CRITICAL: Could not calculate state age ({type(ex).__name__} – {ex})")
         sys.exit(2)
@@ -77,21 +75,18 @@ def check_age(checktime_raw, grace):
         )
         sys.exit(2)
 
-    if age_days == 0:
+    # give the cron job some time to write the new state
+    if age <= timedelta(hours=24, minutes=grace):
         return
 
-    # give the cron job some time to write today's state
-    if age_days == 1 and minutes_since_midnight <= grace:
-        return
-
-    if age_days == 1:
+    if age <= timedelta(hours=48):
         print(
-            f"WARNING: Last audit script run was yesterday ({checktime_raw}) – check your cron job."
+            f"WARNING: Last audit script run was more than 24h ago ({checktime_raw}) – check your cron job."
         )
         sys.exit(1)
 
     print(
-        f"CRITICAL: Last audit script run was {age_days} days ago ({checktime_raw}) – check your cron job."
+        f"CRITICAL: Last audit script run was {age.days} days ago ({checktime_raw}) – check your cron job."
     )
     sys.exit(2)
 

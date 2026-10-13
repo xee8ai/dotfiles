@@ -11,18 +11,28 @@ export PATH="/usr/local/bin:/usr/bin:/bin"
 PROJECT_DIR="$1"
 CHECKFILE="${2:-/tmp/$(id -un)-composer_audit_state}"
 
+# time of day (local time) the daily audit is done
+REFRESH_TIME="07:00"
+
 if test -z "$PROJECT_DIR"; then
         echo "Usage: $0 PROJECT_DIR [STATE_FILE]" >&2
         exit 1
 fi
 
-# the audit is done once a day only: nothing to do if the state file has been
-# written today (so cron can call this script every few minutes to get a
-# missing state file rebuilt soon, e.g. after a reboot)
+# the audit is done once a day only (so cron can call this script every few
+# minutes to get a missing state file rebuilt soon, e.g. after a reboot) – the
+# state file is (re)written if
+#   - it does not exist (or holds no valid time of the check)
+#   - it is older than 24h
+#   - this is the first run after $REFRESH_TIME (local time)
 if test -f "$CHECKFILE"; then
-        CHECKTIME=$(head -n 1 "$CHECKFILE")
-        if test -n "$CHECKTIME" && test "$(date -d "$CHECKTIME" +%F 2> /dev/null)" = "$(date +%F)"; then
-                exit 0
+        NOW=$(date +%s)
+        REFRESH=$(date -d "today $REFRESH_TIME" +%s)
+        CHECKTIME=$(date -d "$(head -n 1 "$CHECKFILE")" +%s 2> /dev/null)
+        if test -n "$CHECKTIME" && test $((NOW - CHECKTIME)) -lt 86400; then
+                if test "$NOW" -lt "$REFRESH" || test "$CHECKTIME" -ge "$REFRESH"; then
+                        exit 0
+                fi
         fi
 fi
 
