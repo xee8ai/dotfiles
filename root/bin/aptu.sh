@@ -102,6 +102,8 @@ if [ -s /etc/apt/preferences.d/apt-listbugs ]; then
     cat /etc/apt/preferences.d/apt-listbugs
 fi
 
+/usr/sbin/needrestart
+
 cd $CWD
 
 echo
