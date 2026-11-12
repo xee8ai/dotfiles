@@ -27,6 +27,10 @@ function header {
 function check_claudecode {
     header "Updating Claude Code"
     $CLAUDE upgrade
+    if [ -e "$HOME/.claude/plugins/cache/claude-plugins-official/mattpocock-skills" ]; then
+        header "Updating mattpocock-skills for Claude Code"
+        claude plugin update mattpocock-skills@claude-plugins-official
+    fi
 }
 
 ################################################################################
@@ -64,11 +68,29 @@ function check_system {
     fi
 }
 
+function check_laravel_boost() {
+    header "Updating or installing Laravel boost"
+    php artisan boost:update || php artisan boost:install
+}
+
+################################################################################
+# update Laravel project
+function check_laravel {
+    grep -q laravel/boost composer.json && check_laravel_boost
+}
+
 ################################################################################
 # update project related stuff
-# function check_project {
-# }
+function check_project {
+    if [ -e artisan ]; then
+        check_laravel
+    fi
+}
 
 ################################################################################
 ################################################################################
 check_system
+check_project
+
+echo
+echo
