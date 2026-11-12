@@ -18,7 +18,7 @@ DSTDIR=$GITDIR"/dokuwiki"
 function run {
     CMD=$1
     echo
-    tput smul; tput bold; tput setaf 123
+    tput smul; tput bold; tput setaf 39
     echo $CMD
     tput sgr0
     $CMD

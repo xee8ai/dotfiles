@@ -16,7 +16,7 @@ TEE=" 2>&1 | tee -a $LOGFILE"
 function setCons {
     tput smul
     tput bold
-    tput setaf 123
+    tput setaf 39
 }
 
 function logAndRun {

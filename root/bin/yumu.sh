@@ -7,7 +7,7 @@ clear
 function setCons {
     tput smul
     tput bold
-    tput setaf 123
+    tput setaf 39
 }
 
 declare -a CMDS=(
