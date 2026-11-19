@@ -77,8 +77,10 @@ if [ -x /root/bin/search_for_missing_packets.sh ]; then
     logAndRun "$CMD"
 fi
 
-CMD="/usr/bin/fwupdmgr update"
-logAndRun "$CMD"
+if [ -x /usr/bin/fwupdmgr ]; then
+    CMD="/usr/bin/fwupdmgr update"
+    logAndRun "$CMD"
+fi
 
 CWD=$(pwd)
 
