@@ -2,6 +2,13 @@
 
 set -euo pipefail
 
+# Manually installed .deb packages (and their dependencies) to exclude from ~o
+keep_packages=(
+    geteduroam-gui
+    teams
+    zoom
+)
+
 APT="/usr/bin/apt"
 # APTGET="/usr/bin/apt-get"
 # APTITUDE="/usr/bin/aptitude"
@@ -21,17 +28,53 @@ function setCons {
 
 function logAndRun {
     CMD=$1
+    CMDPRINT="${1:0:120}"
     echo
     setCons
-    echo "$(hostname): $CMD…"
+    echo "$(hostname): $CMDPRINT…"
     echo "" >> $LOGFILE
     echo "----------------------------------------" >> $LOGFILE
     echo "$(date -Iseconds)" >> $LOGFILE
-    echo "$CMD" >> $LOGFILE
+    echo "${CMD}" >> $LOGFILE
     echo "--------------------" >> $LOGFILE
     tput sgr0
     eval $CMD$TEE
 }
+
+purge_obsolete() {
+    local -a installed_keeps=()
+    local pkg
+    for pkg in ${keep_packages[@]+"${keep_packages[@]}"}; do
+        if dpkg-query -W -f='${Status}\n' "$pkg" 2>/dev/null | grep -q '^install ok installed$'; then
+            installed_keeps+=("$pkg")
+        fi
+    done
+
+    local pattern='~o'
+    if (( ${#installed_keeps[@]} > 0 )); then
+        local protected_pkgs
+        protected_pkgs=$(
+            LC_ALL=C apt-cache depends --recurse --important --installed "${installed_keeps[@]}" |
+                awk '
+            { pkg = "" }
+            /^[^[:space:]|]/ { pkg = $1 }
+            /^[[:space:]|]*(Pre)?Depends:/ { pkg = $2 }
+            pkg != "" && pkg !~ /^</ {
+                sub(/:.*/, "", pkg)
+                print pkg
+            }
+        ' | sort -u
+    )
+
+    for pkg in $protected_pkgs; do
+        pattern+=" !?exact-name(${pkg})"
+    done
+    fi
+
+    CMD='apt purge "'$@'" "'$pattern'"'
+    logAndRun "$CMD"
+}
+
 
 CMD="$APT autoremove"
 logAndRun "$CMD"
@@ -39,8 +82,7 @@ logAndRun "$CMD"
 CMD="$APT purge ~c"
 logAndRun "$CMD"
 
-CMD="$APT purge ~o"
-logAndRun "$CMD"
+purge_obsolete
 
 CMD="$APT autoremove"
 logAndRun "$CMD"
