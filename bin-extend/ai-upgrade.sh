@@ -70,6 +70,14 @@ function check_system {
 
 function check_laravel_boost() {
     header "Updating or installing Laravel boost"
+    # use workaround script (disabled registration) if exists:
+    WORKAROUND="scripts/boost.php"
+    if [ -e "$WORKAROUND" ]; then
+        php $WORKAROUND update || php $WORKAROUND install
+        return 0
+    fi
+
+    # if not: Update using the standard way
     php artisan boost:update || php artisan boost:install
 }
 
@@ -92,5 +100,5 @@ function check_project {
 check_system
 check_project
 
-echo
+header "All is up to date, exiting…"
 echo
